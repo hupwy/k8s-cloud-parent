@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>k8s-srv-user</artifactId>
+    <groupId>com.neusoft.edu</groupId>
     <version>0.0.1</version>
     <packaging>jar</packaging>
 
