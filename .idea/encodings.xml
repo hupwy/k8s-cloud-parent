@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/k8s-srv-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/k8s-srv-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/k8s-srv-docker-monitor/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/k8s-srv-docker-monitor/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/k8s-srv-login/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/k8s-srv-login/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/k8s-srv-user/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/k8s-srv-user/src/main/resources" charset="UTF-8" />
+  </component>
+</project>
