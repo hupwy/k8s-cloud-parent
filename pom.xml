@@ -17,8 +17,10 @@
     <version>0.0.1</version>
 
     <properties>
+<!--
         <docker.image.prefix>cloudlab</docker.image.prefix>
         <fabric8.generator.name>harbor.neuedu.com.cn/${docker.image.prefix}/${project.artifactId}:${project.version}</fabric8.generator.name>
+-->
         <modules.version>0.0.1</modules.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
