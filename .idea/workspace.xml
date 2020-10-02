@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3b68a67b-9ee6-4c3f-8d75-5952e8d9799a" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="D:\profile\app\apache-maven-3.6.3" />
+        <option name="userSettingsFile" value="D:\profile\app\apache-maven-3.6.3\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1hWgT9Hw7221jKHtQhWQlfvSsdG" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/.kube/config" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.26551723" />
+    <property name="settings.editor.selected.configurable" value="com.intellij.kubernetes.api.settings.KubernetesApiConfigurable" />
+  </component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.neusoft.edu" />
+      <recent name="com.neusoft.edu.controller" />
+      <recent name="com.neusoft.edu.feign.user" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\profile\repository\Git\k8s-cloud-parent\k8s-srv-login\src\main\resources" />
+      <recent name="D:\profile\repository\Git\k8s-cloud-parent\k8s-srv-user\src\main\resources" />
+      <recent name="D:\profile\repository\Git\k8s-cloud-parent\k8s-srv-docker-monitor\src\main" />
+      <recent name="D:\profile\repository\Git\k8s-cloud-parent\k8s-srv-docker-monitor\src\main\resources" />
+      <recent name="D:\profile\repository\Git\k8s-cloud-parent\k8s-srv-user\src\main\java\com\neusoft\edu\feign" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Maven.k8s-srv-user [clean,package,fabric8:build]">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="k8s-srv-docker-monitor [clean,package,fabric8:build]" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+                <option value="package" />
+                <option value="fabric8:build" />
+              </list>
+            </option>
+            <option name="pomFileName" value="pom.xml" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$/k8s-srv-docker-monitor" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="k8s-srv-login [clean,package,fabric8:build]" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+                <option value="package" />
+                <option value="fabric8:build" />
+              </list>
+            </option>
+            <option name="pomFileName" value="pom.xml" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$/k8s-srv-login" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="k8s-srv-user [clean,package,fabric8:build]" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+                <option value="package" />
+                <option value="fabric8:build" />
+              </list>
+            </option>
+            <option name="pomFileName" value="pom.xml" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$/k8s-srv-user" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="DockerMonitorBootMain" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="k8s-srv-docker-monitor" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.neusoft.edu.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.neusoft.edu.DockerMonitorBootMain" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoginBootMain" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="k8s-srv-login" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.neusoft.edu.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.neusoft.edu.LoginBootMain" />
+      <option name="ACTIVE_PROFILES" value="dev" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserBootMain" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="k8s-srv-user" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.neusoft.edu.UserBootMain" />
+      <option name="ACTIVE_PROFILES" value="dev" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Maven.k8s-srv-login [clean,package,fabric8:build]" />
+      <item itemvalue="Maven.k8s-srv-docker-monitor [clean,package,fabric8:build]" />
+      <item itemvalue="Maven.k8s-srv-user [clean,package,fabric8:build]" />
+      <item itemvalue="Spring Boot.UserBootMain" />
+      <item itemvalue="Spring Boot.DockerMonitorBootMain" />
+      <item itemvalue="Spring Boot.LoginBootMain" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.LoginBootMain" />
+        <item itemvalue="Spring Boot.DockerMonitorBootMain" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\admin\AppData\Roaming\Subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3b68a67b-9ee6-4c3f-8d75-5952e8d9799a" name="Default Changelist" comment="" />
+      <created>1600132268029</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1600132268029</updated>
+      <workItem from="1600132269073" duration="3629000" />
+      <workItem from="1600137652379" duration="157000" />
+      <workItem from="1600137817411" duration="627000" />
+      <workItem from="1600138457565" duration="22271000" />
+      <workItem from="1600234542326" duration="741000" />
+      <workItem from="1600235347268" duration="7625000" />
+      <workItem from="1600247479239" duration="2485000" />
+      <workItem from="1600290098798" duration="81000" />
+      <workItem from="1600290189036" duration="50000" />
+      <workItem from="1600290287894" duration="7575000" />
+      <workItem from="1600649071731" duration="5171000" />
+      <workItem from="1600734646935" duration="5588000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="695" y="343" key="#Notifications" timestamp="1600290329558">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="695" y="343" key="#Notifications/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600290329558" />
+    <state x="552" y="161" key="#Plugins" timestamp="1600290377638">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="161" key="#Plugins/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600290377638" />
+    <state x="440" y="94" key="#Project_Structure" timestamp="1600138694349">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="440" y="94" key="#Project_Structure/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600138694349" />
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1600235506798">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600235506798" />
+    <state x="765" y="225" key="#com.intellij.ide.util.MemberChooser" timestamp="1600218982660">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="765" y="225" key="#com.intellij.ide.util.MemberChooser/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600218982660" />
+    <state x="640" y="255" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1600290208661">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="640" y="255" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600290208661" />
+    <state x="337" y="65" key="FileChooserDialogImpl" timestamp="1600234634291">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="337" y="65" key="FileChooserDialogImpl/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600234634291" />
+    <state width="1562" height="354" key="GridCell.Tab.0.bottom" timestamp="1600247422147">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1562" height="354" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600247422147" />
+    <state width="1562" height="354" key="GridCell.Tab.0.center" timestamp="1600247422147">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1562" height="354" key="GridCell.Tab.0.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600247422147" />
+    <state width="1562" height="354" key="GridCell.Tab.0.left" timestamp="1600247422147">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1562" height="354" key="GridCell.Tab.0.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600247422147" />
+    <state width="1562" height="354" key="GridCell.Tab.0.right" timestamp="1600247422147">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1562" height="354" key="GridCell.Tab.0.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600247422147" />
+    <state width="1562" height="354" key="GridCell.Tab.1.bottom" timestamp="1600247422148">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1562" height="354" key="GridCell.Tab.1.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600247422148" />
+    <state width="1562" height="354" key="GridCell.Tab.1.center" timestamp="1600247422148">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1562" height="354" key="GridCell.Tab.1.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600247422148" />
+    <state width="1562" height="354" key="GridCell.Tab.1.left" timestamp="1600247422148">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1562" height="354" key="GridCell.Tab.1.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600247422148" />
+    <state width="1562" height="354" key="GridCell.Tab.1.right" timestamp="1600247422148">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1562" height="354" key="GridCell.Tab.1.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600247422148" />
+    <state width="1562" height="354" key="GridCell.Tab.2.bottom" timestamp="1600247422148">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1562" height="354" key="GridCell.Tab.2.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600247422148" />
+    <state width="1562" height="354" key="GridCell.Tab.2.center" timestamp="1600247422148">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1562" height="354" key="GridCell.Tab.2.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600247422148" />
+    <state width="1562" height="354" key="GridCell.Tab.2.left" timestamp="1600247422148">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1562" height="354" key="GridCell.Tab.2.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600247422148" />
+    <state width="1562" height="354" key="GridCell.Tab.2.right" timestamp="1600247422148">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1562" height="354" key="GridCell.Tab.2.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600247422148" />
+    <state x="540" y="254" key="IDE.errors.dialog" timestamp="1600735276245">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="540" y="254" key="IDE.errors.dialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600735276245" />
+    <state x="367" y="113" key="SettingsEditor" timestamp="1600290874570">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="367" y="113" key="SettingsEditor/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600290874570" />
+    <state x="334" y="180" key="new project wizard" timestamp="1600139139004">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="334" y="180" key="new project wizard/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600139139004" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1600226067414">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600226067414" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/k8s-srv-docker-monitor/src/main/java/com/neusoft/edu/controller/MonitorController.java</url>
+          <line>17</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/k8s-srv-user/src/main/java/com/neusoft/edu/controller/UserController.java</url>
+          <line>22</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/k8s-srv-login/src/main/java/com/neusoft/edu/controller/UserController.java</url>
+          <line>23</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
