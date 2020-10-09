@@ -600,7 +600,6 @@ Jenkins 中可以打开`系统管理`->`插件管理`->`可选插件`来安装�
    ```
 
 ### Kubernetes 插件 Container 配置
-
 将配置 Jenkins Slave 在 Kubernetes 中的 Pod 中所包含容器信息，这里镜像都可以从官方 Docker Hub 下载，由于网速原因，本人已经将其下载到 Aliyun 镜像仓库。
 
 1. 配置 Maven 镜像
@@ -642,93 +641,95 @@ Jenkins 中可以打开`系统管理`->`插件管理`->`可选插件`来安装�
 ### Container 存储挂载配置
 
 由于上面配置的 Maven、Docker 等都需要挂载存储，Maven 中是将中央仓库下载的 Jar 存储到共享目录，而 Docker 则是需要将宿主机的 Docker 配置挂载到 Docker In Docker 容器内部，所以我们要对挂载进行配置。
-    
+
 1. 创建 Maven 存储使用的 PV、PVC
+
+   提前在 NFS 卷中，创建用于存储 Maven 相关 Jar 的目录：
+
+   > 创建的目录要确保其它用户有读写权限。
+
+   ```shell
+   $ mkdir /nfs/data/maven
+   ```
+
+   然后，Kubernetes 下再创建 Maven 的 PV、PVC 部署文件：
+
+   **maven-storage.yaml**
+
+   ```yaml
+   apiVersion: v1
+   kind: PersistentVolume
+   metadata:
+     name: maven
+     labels:
+       app: maven
+   spec:
+     capacity:          
+       storage: 100Gi
+     accessModes:       
+       - ReadWriteOnce
+     persistentVolumeReclaimPolicy: Retain  
+     mountOptions:         #NFS挂在选项
+       - hard
+       - nfsvers=4.1    
+     nfs:                  #NFS设置
+       path: /nfs/data/maven   
+       server: 192.168.3.51  #NFS服务器IP
+   ---
+   kind: PersistentVolumeClaim
+   apiVersion: v1
+   metadata:
+     name: maven
+   spec:
+     accessModes:
+       - ReadWriteOnce
+     resources:
+       requests:
+         storage: 100Gi     #存储空间大小
+     selector:
+       matchLabels:
+         app: maven
+   ```
+
+   部署 PV、PVC 到 Kubernetes 中：
+
+   - `-n`：指定 namespace
+
+   ```shell
+   $ kubectl apply -f maven-storage.yaml -n public
+   ```
+
+2. 配置 Maven 挂载
+
+   在卷选项中，选择添加卷，选择 `Persistent Volume Claim` 按如下添加配置：
+
+   - 申明值（PVC 名称）：maven
+   - 挂在路径（容器内的目录）：/root/.m2
    
-        提前在 NFS 卷中，创建用于存储 Maven 相关 Jar 的目录：
-        
-        > 创建的目录要确保其它用户有读写权限。
-        
-        ```shell
-        $ mkdir /nfs/data/maven
-        ```
-        
-        然后，Kubernetes 下再创建 Maven 的 PV、PVC 部署文件：
-        
-        **maven-storage.yaml**]
-        
-        ```yaml
-        apiVersion: v1
-        kind: PersistentVolume
-        metadata:
-          name: maven
-          labels:
-            app: maven
-        spec:
-          capacity:          
-            storage: 100Gi         #根据自身情况填写存储空间大小
-          accessModes:       
-            - ReadWriteOnce
-          persistentVolumeReclaimPolicy: Retain  
-          mountOptions:            #NFS挂在选项
-            - hard
-            - nfsvers=4.1    
-          nfs:                     #NFS设置
-            path: /nfs/data/maven   
-            server: 192.168.3.51   #NFS服务器IP
-        ---
-        kind: PersistentVolumeClaim
-        apiVersion: v1
-        metadata:
-          name: maven
-        spec:
-          accessModes:
-            - ReadWriteOnce
-          resources:
-            requests:
-              storage: 100Gi        #根据自身情况填写存储空间大小
-          selector:
-            matchLabels:
-              app: maven
-        ```
-        
-        部署 PV、PVC 到 Kubernetes 中：
-        
-        `-n`：指定 namespace
-        
-        ````shell
-        $ kubectl apply -f maven-storage.yaml -n default
-        ````
-    
-     2. 配置 Maven 挂载
-    
-        在卷选项中，选择添加卷，选择 `Persistent Volume Claim` 按如下添加配置：
-    
-        - 申明值（PVC 名称）：maven
-        - 挂在路径（容器内的目录）：/root/.m2
-    
-        ![image-20201004212645367](image-20201004212645367.png)
-    
-     3. 配置 Docker 挂载
-    
-        Kubernetes 中 Pod 的容器是启动在各个节点上，每个节点就是一台宿主机，里面进行了很多 Docker 配置，所以我们这里将宿主机的 Docker 配置挂载进入 Docker 镜像。选择添加卷，选择 `Host Path Volume` 按如下添加配置：
-    
-        **① 路径 /usr/bin/docker：**
-    
-        - 主机路径（宿主机目录）：/usr/bin/docker
-        - 挂载路径（容器内的目录）：/usr/bin/docker
-    
-        **② 路径 /var/run/docker.sock：**
-    
-        - 主机路径（宿主机目录）：/var/run/docker.sock
-        - 挂载路径（容器内的目录）：/var/run/docker.sock
-    
-        **③ 路径 /etc/docker：**
-    
-        - 主机路径（宿主机目录）：/etc/docker
-        - 挂载路径（容器内的目录）：/etc/docker
-    
-        ![image-20201004212951115](image-20201004212951115.png)
+   ![image-20201004212645367](image-20201004212645367.png)
+   
+3. 配置 Docker 挂载
+
+   Kubernetes 中 Pod 的容器是启动在各个节点上，每个节点就是一台宿主机，里面进行了很多 Docker 配置，所以我们这里将宿主机的 Docker 配置挂载进入 Docker 镜像。选择添加卷，选择 `Host Path Volume` 按如下添加配置：
+
+   - 路径 /usr/bin/docker:
+
+     - 主机路径（宿主机目录）：/usr/bin/docker
+     - 挂载路径（容器内的目录）：/usr/bin/docker
+
+   - 路径 /var/run/docker.sock：
+
+     - 主机路径（宿主机目录）：/var/run/docker.sock
+     - 挂载路径（容器内的目录）：/var/run/docker.sock
+
+   - 路径 /etc/docker：
+
+     - 主机路径（宿主机目录）：/etc/docker
+     - 挂载路径（容器内的目录）：/etc/docker
+
+     ![image-20201004212951115](image-20201004212951115.png)
+
+     ​    
 
 ## 创建相关文件
 
