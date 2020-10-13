@@ -8,7 +8,6 @@
         <version>0.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <packaging>pom</packaging>
 
     <modules>
         <module>system</module>
@@ -16,6 +15,7 @@
     </modules>
 
     <artifactId>elephant-modules</artifactId>
+    <packaging>pom</packaging>
 
     <description>
         elephant-modules业务模块
