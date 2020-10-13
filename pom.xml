@@ -127,6 +127,13 @@
                 <version>${lombok.version}</version>
             </dependency>
 
+            <!-- 核心模块 -->
+            <dependency>
+                <artifactId>common-core</artifactId>
+                <groupId>com.itartisan.common.core</groupId>
+                <version>${version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

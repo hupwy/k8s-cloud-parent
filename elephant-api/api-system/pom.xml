@@ -16,4 +16,12 @@
         api-system系统接口模块
     </description>
 
+    <dependencies>
+        <!-- Common Core-->
+        <dependency>
+            <groupId>com.itartisan.common.core</groupId>
+            <artifactId>common-core</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>
