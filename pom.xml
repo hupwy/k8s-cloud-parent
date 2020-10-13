@@ -13,7 +13,7 @@
         <module>elephant-modules</module>
     </modules>
 
-    <groupId>com.itartisan.cn</groupId>
+    <groupId>com.itartisan</groupId>
     <artifactId>k8s-cloud-parent</artifactId>
     <version>0.0.1</version>
 

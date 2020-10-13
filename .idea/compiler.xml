@@ -23,6 +23,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="api" target="1.8" />
+      <module name="api-system" target="1.8" />
       <module name="k8s-srv-api" target="1.8" />
       <module name="k8s-srv-docker-monitor" target="1.8" />
       <module name="k8s-srv-login" target="1.8" />
