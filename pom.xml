@@ -11,6 +11,11 @@
         <module>k8s-srv-user</module>
         <module>k8s-srv-docker-monitor</module>
         <module>elephant-api</module>
+        <module>elephant-auth</module>
+        <module>elephant-common</module>
+        <module>common-log</module>
+        <module>elephant-gateway</module>
+        <module>elephant-modules</module>
     </modules>
 
     <groupId>com.itartisan.cn</groupId>

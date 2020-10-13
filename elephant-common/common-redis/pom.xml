@@ -3,21 +3,16 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>k8s-cloud-parent</artifactId>
+        <artifactId>elephant-common</artifactId>
         <groupId>com.itartisan.cn</groupId>
         <version>0.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <modules>
-        <module>api-system</module>
-    </modules>
-
-    <artifactId>elephant-api</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>common-redis</artifactId>
 
     <description>
-        elephant-api系统接口
+        common-redis缓存服务
     </description>
 
 </project>

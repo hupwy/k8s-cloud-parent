@@ -8,16 +8,16 @@
         <version>0.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
-    <modules>
-        <module>api-system</module>
-    </modules>
-
-    <artifactId>elephant-api</artifactId>
     <packaging>pom</packaging>
 
+    <modules>
+        <module>system</module>
+    </modules>
+
+    <artifactId>elephant-modules</artifactId>
+
     <description>
-        elephant-api系统接口
+        elephant-modules业务模块
     </description>
 
 </project>

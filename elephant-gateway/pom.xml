@@ -9,15 +9,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <modules>
-        <module>api-system</module>
-    </modules>
-
-    <artifactId>elephant-api</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>elephant-gateway</artifactId>
 
     <description>
-        elephant-api系统接口
+        elephant-gateway网关模块
     </description>
 
 </project>

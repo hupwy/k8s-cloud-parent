@@ -10,14 +10,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <modules>
-        <module>api-system</module>
+        <module>redis-auth</module>
     </modules>
 
-    <artifactId>elephant-api</artifactId>
+    <artifactId>elephant-auth</artifactId>
     <packaging>pom</packaging>
 
     <description>
-        elephant-api系统接口
+        elephant-auth认证授权中心
     </description>
 
 </project>

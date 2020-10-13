@@ -29,18 +29,26 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b68a67b-9ee6-4c3f-8d75-5952e8d9799a" name="Default Changelist" comment="update pom.xml">
-      <change afterPath="$PROJECT_DIR$/elephant-api/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+    <list default="true" id="3b68a67b-9ee6-4c3f-8d75-5952e8d9799a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/elephant-api/api-system/src/main/java/com/itartisan/cn/Test.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-auth/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-auth/redis-auth/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-log/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-redis/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-security/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-swagger/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-gateway/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-modules/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-modules/system/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s-cloud-parent.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s-srv-login/k8s-srv-login.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/api-system.iml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/api-system/api-system.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -55,6 +63,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -293,7 +302,7 @@
       <workItem from="1600290287894" duration="7575000" />
       <workItem from="1600649071731" duration="5171000" />
       <workItem from="1600734646935" duration="5588000" />
-      <workItem from="1602554058918" duration="3113000" />
+      <workItem from="1602554058918" duration="5537000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1601609066235</created>
@@ -309,7 +318,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601609710523</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="elephant-api modules add">
+      <created>1602557269823</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1602557269823</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -345,7 +361,8 @@
     </ignored-roots>
     <MESSAGE value="commit" />
     <MESSAGE value="update pom.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="update pom.xml" />
+    <MESSAGE value="elephant-api modules add" />
+    <option name="LAST_COMMIT_MESSAGE" value="elephant-api modules add" />
   </component>
   <component name="WindowStateProjectService">
     <state x="695" y="343" key="#Notifications" timestamp="1600290329558">
@@ -356,10 +373,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="161" key="#Plugins/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600290377638" />
-    <state x="440" y="94" key="#Project_Structure" timestamp="1602556650417">
+    <state x="440" y="94" key="#Project_Structure" timestamp="1602558338403">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="440" y="94" key="#Project_Structure/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602556650417" />
+    <state x="440" y="94" key="#Project_Structure/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602558338403" />
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1600235506798">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -372,6 +389,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="640" y="255" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600290208661" />
+    <state x="474" y="84" key="CommitChangelistDialog2" timestamp="1602557268958">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="474" y="84" key="CommitChangelistDialog2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602557268958" />
     <state x="337" y="65" key="FileChooserDialogImpl" timestamp="1602554096006">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -442,18 +463,19 @@
     </state>
     <state x="367" y="113" key="SettingsEditor/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602554098233" />
     <state x="367" y="113" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1601609309859" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1601609718504">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1602557276572">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602557276572" />
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601609718504" />
     <state x="763" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601609687100">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="763" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601609687100" />
-    <state x="471" y="258" key="new project wizard" timestamp="1602557028408">
+    <state x="351" y="263" key="new project wizard" timestamp="1602566593038">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="471" y="258" key="new project wizard/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602557028408" />
+    <state x="351" y="263" key="new project wizard/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602566593038" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1600226067414">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -10,14 +10,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <modules>
-        <module>api-system</module>
+        <module>common-core</module>
+        <module>common-log</module>
+        <module>common-redis</module>
+        <module>common-security</module>
+        <module>common-swagger</module>
     </modules>
 
-    <artifactId>elephant-api</artifactId>
+    <artifactId>elephant-common</artifactId>
     <packaging>pom</packaging>
 
     <description>
-        elephant-api系统接口
+        elephant-common通用模块
     </description>
 
 </project>
