@@ -7,12 +7,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="k8s-srv-login" />
+        <module name="api-system" />
         <module name="k8s-srv-api" />
         <module name="k8s-srv-docker-monitor" />
-        <module name="k8s-srv-login" />
+        <module name="api" />
         <module name="k8s-srv-user" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="api" target="1.8" />
+      <module name="api-system" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

@@ -3,16 +3,17 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <packaging>pom</packaging>
+
     <modules>
         <module>k8s-srv-api</module>
         <module>k8s-srv-login</module>
         <module>k8s-srv-user</module>
         <module>k8s-srv-docker-monitor</module>
+        <module>elephant-api</module>
     </modules>
 
-    <groupId>com.neusoft.edu</groupId>
+    <groupId>com.itartisan.cn</groupId>
     <artifactId>k8s-cloud-parent</artifactId>
     <version>0.0.1</version>
 

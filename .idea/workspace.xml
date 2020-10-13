@@ -30,51 +30,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3b68a67b-9ee6-4c3f-8d75-5952e8d9799a" name="Default Changelist" comment="update pom.xml">
-      <change afterPath="$PROJECT_DIR$/k8s-srv-api/target/classes/com/neusoft/edu/feign/monitor/MonitorInterface.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-api/target/classes/com/neusoft/edu/feign/user/UserInterface.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-api/target/k8s-srv-api-0.0.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-api/target/maven-archiver/pom.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-api/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-api/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-api/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-docker-monitor/target/classes/application.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-docker-monitor/target/classes/com/neusoft/edu/DockerMonitorBootMain.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-docker-monitor/target/classes/com/neusoft/edu/controller/MonitorController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-docker-monitor/target/k8s-srv-docker-monitor.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-docker-monitor/target/k8s-srv-docker-monitor.jar.original" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-docker-monitor/target/maven-archiver/pom.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-docker-monitor/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-docker-monitor/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-docker-monitor/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-login/target/classes/application-dev.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-login/target/classes/application.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-login/target/classes/com/neusoft/edu/LoginBootMain.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-login/target/classes/com/neusoft/edu/controller/ServiceController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-login/target/classes/com/neusoft/edu/controller/UserController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-login/target/classes/com/neusoft/edu/feign/UserFallback.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-login/target/classes/com/neusoft/edu/feign/UserService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-login/target/k8s-srv-login.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-login/target/k8s-srv-login.jar.original" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-login/target/maven-archiver/pom.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-login/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-login/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-login/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-user/target/classes/application-dev.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-user/target/classes/application.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-user/target/classes/com/neusoft/edu/UserBootMain.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-user/target/classes/com/neusoft/edu/controller/UserController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-user/target/classes/com/neusoft/edu/feign/DockerFallback.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-user/target/classes/com/neusoft/edu/feign/MonitorService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-user/target/k8s-srv-user.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-user/target/k8s-srv-user.jar.original" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-user/target/maven-archiver/pom.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-user/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-user/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s-srv-user/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s-srv-docker-monitor/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s-srv-docker-monitor/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s-srv-login/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s-srv-login/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s-srv-user/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s-srv-user/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-api/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-cloud-parent.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-login/k8s-srv-login.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +64,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="D:\appdata\ideaIU-2020.2.2.win\plugins\maven\lib\maven3" />
+        <option name="mavenHome" value="$PROJECT_DIR$/../../../app/apache-maven-3.6.3" />
         <option name="userSettingsFile" value="D:\profile\app\apache-maven-3.6.3\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
@@ -133,6 +100,9 @@
     <option name="notificationShown" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\profile\repository\GitHub\k8s-cloud-parent\elephant-api" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.neusoft.edu" />
       <recent name="com.neusoft.edu.controller" />
@@ -154,13 +124,15 @@
     </option>
   </component>
   <component name="RunManager" selected="Maven.k8s-srv-user [clean,package,fabric8:build]">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -321,6 +293,7 @@
       <workItem from="1600290287894" duration="7575000" />
       <workItem from="1600649071731" duration="5171000" />
       <workItem from="1600734646935" duration="5588000" />
+      <workItem from="1602554058918" duration="3113000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1601609066235</created>
@@ -383,10 +356,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="161" key="#Plugins/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600290377638" />
-    <state x="440" y="94" key="#Project_Structure" timestamp="1600138694349">
+    <state x="440" y="94" key="#Project_Structure" timestamp="1602556650417">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="440" y="94" key="#Project_Structure/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600138694349" />
+    <state x="440" y="94" key="#Project_Structure/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602556650417" />
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1600235506798">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -399,10 +372,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="640" y="255" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600290208661" />
-    <state x="337" y="65" key="FileChooserDialogImpl" timestamp="1601609307556">
+    <state x="337" y="65" key="FileChooserDialogImpl" timestamp="1602554096006">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="337" y="65" key="FileChooserDialogImpl/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600234634291" />
+    <state x="337" y="65" key="FileChooserDialogImpl/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602554096006" />
     <state x="337" y="65" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1601609307556" />
     <state x="771" y="439" key="Github.CreateGistDialog" timestamp="1601608946995">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -464,10 +437,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="540" y="254" key="IDE.errors.dialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600735276245" />
-    <state x="367" y="113" key="SettingsEditor" timestamp="1601609309859">
+    <state x="367" y="113" key="SettingsEditor" timestamp="1602554098233">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="367" y="113" key="SettingsEditor/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600290874570" />
+    <state x="367" y="113" key="SettingsEditor/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602554098233" />
     <state x="367" y="113" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1601609309859" />
     <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1601609718504">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -477,17 +450,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="763" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601609687100" />
-    <state x="334" y="180" key="new project wizard" timestamp="1600139139004">
+    <state x="471" y="258" key="new project wizard" timestamp="1602557028408">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="334" y="180" key="new project wizard/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600139139004" />
+    <state x="471" y="258" key="new project wizard/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602557028408" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1600226067414">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600226067414" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1601609504981">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1602555679950">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602555679950" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1601609504981" />
   </component>
   <component name="XDebuggerManager">
