@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.itartisan.cn.common.core.utils.SpringUtils
+
+  

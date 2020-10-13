@@ -12,13 +12,9 @@
         <module name="common-log" />
         <module name="elephant-gateway" />
         <module name="common-redis" />
-        <module name="k8s-srv-user" />
         <module name="system" />
-        <module name="k8s-srv-login" />
         <module name="api-system" />
-        <module name="k8s-srv-api" />
         <module name="common-swagger" />
-        <module name="k8s-srv-docker-monitor" />
         <module name="api" />
         <module name="auth-redis" />
         <module name="job" />
@@ -27,6 +23,10 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="api" target="1.8" />
+      <module name="k8s-srv-api" target="1.8" />
+      <module name="k8s-srv-docker-monitor" target="1.8" />
+      <module name="k8s-srv-login" target="1.8" />
+      <module name="k8s-srv-user" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

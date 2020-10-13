@@ -127,12 +127,6 @@
                 <version>${lombok.version}</version>
             </dependency>
 
-            <!--Service Interface API-->
-            <dependency>
-                <groupId>com.neusoft.edu</groupId>
-                <artifactId>k8s-srv-api</artifactId>
-                <version>${modules.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
