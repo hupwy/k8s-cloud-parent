@@ -20,6 +20,8 @@
         <module name="common-swagger" />
         <module name="k8s-srv-docker-monitor" />
         <module name="api" />
+        <module name="auth-redis" />
+        <module name="job" />
         <module name="common-core" />
       </profile>
     </annotationProcessing>

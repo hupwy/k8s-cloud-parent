@@ -30,25 +30,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3b68a67b-9ee6-4c3f-8d75-5952e8d9799a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/elephant-api/api-system/src/main/java/com/itartisan/cn/Test.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-auth/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-auth/redis-auth/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-common/common-log/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-common/common-redis/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-common/common-security/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-common/common-swagger/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-common/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-gateway/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-modules/job/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/api-system.iml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/api-system/api-system.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/api-system/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/src/main/java/com/itartisan/cn/Test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-auth/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-auth/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-auth/redis-auth/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-core/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-modules/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-modules/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-api/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-api/src/main/java/com/neusoft/edu/feign/monitor/MonitorInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-api/src/main/java/com/neusoft/edu/feign/user/UserInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-docker-monitor/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-docker-monitor/src/main/fabric8/k8s-srv-docker-monitor-deployment.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-docker-monitor/src/main/fabric8/k8s-srv-docker-monitor-service.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-docker-monitor/src/main/java/com/neusoft/edu/DockerMonitorBootMain.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-docker-monitor/src/main/java/com/neusoft/edu/controller/MonitorController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-docker-monitor/src/main/resources/application.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-login/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-login/src/main/fabric8/k8s-srv-login-deployment.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-login/src/main/fabric8/k8s-srv-login-service.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-login/src/main/java/com/neusoft/edu/LoginBootMain.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-login/src/main/java/com/neusoft/edu/controller/ServiceController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-login/src/main/java/com/neusoft/edu/controller/UserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-login/src/main/java/com/neusoft/edu/feign/UserFallback.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-login/src/main/java/com/neusoft/edu/feign/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-login/src/main/resources/application-dev.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-login/src/main/resources/application.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-user/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-user/src/main/fabric8/k8s-srv-user-deployment.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-user/src/main/fabric8/k8s-srv-user-service.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-user/src/main/java/com/neusoft/edu/UserBootMain.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-user/src/main/java/com/neusoft/edu/controller/UserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-user/src/main/java/com/neusoft/edu/feign/DockerFallback.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-user/src/main/java/com/neusoft/edu/feign/MonitorService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-user/src/main/resources/application-dev.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s-srv-user/src/main/resources/application.yaml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -103,7 +123,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.26551723" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="settings.editor.selected.configurable" value="build.tools" />
   </component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
@@ -113,6 +133,7 @@
       <recent name="D:\profile\repository\GitHub\k8s-cloud-parent\elephant-api" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.itartisan.cn.system.api" />
       <recent name="com.neusoft.edu" />
       <recent name="com.neusoft.edu.controller" />
       <recent name="com.neusoft.edu.feign.user" />
@@ -302,7 +323,7 @@
       <workItem from="1600290287894" duration="7575000" />
       <workItem from="1600649071731" duration="5171000" />
       <workItem from="1600734646935" duration="5588000" />
-      <workItem from="1602554058918" duration="5537000" />
+      <workItem from="1602554058918" duration="10487000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1601609066235</created>
@@ -325,7 +346,21 @@
       <option name="project" value="LOCAL" />
       <updated>1602557269823</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="project initialize">
+      <created>1602566808709</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1602566808710</updated>
+    </task>
+    <task id="LOCAL-00005" summary="readme.md update">
+      <created>1602567100753</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1602567100753</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -362,7 +397,9 @@
     <MESSAGE value="commit" />
     <MESSAGE value="update pom.xml" />
     <MESSAGE value="elephant-api modules add" />
-    <option name="LAST_COMMIT_MESSAGE" value="elephant-api modules add" />
+    <MESSAGE value="project initialize" />
+    <MESSAGE value="readme.md update" />
+    <option name="LAST_COMMIT_MESSAGE" value="readme.md update" />
   </component>
   <component name="WindowStateProjectService">
     <state x="695" y="343" key="#Notifications" timestamp="1600290329558">
@@ -373,10 +410,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="161" key="#Plugins/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600290377638" />
-    <state x="440" y="94" key="#Project_Structure" timestamp="1602558338403">
+    <state x="440" y="94" key="#Project_Structure" timestamp="1602569326127">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="440" y="94" key="#Project_Structure/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602558338403" />
+    <state x="440" y="94" key="#Project_Structure/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602569326127" />
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1600235506798">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -389,10 +426,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="640" y="255" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600290208661" />
-    <state x="474" y="84" key="CommitChangelistDialog2" timestamp="1602557268958">
+    <state x="474" y="84" key="CommitChangelistDialog2" timestamp="1602567100205">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="474" y="84" key="CommitChangelistDialog2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602557268958" />
+    <state x="474" y="84" key="CommitChangelistDialog2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602567100205" />
     <state x="337" y="65" key="FileChooserDialogImpl" timestamp="1602554096006">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -458,24 +495,24 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="540" y="254" key="IDE.errors.dialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600735276245" />
-    <state x="367" y="113" key="SettingsEditor" timestamp="1602554098233">
+    <state x="367" y="113" key="SettingsEditor" timestamp="1602568515960">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="367" y="113" key="SettingsEditor/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602554098233" />
+    <state x="367" y="113" key="SettingsEditor/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602568515960" />
     <state x="367" y="113" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1601609309859" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1602557276572">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1602567110374">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602557276572" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602567110374" />
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601609718504" />
     <state x="763" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601609687100">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="763" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601609687100" />
-    <state x="351" y="263" key="new project wizard" timestamp="1602566593038">
+    <state x="351" y="263" key="new project wizard" timestamp="1602567193388">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="351" y="263" key="new project wizard/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602566593038" />
+    <state x="351" y="263" key="new project wizard/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602567193388" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1600226067414">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

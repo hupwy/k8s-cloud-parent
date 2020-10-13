@@ -6,14 +6,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>k8s-srv-api</module>
-        <module>k8s-srv-login</module>
-        <module>k8s-srv-user</module>
-        <module>k8s-srv-docker-monitor</module>
         <module>elephant-api</module>
         <module>elephant-auth</module>
         <module>elephant-common</module>
-        <module>common-log</module>
         <module>elephant-gateway</module>
         <module>elephant-modules</module>
     </modules>
@@ -23,18 +18,29 @@
     <version>0.0.1</version>
 
     <properties>
-<!--
-        <docker.image.prefix>cloudlab</docker.image.prefix>
-        <fabric8.generator.name>harbor.neuedu.com.cn/${docker.image.prefix}/${project.artifactId}:${project.version}</fabric8.generator.name>
--->
+        <!--project compile-->
         <modules.version>0.0.1</modules.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-        <lombok.version>1.18.12</lombok.version>
-        <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
-        <spring-boot.version>2.3.3.RELEASE</spring-boot.version>
         <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <lombok.version>1.18.12</lombok.version>
+
+        <!--spring portion-->
+        <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
+        <spring-cloud-alibaba.version>2.2.3.RELEASE</spring-cloud-alibaba.version>
+        <nacos.version>1.3.0</nacos.version>
+        <spring-boot.version>2.3.3.RELEASE</spring-boot.version>
+        <spring-boot-admin.version>2.2.3</spring-boot-admin.version>
+        <spring-boot.mybatis>2.1.2</spring-boot.mybatis>
+
+        <!--swagger-->
+        <swagger.fox.version>2.9.2</swagger.fox.version>
+        <swagger.core.version>1.5.24</swagger.core.version>
+
+        <!--tool-->
+        <commons.lang3.version>3.6</commons.lang3.version>
+
     </properties>
 
     <!-- <parent>
@@ -55,6 +61,23 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <!-- SpringCloud Alibaba 微服务 -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Alibaba Nacos 配置 -->
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-client</artifactId>
+                <version>${nacos.version}</version>
+            </dependency>
+
             <!-- SpringBoot 依赖 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -62,6 +85,39 @@
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!--  SpringBoot 监控客户端 -->
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-client</artifactId>
+                <version>${spring-boot-admin.version}</version>
+            </dependency>
+
+            <!-- Mybatis 依赖配置 -->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${spring-boot.mybatis}</version>
+            </dependency>
+
+            <!-- Apache Lang3 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons.lang3.version}</version>
+            </dependency>
+
+            <!-- Swagger 依赖配置 -->
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-models</artifactId>
+                <version>${swagger.core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>${swagger.core.version}</version>
             </dependency>
 
             <!-- lombok -->
