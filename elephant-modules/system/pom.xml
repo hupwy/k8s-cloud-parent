@@ -11,6 +11,7 @@
 
     <artifactId>system</artifactId>
     <groupId>com.itartisan.modules.system</groupId>
+    <version>0.0.1</version>
 
     <description>
         modules-system系统模块
@@ -68,4 +69,18 @@
         </dependency>
 
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>none</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

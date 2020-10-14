@@ -11,7 +11,7 @@
 
     <artifactId>common-log</artifactId>
     <groupId>com.itartisan.common.log</groupId>
-    <version>${parent.version}</version>
+    <version>0.0.1</version>
 
     <description>
         common-log日志记录
@@ -24,4 +24,18 @@
             <artifactId>common-security</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>none</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -11,6 +11,7 @@
 
     <artifactId>auth-redis</artifactId>
     <groupId>com.itartisan.auth.redis</groupId>
+    <version>0.0.1</version>
     <packaging>jar</packaging>
 
     <description>
@@ -60,5 +61,22 @@
             <groupId>com.itartisan.common.security</groupId>
             <artifactId>common-security</artifactId>
         </dependency>
+
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

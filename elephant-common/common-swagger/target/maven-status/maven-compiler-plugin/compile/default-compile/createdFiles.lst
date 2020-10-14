@@ -1,0 +1,6 @@
+com\itartisan\common\swagger\config\SwaggerProperties$Authorization.class
+com\itartisan\common\swagger\config\SwaggerProperties$Contact.class
+com\itartisan\common\swagger\config\SwaggerAutoConfiguration.class
+com\itartisan\common\swagger\config\SwaggerProperties.class
+com\itartisan\common\swagger\annotation\EnableCustomSwagger2.class
+com\itartisan\common\swagger\config\SwaggerProperties$AuthorizationScope.class

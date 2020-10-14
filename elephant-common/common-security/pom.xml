@@ -11,7 +11,7 @@
 
     <artifactId>common-security</artifactId>
     <groupId>com.itartisan.common.security</groupId>
-    <version>${parent.version}</version>
+    <version>0.0.1</version>
 
     <description>
         common-security安全模块
@@ -36,5 +36,17 @@
             <artifactId>common-redis</artifactId>
         </dependency>
     </dependencies>
-
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>none</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
