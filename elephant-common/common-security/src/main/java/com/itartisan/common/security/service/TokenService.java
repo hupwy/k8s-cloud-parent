@@ -1,6 +1,6 @@
 package com.itartisan.common.security.service;
 
-import com.itartisan.beans.model.LoginUser;
+import com.itartisan.api.beans.model.LoginUser;
 import com.itartisan.common.core.constant.CacheConstants;
 import com.itartisan.common.core.constant.Constants;
 import com.itartisan.common.core.utils.IdUtils;

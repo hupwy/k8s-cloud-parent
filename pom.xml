@@ -194,7 +194,7 @@
 
             <!-- 系统接口 -->
             <dependency>
-                <groupId>com.itartisan.system.api</groupId>
+                <groupId>com.itartisan.api.system</groupId>
                 <artifactId>api-system</artifactId>
                 <version>${version}</version>
             </dependency>

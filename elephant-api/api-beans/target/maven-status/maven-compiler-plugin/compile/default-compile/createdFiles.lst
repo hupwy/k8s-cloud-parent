@@ -1,0 +1,5 @@
+com\itartisan\api\beans\domain\SysDept.class
+com\itartisan\api\beans\domain\SysOperLog.class
+com\itartisan\api\beans\domain\SysRole.class
+com\itartisan\api\beans\model\LoginUser.class
+com\itartisan\api\beans\domain\SysUser.class

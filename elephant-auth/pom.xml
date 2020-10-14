@@ -20,4 +20,36 @@
         elephant-auth认证授权中心
     </description>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.itartisan.api.beans</groupId>
+            <artifactId>api-beans</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.itartisan.api.beans</groupId>
+            <artifactId>api-beans</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.itartisan.common.security</groupId>
+            <artifactId>common-security</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

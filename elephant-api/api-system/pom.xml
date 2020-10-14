@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>api-system</artifactId>
-    <groupId>com.itartisan.system.api</groupId>
+    <groupId>com.itartisan.api.system</groupId>
 
     <description>
         api-system系统接口模块

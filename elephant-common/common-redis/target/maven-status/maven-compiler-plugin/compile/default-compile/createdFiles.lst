@@ -1,0 +1,3 @@
+com\itartisan\common\redis\configure\FastJson2JsonRedisSerializer.class
+com\itartisan\common\redis\service\RedisService.class
+com\itartisan\common\redis\configure\RedisConfig.class

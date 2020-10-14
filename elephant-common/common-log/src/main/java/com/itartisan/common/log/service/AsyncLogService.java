@@ -1,7 +1,7 @@
 package com.itartisan.common.log.service;
 
-import com.itartisan.beans.domain.SysOperLog;
-import com.itartisan.system.api.RemoteLogService;
+import com.itartisan.api.beans.domain.SysOperLog;
+import com.itartisan.api.system.RemoteLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;

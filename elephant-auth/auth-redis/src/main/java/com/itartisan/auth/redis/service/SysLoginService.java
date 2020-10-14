@@ -1,7 +1,7 @@
 package com.itartisan.auth.redis.service;
 
-import com.itartisan.beans.domain.SysUser;
-import com.itartisan.beans.model.LoginUser;
+import com.itartisan.api.beans.domain.SysUser;
+import com.itartisan.api.beans.model.LoginUser;
 import com.itartisan.common.core.constant.Constants;
 import com.itartisan.common.core.constant.UserConstants;
 import com.itartisan.common.core.domain.R;
@@ -9,8 +9,8 @@ import com.itartisan.common.core.enums.UserStatus;
 import com.itartisan.common.core.exception.BaseException;
 import com.itartisan.common.core.utils.StringUtils;
 import com.itartisan.common.security.utils.SecurityUtils;
-import com.itartisan.system.api.RemoteLogService;
-import com.itartisan.system.api.RemoteUserService;
+import com.itartisan.api.system.RemoteLogService;
+import com.itartisan.api.system.RemoteUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

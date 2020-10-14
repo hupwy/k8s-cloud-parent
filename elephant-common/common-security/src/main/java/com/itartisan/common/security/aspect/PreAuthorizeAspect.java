@@ -1,6 +1,6 @@
 package com.itartisan.common.security.aspect;
 
-import com.itartisan.beans.model.LoginUser;
+import com.itartisan.api.beans.model.LoginUser;
 import com.itartisan.common.core.exception.PreAuthorizeException;
 import com.itartisan.common.security.annotation.PreAuthorize;
 import com.itartisan.common.security.service.TokenService;

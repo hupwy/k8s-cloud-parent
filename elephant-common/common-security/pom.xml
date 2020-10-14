@@ -18,16 +18,16 @@
     </description>
 
     <dependencies>
-        <!-- Api System -->
-        <dependency>
-            <groupId>com.itartisan.system.api</groupId>
-            <artifactId>api-system</artifactId>
-        </dependency>
-
         <!-- Api beans -->
         <dependency>
             <groupId>com.itartisan.api.beans</groupId>
             <artifactId>api-beans</artifactId>
+        </dependency>
+
+        <!-- Api system -->
+        <dependency>
+            <groupId>com.itartisan.api.system</groupId>
+            <artifactId>api-system</artifactId>
         </dependency>
 
         <!-- Common Redis-->

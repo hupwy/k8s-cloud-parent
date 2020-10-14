@@ -2,7 +2,7 @@ package com.itartisan.common.log.aspect;
 
 
 import com.alibaba.fastjson.JSON;
-import com.itartisan.beans.domain.SysOperLog;
+import com.itartisan.api.beans.domain.SysOperLog;
 import com.itartisan.common.core.constant.CacheConstants;
 import com.itartisan.common.core.utils.ServletUtils;
 import com.itartisan.common.core.utils.StringUtils;
