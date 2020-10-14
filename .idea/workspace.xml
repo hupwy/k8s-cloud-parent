@@ -30,9 +30,149 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3b68a67b-9ee6-4c3f-8d75-5952e8d9799a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-api/api-beans/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-api/api-beans/target/classes/com/itartisan/beans/domain/SysDept.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-api/api-beans/target/classes/com/itartisan/beans/domain/SysOperLog.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-api/api-beans/target/classes/com/itartisan/beans/domain/SysRole.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-api/api-beans/target/classes/com/itartisan/beans/domain/SysUser.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-api/api-beans/target/classes/com/itartisan/beans/model/LoginUser.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-api/api-system/src/main/resources/META-INF/spring.factories" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-api/api-system/target/classes/META-INF/spring.factories" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-api/api-system/target/classes/com/itartisan/system/api/RemoteLogService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-api/api-system/target/classes/com/itartisan/system/api/RemoteUserService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-api/api-system/target/classes/com/itartisan/system/api/factory/RemoteLogFallbackFactory$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-api/api-system/target/classes/com/itartisan/system/api/factory/RemoteLogFallbackFactory.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-api/api-system/target/classes/com/itartisan/system/api/factory/RemoteUserFallbackFactory$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-api/api-system/target/classes/com/itartisan/system/api/factory/RemoteUserFallbackFactory.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/src/main/java/com/itartisan/auth/redis/ElephantAuthApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/src/main/java/com/itartisan/auth/redis/controller/TokenController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/src/main/java/com/itartisan/auth/redis/form/LoginBody.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/src/main/java/com/itartisan/auth/redis/service/SysLoginService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/src/main/resources/banner.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/src/main/resources/bootstrap.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/target/classes/banner.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/target/classes/bootstrap.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/target/classes/com/itartisan/auth/redis/ElephantAuthApplication.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/target/classes/com/itartisan/auth/redis/controller/TokenController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/target/classes/com/itartisan/auth/redis/form/LoginBody.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/target/classes/com/itartisan/auth/redis/service/SysLoginService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/META-INF/spring.factories" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/constant/CacheConstants.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/constant/Constants.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/constant/HttpStatus.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/constant/ScheduleConstants$Status.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/constant/ScheduleConstants.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/constant/ServiceNameConstants.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/constant/UserConstants.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/domain/R.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/enums/UserStatus.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/exception/BaseException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/exception/CheckedException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/exception/CustomException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/exception/PreAuthorizeException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/exception/UtilException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/exception/job/TaskException$Code.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/exception/job/TaskException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/exception/user/UserException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/exception/user/UserPasswordNotMatchException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/text/CharsetKit.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/text/Convert.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/text/StrFormatter.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/text/UUID$Holder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/text/UUID.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/DateUtils.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/ExceptionUtil.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/IdUtils.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/ReUtil.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/ServletUtils.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/SpringUtils.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/StringUtils.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/bean/BeanUtils.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/file/FileUtils.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/ip/IpUtils.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/reflect/ReflectUtils.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/sign/Base64.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/sql/SqlUtil.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/web/controller/BaseController$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/web/controller/BaseController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/web/domain/AjaxResult.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/web/domain/BaseEntity.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/web/domain/TreeEntity.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/annotation/Log.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/aspect/LogAspect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/enums/BusinessStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/enums/BusinessType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/enums/OperatorType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/service/AsyncLogService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-log/src/main/resources/META-INF/spring.factories" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-log/target/classes/META-INF/spring.factories" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-log/target/classes/com/itartisan/common/log/annotation/Log.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-log/target/classes/com/itartisan/common/log/aspect/LogAspect.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-log/target/classes/com/itartisan/common/log/enums/BusinessStatus.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-log/target/classes/com/itartisan/common/log/enums/BusinessType.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-log/target/classes/com/itartisan/common/log/enums/OperatorType.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-log/target/classes/com/itartisan/common/log/service/AsyncLogService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-redis/src/main/java/com/itartisan/common/redis/configure/FastJson2JsonRedisSerializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-redis/src/main/java/com/itartisan/common/redis/configure/RedisConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-redis/src/main/java/com/itartisan/common/redis/service/RedisService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-redis/src/main/resources/META-INF/spring.factories" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-redis/target/classes/META-INF/spring.factories" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-redis/target/classes/com/itartisan/common/redis/configure/FastJson2JsonRedisSerializer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-redis/target/classes/com/itartisan/common/redis/configure/RedisConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-redis/target/classes/com/itartisan/common/redis/service/RedisService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-security/src/main/java/com/itartisan/common/security/annotation/EnableCustomConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-security/src/main/java/com/itartisan/common/security/annotation/EnableRyFeignClients.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-security/src/main/java/com/itartisan/common/security/annotation/PreAuthorize.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-security/src/main/java/com/itartisan/common/security/aspect/PreAuthorizeAspect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-security/src/main/java/com/itartisan/common/security/config/ApplicationConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-security/src/main/java/com/itartisan/common/security/handler/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-security/src/main/java/com/itartisan/common/security/service/TokenService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-security/src/main/java/com/itartisan/common/security/utils/SecurityUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-security/src/main/resources/META-INF/spring.factories" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-security/target/classes/META-INF/spring.factories" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-security/target/classes/com/itartisan/common/security/annotation/EnableCustomConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-security/target/classes/com/itartisan/common/security/annotation/EnableRyFeignClients.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-security/target/classes/com/itartisan/common/security/annotation/PreAuthorize.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-security/target/classes/com/itartisan/common/security/aspect/PreAuthorizeAspect.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-security/target/classes/com/itartisan/common/security/config/ApplicationConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-security/target/classes/com/itartisan/common/security/handler/GlobalExceptionHandler.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-security/target/classes/com/itartisan/common/security/service/TokenService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-security/target/classes/com/itartisan/common/security/utils/SecurityUtils.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-swagger/src/main/java/com/itartisan/common/swagger/annotation/EnableCustomSwagger2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-swagger/src/main/java/com/itartisan/common/swagger/config/SwaggerAutoConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-swagger/src/main/java/com/itartisan/common/swagger/config/SwaggerProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-swagger/src/main/resources/META-INF/spring.factories" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-swagger/target/classes/META-INF/spring.factories" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-swagger/target/classes/com/itartisan/common/swagger/annotation/EnableCustomSwagger2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-swagger/target/classes/com/itartisan/common/swagger/config/SwaggerAutoConfiguration.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-swagger/target/classes/com/itartisan/common/swagger/config/SwaggerProperties$Authorization.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-swagger/target/classes/com/itartisan/common/swagger/config/SwaggerProperties$AuthorizationScope.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-swagger/target/classes/com/itartisan/common/swagger/config/SwaggerProperties$Contact.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-common/common-swagger/target/classes/com/itartisan/common/swagger/config/SwaggerProperties.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-modules/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-modules/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/api-system/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/src/main/java/com/itartisan/system/api/RemoteLogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/api-system/src/main/java/com/itartisan/system/api/RemoteLogService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/src/main/java/com/itartisan/system/api/RemoteUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/api-system/src/main/java/com/itartisan/system/api/RemoteUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/src/main/java/com/itartisan/system/api/domain/SysDept.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/api-beans/src/main/java/com/itartisan/beans/domain/SysDept.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/src/main/java/com/itartisan/system/api/domain/SysOperLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/api-beans/src/main/java/com/itartisan/beans/domain/SysOperLog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/src/main/java/com/itartisan/system/api/domain/SysRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/api-beans/src/main/java/com/itartisan/beans/domain/SysRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/src/main/java/com/itartisan/system/api/domain/SysUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/api-beans/src/main/java/com/itartisan/beans/domain/SysUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/src/main/java/com/itartisan/system/api/factory/RemoteLogFallbackFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/api-system/src/main/java/com/itartisan/system/api/factory/RemoteLogFallbackFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/src/main/java/com/itartisan/system/api/factory/RemoteUserFallbackFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/api-system/src/main/java/com/itartisan/system/api/factory/RemoteUserFallbackFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/src/main/java/com/itartisan/system/api/model/LoginUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/api-beans/src/main/java/com/itartisan/beans/model/LoginUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-auth/auth-redis/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-core/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-log/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-log/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-redis/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-redis/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-security/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-swagger/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-swagger/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/elephant-modules/system/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-modules/system/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +196,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="$PROJECT_DIR$/../../../app/apache-maven-3.6.3" />
+        <option name="mavenHome" value="D:\profile\app\apache-maven-3.6.3" />
         <option name="userSettingsFile" value="D:\profile\app\apache-maven-3.6.3\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
@@ -73,9 +213,10 @@
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/elephant-api/api-system/src/main/java/com/itartisan/system/api" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/elephant-api/api-system/src/main/resources" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -96,18 +237,18 @@
       <recent name="D:\profile\repository\GitHub\k8s-cloud-parent\elephant-api" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.itartisan.auth.redis" />
+      <recent name="com.itartisan.modules.system" />
       <recent name="com.itartisan.cn.common.core.utils.reflect" />
       <recent name="com.itartisan.cn.common.core.enums" />
       <recent name="com.itartisan.cn.common.core.domain" />
-      <recent name="com.itartisan.cn.system.api" />
-      <recent name="com.neusoft.edu" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\profile\repository\GitHub\k8s-cloud-parent\elephant-api\api-system\src\main\java\com\itartisan\system\api" />
-      <recent name="D:\profile\repository\GitHub\k8s-cloud-parent\elephant-common\common-core\src\main\java\com\itartisan\cn\common\core" />
-      <recent name="D:\profile\repository\GitHub\k8s-cloud-parent\elephant-common\common-core\src\main\resources" />
-      <recent name="D:\profile\repository\Git\k8s-cloud-parent\k8s-srv-login\src\main\resources" />
-      <recent name="D:\profile\repository\Git\k8s-cloud-parent\k8s-srv-user\src\main\resources" />
+      <recent name="D:\profile\repository\GitHub\k8s-cloud-parent\elephant-api\api-system\src\main\resources" />
+      <recent name="D:\profile\repository\GitHub\k8s-cloud-parent\elephant-api\api-beans\src\main\java\com\itartisan\api\beans" />
+      <recent name="D:\profile\repository\GitHub\k8s-cloud-parent\elephant-auth\auth-redis\src\main\resources" />
+      <recent name="D:\profile\repository\GitHub\k8s-cloud-parent\elephant-auth\auth-redis\src\main\java\com\itartisan\auth\redis" />
+      <recent name="D:\profile\repository\GitHub\k8s-cloud-parent\elephant-common\common-swagger\src\main\java\com\itartisan\common\swagger" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -225,6 +366,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ElephantAuthApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="redis-auth" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.itartisan.auth.redis.ElephantAuthApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="LoginBootMain" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="k8s-srv-login" />
       <extension name="coverage">
@@ -254,6 +402,7 @@
       <item itemvalue="Maven.k8s-srv-docker-monitor [clean,package,fabric8:build]" />
       <item itemvalue="Maven.k8s-srv-user [clean,package,fabric8:build]" />
       <item itemvalue="Spring Boot.UserBootMain" />
+      <item itemvalue="Spring Boot.ElephantAuthApplication" />
       <item itemvalue="Spring Boot.DockerMonitorBootMain" />
       <item itemvalue="Spring Boot.LoginBootMain" />
     </list>
@@ -287,7 +436,9 @@
       <workItem from="1600290287894" duration="7575000" />
       <workItem from="1600649071731" duration="5171000" />
       <workItem from="1600734646935" duration="5588000" />
-      <workItem from="1602554058918" duration="18936000" />
+      <workItem from="1602554058918" duration="25191000" />
+      <workItem from="1602638736309" duration="2667000" />
+      <workItem from="1602641412374" duration="2829000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1601609066235</created>
@@ -359,7 +510,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602580631596</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="modules-system update">
+      <created>1602581694192</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1602581694192</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -403,7 +561,8 @@
     <MESSAGE value="groupId update" />
     <MESSAGE value="system-api add" />
     <MESSAGE value="RemoteUserService.java update" />
-    <option name="LAST_COMMIT_MESSAGE" value="RemoteUserService.java update" />
+    <MESSAGE value="modules-system update" />
+    <option name="LAST_COMMIT_MESSAGE" value="modules-system update" />
   </component>
   <component name="WindowStateProjectService">
     <state x="695" y="343" key="#Notifications" timestamp="1600290329558">
@@ -414,10 +573,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="161" key="#Plugins/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600290377638" />
-    <state x="440" y="94" key="#Project_Structure" timestamp="1602581240783">
+    <state x="440" y="94" key="#Project_Structure" timestamp="1602643811426">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="440" y="94" key="#Project_Structure/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602581240783" />
+    <state x="440" y="94" key="#Project_Structure/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602643811426" />
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1600235506798">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -430,10 +589,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="640" y="255" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600290208661" />
-    <state x="474" y="84" key="CommitChangelistDialog2" timestamp="1602580630583">
+    <state x="474" y="84" key="CommitChangelistDialog2" timestamp="1602581693576">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="474" y="84" key="CommitChangelistDialog2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602580630583" />
+    <state x="474" y="84" key="CommitChangelistDialog2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602581693576" />
     <state x="337" y="65" key="FileChooserDialogImpl" timestamp="1602579138647">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -499,6 +658,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="540" y="254" key="IDE.errors.dialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600735276245" />
+    <state x="490" y="175" key="Maven.ArtifactSearchDialog" timestamp="1602638527468">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="490" y="175" key="Maven.ArtifactSearchDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602638527468" />
     <state x="527" y="242" key="NewModule_or_Project.wizard" timestamp="1602579140432">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -508,27 +671,27 @@
     </state>
     <state x="367" y="113" key="SettingsEditor/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602579147296" />
     <state x="367" y="113" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1601609309859" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1602580637754">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1602581700064">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602580637754" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602581700064" />
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601609718504" />
     <state x="763" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601609687100">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="763" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601609687100" />
-    <state x="351" y="263" key="new project wizard" timestamp="1602578862779">
+    <state x="351" y="263" key="new project wizard" timestamp="1602640972979">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="351" y="263" key="new project wizard/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602578862779" />
+    <state x="351" y="263" key="new project wizard/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602640972979" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1600226067414">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600226067414" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1602555679950">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1602635411495">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602555679950" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602635411495" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1601609504981" />
   </component>
   <component name="XDebuggerManager">

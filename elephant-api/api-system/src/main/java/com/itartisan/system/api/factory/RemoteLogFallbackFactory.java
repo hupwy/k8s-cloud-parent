@@ -1,9 +1,9 @@
 package com.itartisan.system.api.factory;
 
 
+import com.itartisan.beans.domain.SysOperLog;
 import com.itartisan.common.core.domain.R;
 import com.itartisan.system.api.RemoteLogService;
-import com.itartisan.system.api.domain.SysOperLog;
 import feign.hystrix.FallbackFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

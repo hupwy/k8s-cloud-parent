@@ -12,6 +12,7 @@
         <module name="common-log" />
         <module name="elephant-gateway" />
         <module name="common-redis" />
+        <module name="api-beans" />
         <module name="system" />
         <module name="api-system" />
         <module name="common-swagger" />

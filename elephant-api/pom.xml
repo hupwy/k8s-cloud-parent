@@ -11,6 +11,7 @@
 
     <modules>
         <module>api-system</module>
+        <module>api-beans</module>
     </modules>
 
     <artifactId>elephant-api</artifactId>

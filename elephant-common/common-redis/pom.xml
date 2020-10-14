@@ -11,10 +11,23 @@
 
     <artifactId>common-redis</artifactId>
     <groupId>com.itartisan.common.redis</groupId>
-    <version>0.0.1</version>
+    <version>${parent.version}</version>
 
     <description>
         common-redis缓存服务
     </description>
 
+    <dependencies>
+        <!-- SpringBoot Boot Redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <!-- RuoYi Common Core-->
+        <dependency>
+            <groupId>com.itartisan.common.core</groupId>
+            <artifactId>common-core</artifactId>
+        </dependency>
+    </dependencies>
 </project>

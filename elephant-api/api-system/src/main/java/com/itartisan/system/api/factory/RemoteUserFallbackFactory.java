@@ -1,8 +1,8 @@
 package com.itartisan.system.api.factory;
 
+import com.itartisan.beans.model.LoginUser;
 import com.itartisan.common.core.domain.R;
 import com.itartisan.system.api.RemoteUserService;
-import com.itartisan.system.api.model.LoginUser;
 import feign.hystrix.FallbackFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

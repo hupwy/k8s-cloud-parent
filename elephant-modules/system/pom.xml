@@ -17,6 +17,19 @@
     </description>
 
     <dependencies>
+
+        <!--SpringCloud Kubernetes Discovery-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-kubernetes</artifactId>
+        </dependency>
+
+        <!--SpringCloud Kubernetes Loadbalancer-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-kubernetes-loadbalancer</artifactId>
+        </dependency>
+
         <!-- SpringCloud Ailibaba Nacos -->
         <!--<dependency>
             <groupId>com.alibaba.cloud</groupId>

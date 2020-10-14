@@ -10,9 +10,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>common-log</artifactId>
+    <groupId>com.itartisan.common.log</groupId>
+    <version>${parent.version}</version>
 
     <description>
         common-log日志记录
     </description>
 
+    <dependencies>
+        <!-- Common Security -->
+        <dependency>
+            <groupId>com.itartisan.common.security</groupId>
+            <artifactId>common-security</artifactId>
+        </dependency>
+    </dependencies>
 </project>

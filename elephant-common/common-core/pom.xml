@@ -38,10 +38,16 @@
         </dependency>
 
         <!-- Apache Commons Pool2 -->
-        <!--<dependency>
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
-        </dependency>-->
+        </dependency>
+
+        <!-- Mybatis 依赖配置 -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
 
         <!-- Pagehelper -->
         <!--<dependency>
@@ -62,10 +68,10 @@
         </dependency>
 
         <!-- Alibaba Fastjson -->
-        <!--<dependency>
+        <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-        </dependency>-->
+        </dependency>
 
         <!-- Apache Lang3 -->
         <dependency>
@@ -74,10 +80,10 @@
         </dependency>
 
         <!-- Commons Io -->
-        <!--<dependency>
+        <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-        </dependency>-->
+        </dependency>
 
         <!-- Commons Fileupload -->
         <!--<dependency>

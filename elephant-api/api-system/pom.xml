@@ -22,6 +22,12 @@
             <groupId>com.itartisan.common.core</groupId>
             <artifactId>common-core</artifactId>
         </dependency>
+
+        <!-- 系统模块用的bean -->
+        <dependency>
+            <groupId>com.itartisan.api.beans</groupId>
+            <artifactId>api-beans</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

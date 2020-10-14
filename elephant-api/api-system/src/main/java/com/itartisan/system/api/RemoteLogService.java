@@ -1,9 +1,9 @@
 package com.itartisan.system.api;
 
 
+import com.itartisan.beans.domain.SysOperLog;
 import com.itartisan.common.core.constant.ServiceNameConstants;
 import com.itartisan.common.core.domain.R;
-import com.itartisan.system.api.domain.SysOperLog;
 import com.itartisan.system.api.factory.RemoteLogFallbackFactory;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.itartisan.system.api.factory.RemoteUserFallbackFactory,\
+  com.itartisan.system.api.factory.RemoteLogFallbackFactory

@@ -10,9 +10,31 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>common-security</artifactId>
+    <groupId>com.itartisan.common.security</groupId>
+    <version>${parent.version}</version>
 
     <description>
         common-security安全模块
     </description>
+
+    <dependencies>
+        <!-- Api System -->
+        <dependency>
+            <groupId>com.itartisan.system.api</groupId>
+            <artifactId>api-system</artifactId>
+        </dependency>
+
+        <!-- Api beans -->
+        <dependency>
+            <groupId>com.itartisan.api.beans</groupId>
+            <artifactId>api-beans</artifactId>
+        </dependency>
+
+        <!-- Common Redis-->
+        <dependency>
+            <groupId>com.itartisan.common.redis</groupId>
+            <artifactId>common-redis</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
