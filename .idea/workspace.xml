@@ -30,20 +30,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3b68a67b-9ee6-4c3f-8d75-5952e8d9799a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-auth/auth-redis/src/main/java/com/itartisan/auth/redis/controller/TokenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/src/main/java/com/itartisan/auth/redis/controller/TokenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-auth/auth-redis/src/main/java/com/itartisan/auth/redis/form/LoginBody.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/src/main/java/com/itartisan/auth/redis/form/LoginBody.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-auth/auth-redis/src/main/java/com/itartisan/auth/redis/service/SysLoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/src/main/java/com/itartisan/auth/redis/service/SysLoginService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/src/main/java/com/itartisan/common/core/text/Convert.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-core/src/main/java/com/itartisan/common/core/text/Convert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/annotation/Log.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/annotation/Log.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/aspect/LogAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/aspect/LogAspect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/enums/BusinessStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/enums/BusinessStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/enums/BusinessType.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/enums/BusinessType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/enums/OperatorType.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/enums/OperatorType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/service/AsyncLogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/service/AsyncLogService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-redis/src/main/java/com/itartisan/common/redis/configure/RedisConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-redis/src/main/java/com/itartisan/common/redis/configure/RedisConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/src/main/java/com/itartisan/common/security/aspect/PreAuthorizeAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-security/src/main/java/com/itartisan/common/security/aspect/PreAuthorizeAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/text/Convert.class" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/text/Convert.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-redis/target/classes/com/itartisan/common/redis/configure/RedisConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-redis/target/classes/com/itartisan/common/redis/configure/RedisConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-gateway/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +78,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/elephant-api/api-system/src/main/resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/elephant-gateway/src/main/java/com/itartisan/gateway" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -104,22 +95,22 @@
     <option name="notificationShown" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\profile\repository\GitHub\k8s-cloud-parent\elephant-api" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\profile\repository\GitHub\k8s-cloud-parent\elephant-gateway\src\main\java\com\itartisan\gateway" />
+      <recent name="D:\profile\repository\GitHub\k8s-cloud-parent\elephant-gateway\src\main\resources" />
+      <recent name="D:\profile\repository\GitHub\k8s-cloud-parent\elephant-api\api-system\src\main\resources" />
+      <recent name="D:\profile\repository\GitHub\k8s-cloud-parent\elephant-api\api-beans\src\main\java\com\itartisan\api\beans" />
+      <recent name="D:\profile\repository\GitHub\k8s-cloud-parent\elephant-auth\auth-redis\src\main\resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.itartisan.gateway" />
       <recent name="com.itartisan.auth.redis" />
       <recent name="com.itartisan.modules.system" />
       <recent name="com.itartisan.cn.common.core.utils.reflect" />
       <recent name="com.itartisan.cn.common.core.enums" />
-      <recent name="com.itartisan.cn.common.core.domain" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\profile\repository\GitHub\k8s-cloud-parent\elephant-api\api-system\src\main\resources" />
-      <recent name="D:\profile\repository\GitHub\k8s-cloud-parent\elephant-api\api-beans\src\main\java\com\itartisan\api\beans" />
-      <recent name="D:\profile\repository\GitHub\k8s-cloud-parent\elephant-auth\auth-redis\src\main\resources" />
-      <recent name="D:\profile\repository\GitHub\k8s-cloud-parent\elephant-auth\auth-redis\src\main\java\com\itartisan\auth\redis" />
-      <recent name="D:\profile\repository\GitHub\k8s-cloud-parent\elephant-common\common-swagger\src\main\java\com\itartisan\common\swagger" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\profile\repository\GitHub\k8s-cloud-parent\elephant-api" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -129,7 +120,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.ElephantAuthApplication">
+  <component name="RunManager" selected="Spring Boot.ElephantGatewayApplication">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -242,6 +233,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ElephantGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="elephant-gateway" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.itartisan.gateway.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.itartisan.gateway.ElephantGatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="LoginBootMain" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="k8s-srv-login" />
       <extension name="coverage">
@@ -253,6 +257,13 @@
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.neusoft.edu.LoginBootMain" />
       <option name="ACTIVE_PROFILES" value="dev" />
       <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RuoYiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="elephant-gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.itartisan.gateway.RuoYiGatewayApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -274,9 +285,12 @@
       <item itemvalue="Spring Boot.ElephantAuthApplication" />
       <item itemvalue="Spring Boot.DockerMonitorBootMain" />
       <item itemvalue="Spring Boot.LoginBootMain" />
+      <item itemvalue="Spring Boot.RuoYiGatewayApplication" />
+      <item itemvalue="Spring Boot.ElephantGatewayApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Spring Boot.ElephantGatewayApplication" />
         <item itemvalue="Spring Boot.LoginBootMain" />
         <item itemvalue="Spring Boot.DockerMonitorBootMain" />
       </list>
@@ -312,7 +326,7 @@
       <workItem from="1602721581909" duration="1923000" />
       <workItem from="1602740640600" duration="651000" />
       <workItem from="1602742598793" duration="599000" />
-      <workItem from="1602746364123" duration="3415000" />
+      <workItem from="1602746364123" duration="9115000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1601609066235</created>
@@ -419,7 +433,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602819431237</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="删除注解">
+      <created>1602826217948</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1602826217948</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -466,13 +487,14 @@
     <MESSAGE value="project refactor" />
     <MESSAGE value="针对maven plugins的[repackage failed: Unable to find main class]修改" />
     <MESSAGE value="格式化" />
-    <option name="LAST_COMMIT_MESSAGE" value="格式化" />
+    <MESSAGE value="删除注解" />
+    <option name="LAST_COMMIT_MESSAGE" value="删除注解" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="586" y="198" key="#Inspections" timestamp="1602826156227">
+    <state x="586" y="198" key="#Inspections" timestamp="1602832016136">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="586" y="198" key="#Inspections/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602826156227" />
+    <state x="586" y="198" key="#Inspections/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602832016136" />
     <state x="695" y="343" key="#Notifications" timestamp="1600290329558">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -497,10 +519,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="640" y="255" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600290208661" />
-    <state x="774" y="101" key="CommitChangelistDialog2" timestamp="1602819430181">
+    <state x="774" y="101" key="CommitChangelistDialog2" timestamp="1602826214533">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="774" y="101" key="CommitChangelistDialog2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602819430181" />
+    <state x="774" y="101" key="CommitChangelistDialog2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602826214533" />
     <state x="337" y="65" key="FileChooserDialogImpl" timestamp="1602579138647">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -510,58 +532,58 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="771" y="439" key="Github.CreateGistDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1601608946995" />
-    <state width="1877" height="426" key="GridCell.Tab.0.bottom" timestamp="1602664105353">
+    <state width="1562" height="549" key="GridCell.Tab.0.bottom" timestamp="1602837180903">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="426" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602664105353" />
+    <state width="1562" height="549" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602837180903" />
     <state width="1562" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601609969418" />
-    <state width="1877" height="426" key="GridCell.Tab.0.center" timestamp="1602664105353">
+    <state width="1562" height="549" key="GridCell.Tab.0.center" timestamp="1602837180903">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="426" key="GridCell.Tab.0.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602664105353" />
+    <state width="1562" height="549" key="GridCell.Tab.0.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602837180903" />
     <state width="1562" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601609969418" />
-    <state width="1877" height="426" key="GridCell.Tab.0.left" timestamp="1602664105353">
+    <state width="1562" height="549" key="GridCell.Tab.0.left" timestamp="1602837180903">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="426" key="GridCell.Tab.0.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602664105353" />
+    <state width="1562" height="549" key="GridCell.Tab.0.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602837180903" />
     <state width="1562" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601609969418" />
-    <state width="1877" height="426" key="GridCell.Tab.0.right" timestamp="1602664105353">
+    <state width="1562" height="549" key="GridCell.Tab.0.right" timestamp="1602837180903">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="426" key="GridCell.Tab.0.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602664105353" />
+    <state width="1562" height="549" key="GridCell.Tab.0.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602837180903" />
     <state width="1562" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601609969418" />
-    <state width="1562" height="549" key="GridCell.Tab.1.bottom" timestamp="1602660067595">
+    <state width="1562" height="549" key="GridCell.Tab.1.bottom" timestamp="1602837180904">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1562" height="549" key="GridCell.Tab.1.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602660067595" />
-    <state width="1562" height="549" key="GridCell.Tab.1.center" timestamp="1602660067595">
+    <state width="1562" height="549" key="GridCell.Tab.1.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602837180904" />
+    <state width="1562" height="549" key="GridCell.Tab.1.center" timestamp="1602837180903">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1562" height="549" key="GridCell.Tab.1.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602660067595" />
-    <state width="1562" height="549" key="GridCell.Tab.1.left" timestamp="1602660067595">
+    <state width="1562" height="549" key="GridCell.Tab.1.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602837180903" />
+    <state width="1562" height="549" key="GridCell.Tab.1.left" timestamp="1602837180903">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1562" height="549" key="GridCell.Tab.1.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602660067595" />
-    <state width="1562" height="549" key="GridCell.Tab.1.right" timestamp="1602660067595">
+    <state width="1562" height="549" key="GridCell.Tab.1.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602837180903" />
+    <state width="1562" height="549" key="GridCell.Tab.1.right" timestamp="1602837180903">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1562" height="549" key="GridCell.Tab.1.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602660067595" />
-    <state width="1562" height="354" key="GridCell.Tab.2.bottom" timestamp="1600247422148">
+    <state width="1562" height="549" key="GridCell.Tab.1.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602837180903" />
+    <state width="1562" height="549" key="GridCell.Tab.2.bottom" timestamp="1602837180904">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1562" height="354" key="GridCell.Tab.2.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600247422148" />
-    <state width="1562" height="354" key="GridCell.Tab.2.center" timestamp="1600247422148">
+    <state width="1562" height="549" key="GridCell.Tab.2.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602837180904" />
+    <state width="1562" height="549" key="GridCell.Tab.2.center" timestamp="1602837180904">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1562" height="354" key="GridCell.Tab.2.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600247422148" />
-    <state width="1562" height="354" key="GridCell.Tab.2.left" timestamp="1600247422148">
+    <state width="1562" height="549" key="GridCell.Tab.2.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602837180904" />
+    <state width="1562" height="549" key="GridCell.Tab.2.left" timestamp="1602837180904">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1562" height="354" key="GridCell.Tab.2.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600247422148" />
-    <state width="1562" height="354" key="GridCell.Tab.2.right" timestamp="1600247422148">
+    <state width="1562" height="549" key="GridCell.Tab.2.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602837180904" />
+    <state width="1562" height="549" key="GridCell.Tab.2.right" timestamp="1602837180904">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1562" height="354" key="GridCell.Tab.2.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600247422148" />
+    <state width="1562" height="549" key="GridCell.Tab.2.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602837180904" />
     <state x="540" y="254" key="IDE.errors.dialog" timestamp="1602819184957">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -579,10 +601,10 @@
     </state>
     <state x="367" y="113" key="SettingsEditor/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602825778647" />
     <state x="367" y="113" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1601609309859" />
-    <state x="258" y="203" key="Vcs.Push.Dialog.v2" timestamp="1602819440203">
+    <state x="258" y="203" key="Vcs.Push.Dialog.v2" timestamp="1602826223424">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="258" y="203" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602819440203" />
+    <state x="258" y="203" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602826223424" />
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601609718504" />
     <state x="763" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601609687100">
       <screen x="0" y="0" width="1920" height="1040" />
