@@ -30,30 +30,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3b68a67b-9ee6-4c3f-8d75-5952e8d9799a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/api-beans/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/api-system/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-auth/auth-redis/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-auth/auth-redis/src/main/java/com/itartisan/auth/redis/ElephantAuthApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/src/main/java/com/itartisan/auth/redis/ElephantAuthApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-auth/auth-redis/src/main/java/com/itartisan/auth/redis/controller/TokenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/src/main/java/com/itartisan/auth/redis/controller/TokenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-auth/auth-redis/src/main/java/com/itartisan/auth/redis/form/LoginBody.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/src/main/java/com/itartisan/auth/redis/form/LoginBody.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/elephant-auth/auth-redis/src/main/java/com/itartisan/auth/redis/service/SysLoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/src/main/java/com/itartisan/auth/redis/service/SysLoginService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-auth/auth-redis/target/classes/com/itartisan/auth/redis/ElephantAuthApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/target/classes/com/itartisan/auth/redis/ElephantAuthApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-auth/auth-redis/target/classes/com/itartisan/auth/redis/service/SysLoginService.class" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/target/classes/com/itartisan/auth/redis/service/SysLoginService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-auth/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-auth/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-core/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-log/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-log/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-log/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-log/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-redis/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-redis/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-security/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/src/main/java/com/itartisan/common/security/annotation/EnableRyFeignClients.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-security/src/main/java/com/itartisan/common/security/annotation/EnableItartisanFeignClients.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/target/classes/com/itartisan/common/security/annotation/EnableRyFeignClients.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-security/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-security/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-swagger/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-swagger/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-gateway/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-modules/job/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-modules/job/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-modules/system/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-modules/system/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/src/main/java/com/itartisan/common/core/text/Convert.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-core/src/main/java/com/itartisan/common/core/text/Convert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/annotation/Log.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/annotation/Log.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/aspect/LogAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/aspect/LogAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/enums/BusinessStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/enums/BusinessStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/enums/BusinessType.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/enums/BusinessType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/enums/OperatorType.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/enums/OperatorType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/service/AsyncLogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-log/src/main/java/com/itartisan/common/log/service/AsyncLogService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-redis/src/main/java/com/itartisan/common/redis/configure/RedisConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-redis/src/main/java/com/itartisan/common/redis/configure/RedisConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/src/main/java/com/itartisan/common/security/aspect/PreAuthorizeAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-security/src/main/java/com/itartisan/common/security/aspect/PreAuthorizeAspect.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +98,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.26551723" />
-    <property name="settings.editor.selected.configurable" value="build.tools" />
+    <property name="settings.editor.selected.configurable" value="spring.boot" />
   </component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
@@ -318,7 +308,11 @@
       <workItem from="1602554058918" duration="25191000" />
       <workItem from="1602638736309" duration="2667000" />
       <workItem from="1602641412374" duration="6330000" />
-      <workItem from="1602653769749" duration="6368000" />
+      <workItem from="1602653769749" duration="8361000" />
+      <workItem from="1602721581909" duration="1923000" />
+      <workItem from="1602740640600" duration="651000" />
+      <workItem from="1602742598793" duration="599000" />
+      <workItem from="1602746364123" duration="3415000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1601609066235</created>
@@ -411,7 +405,21 @@
       <option name="project" value="LOCAL" />
       <updated>1602654140999</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="针对maven plugins的[repackage failed: Unable to find main class]修改">
+      <created>1602663058537</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1602663058537</updated>
+    </task>
+    <task id="LOCAL-00015" summary="格式化">
+      <created>1602819431237</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1602819431237</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -456,9 +464,15 @@
     <MESSAGE value="RemoteUserService.java update" />
     <MESSAGE value="modules-system update" />
     <MESSAGE value="project refactor" />
-    <option name="LAST_COMMIT_MESSAGE" value="project refactor" />
+    <MESSAGE value="针对maven plugins的[repackage failed: Unable to find main class]修改" />
+    <MESSAGE value="格式化" />
+    <option name="LAST_COMMIT_MESSAGE" value="格式化" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="586" y="198" key="#Inspections" timestamp="1602826156227">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="586" y="198" key="#Inspections/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602826156227" />
     <state x="695" y="343" key="#Notifications" timestamp="1600290329558">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -483,10 +497,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="640" y="255" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600290208661" />
-    <state x="474" y="84" key="CommitChangelistDialog2" timestamp="1602654134968">
+    <state x="774" y="101" key="CommitChangelistDialog2" timestamp="1602819430181">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="474" y="84" key="CommitChangelistDialog2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602654134968" />
+    <state x="774" y="101" key="CommitChangelistDialog2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602819430181" />
     <state x="337" y="65" key="FileChooserDialogImpl" timestamp="1602579138647">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -496,25 +510,25 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="771" y="439" key="Github.CreateGistDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1601608946995" />
-    <state width="1877" height="426" key="GridCell.Tab.0.bottom" timestamp="1602662901298">
+    <state width="1877" height="426" key="GridCell.Tab.0.bottom" timestamp="1602664105353">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="426" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602662901298" />
+    <state width="1877" height="426" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602664105353" />
     <state width="1562" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601609969418" />
-    <state width="1877" height="426" key="GridCell.Tab.0.center" timestamp="1602662901298">
+    <state width="1877" height="426" key="GridCell.Tab.0.center" timestamp="1602664105353">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="426" key="GridCell.Tab.0.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602662901298" />
+    <state width="1877" height="426" key="GridCell.Tab.0.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602664105353" />
     <state width="1562" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601609969418" />
-    <state width="1877" height="426" key="GridCell.Tab.0.left" timestamp="1602662901297">
+    <state width="1877" height="426" key="GridCell.Tab.0.left" timestamp="1602664105353">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="426" key="GridCell.Tab.0.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602662901297" />
+    <state width="1877" height="426" key="GridCell.Tab.0.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602664105353" />
     <state width="1562" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601609969418" />
-    <state width="1877" height="426" key="GridCell.Tab.0.right" timestamp="1602662901298">
+    <state width="1877" height="426" key="GridCell.Tab.0.right" timestamp="1602664105353">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="426" key="GridCell.Tab.0.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602662901298" />
+    <state width="1877" height="426" key="GridCell.Tab.0.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602664105353" />
     <state width="1562" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601609969418" />
     <state width="1562" height="549" key="GridCell.Tab.1.bottom" timestamp="1602660067595">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -548,10 +562,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1562" height="354" key="GridCell.Tab.2.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600247422148" />
-    <state x="540" y="254" key="IDE.errors.dialog" timestamp="1600735276245">
+    <state x="540" y="254" key="IDE.errors.dialog" timestamp="1602819184957">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="540" y="254" key="IDE.errors.dialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600735276245" />
+    <state x="540" y="254" key="IDE.errors.dialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602819184957" />
     <state x="490" y="175" key="Maven.ArtifactSearchDialog" timestamp="1602638527468">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -560,15 +574,15 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="527" y="242" key="NewModule_or_Project.wizard/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602579140432" />
-    <state x="367" y="113" key="SettingsEditor" timestamp="1602645693192">
+    <state x="367" y="113" key="SettingsEditor" timestamp="1602825778647">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="367" y="113" key="SettingsEditor/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602645693192" />
+    <state x="367" y="113" key="SettingsEditor/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602825778647" />
     <state x="367" y="113" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1601609309859" />
-    <state x="258" y="203" key="Vcs.Push.Dialog.v2" timestamp="1602654145603">
+    <state x="258" y="203" key="Vcs.Push.Dialog.v2" timestamp="1602819440203">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="258" y="203" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602654145603" />
+    <state x="258" y="203" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602819440203" />
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601609718504" />
     <state x="763" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601609687100">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -582,10 +596,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600226067414" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1602662031767">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1602663459060">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602662031767" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602663459060" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1601609504981" />
   </component>
   <component name="XDebuggerManager">

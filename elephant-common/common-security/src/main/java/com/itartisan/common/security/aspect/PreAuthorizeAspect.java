@@ -20,8 +20,6 @@ import java.util.Collection;
 
 /**
  * 自定义权限实现
- * 
- * @author ruoyi
  */
 @Aspect
 @Component

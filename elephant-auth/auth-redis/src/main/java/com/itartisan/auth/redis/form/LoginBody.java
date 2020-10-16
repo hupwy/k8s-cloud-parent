@@ -2,8 +2,6 @@ package com.itartisan.auth.redis.form;
 
 /**
  * 用户登录对象
- * 
- * @author ruoyi
  */
 public class LoginBody
 {
