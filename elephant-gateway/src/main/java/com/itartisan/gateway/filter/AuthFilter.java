@@ -32,7 +32,7 @@ import javax.annotation.Resource;
 public class AuthFilter implements GlobalFilter, Ordered {
     private static final Logger log = LoggerFactory.getLogger(AuthFilter.class);
 
-    // 排除过滤的 uri 地址
+    // 排除过滤的uri地址
     @Autowired
     private IgnoreWhiteProperties ignoreWhite;
 

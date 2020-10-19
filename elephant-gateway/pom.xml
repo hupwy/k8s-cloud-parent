@@ -56,22 +56,22 @@
         </dependency>
 
         <!-- SpringCloud Ailibaba Sentinel -->
-        <dependency>
+        <!--<dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
-        </dependency>
+        </dependency>-->
 
         <!-- SpringCloud Ailibaba Sentinel Gateway -->
-        <dependency>
+        <!--<dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
-        </dependency>
+        </dependency>-->
 
         <!-- Sentinel Datasource Nacos -->
-        <dependency>
+        <!--<dependency>
             <groupId>com.alibaba.csp</groupId>
             <artifactId>sentinel-datasource-nacos</artifactId>
-        </dependency>
+        </dependency>-->
 
         <!-- SpringBoot Actuator -->
         <dependency>

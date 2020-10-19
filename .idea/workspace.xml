@@ -32,9 +32,26 @@
     <list default="true" id="3b68a67b-9ee6-4c3f-8d75-5952e8d9799a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/text/Convert.class" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/text/Convert.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-redis/target/classes/com/itartisan/common/redis/configure/RedisConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-redis/target/classes/com/itartisan/common/redis/configure/RedisConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/src/main/java/com/itartisan/common/core/exception/CustomException.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-core/src/main/java/com/itartisan/common/core/exception/CustomException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/src/main/java/com/itartisan/common/core/web/domain/AjaxResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-core/src/main/java/com/itartisan/common/core/web/domain/AjaxResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/src/main/java/com/itartisan/common/core/web/domain/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-core/src/main/java/com/itartisan/common/core/web/domain/BaseEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/src/main/java/com/itartisan/common/core/web/domain/TreeEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-core/src/main/java/com/itartisan/common/core/web/domain/TreeEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-redis/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-redis/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-redis/src/main/java/com/itartisan/common/redis/configure/FastJson2JsonRedisSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-redis/src/main/java/com/itartisan/common/redis/configure/FastJson2JsonRedisSerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-redis/src/main/java/com/itartisan/common/redis/service/RedisService.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-redis/src/main/java/com/itartisan/common/redis/service/RedisService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/src/main/java/com/itartisan/common/security/annotation/EnableItartisanFeignClients.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-security/src/main/java/com/itartisan/common/security/annotation/EnableItartisanFeignClients.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/src/main/java/com/itartisan/common/security/annotation/PreAuthorize.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-security/src/main/java/com/itartisan/common/security/annotation/PreAuthorize.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/src/main/java/com/itartisan/common/security/aspect/PreAuthorizeAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-security/src/main/java/com/itartisan/common/security/aspect/PreAuthorizeAspect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/elephant-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-gateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-gateway/src/main/java/com/itartisan/gateway/config/GatewayConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-gateway/src/main/java/com/itartisan/gateway/config/GatewayConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-gateway/src/main/java/com/itartisan/gateway/config/SwaggerProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-gateway/src/main/java/com/itartisan/gateway/config/SwaggerProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-gateway/src/main/java/com/itartisan/gateway/config/properties/IgnoreWhiteProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-gateway/src/main/java/com/itartisan/gateway/config/properties/IgnoreWhiteProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-gateway/src/main/java/com/itartisan/gateway/filter/AuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-gateway/src/main/java/com/itartisan/gateway/filter/AuthFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-gateway/src/main/java/com/itartisan/gateway/filter/BlackListUrlFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-gateway/src/main/java/com/itartisan/gateway/filter/BlackListUrlFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-gateway/src/main/java/com/itartisan/gateway/filter/CacheRequestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-gateway/src/main/java/com/itartisan/gateway/filter/CacheRequestFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-gateway/src/main/java/com/itartisan/gateway/handler/SentinelFallbackHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-gateway/src/main/java/com/itartisan/gateway/handler/SentinelFallbackHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-gateway/src/main/java/com/itartisan/gateway/handler/SwaggerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-gateway/src/main/java/com/itartisan/gateway/handler/SwaggerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-gateway/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-gateway/src/main/resources/application-dev.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,14 +137,16 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.ElephantGatewayApplication">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="Spring Boot.RuoYiGatewayApplication">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -242,6 +261,8 @@
         </pattern>
       </extension>
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.itartisan.gateway.ElephantGatewayApplication" />
+      <option name="ACTIVE_PROFILES" value="dev" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -283,9 +304,9 @@
       <item itemvalue="Maven.k8s-srv-user [clean,package,fabric8:build]" />
       <item itemvalue="Spring Boot.UserBootMain" />
       <item itemvalue="Spring Boot.ElephantAuthApplication" />
+      <item itemvalue="Spring Boot.RuoYiGatewayApplication" />
       <item itemvalue="Spring Boot.DockerMonitorBootMain" />
       <item itemvalue="Spring Boot.LoginBootMain" />
-      <item itemvalue="Spring Boot.RuoYiGatewayApplication" />
       <item itemvalue="Spring Boot.ElephantGatewayApplication" />
     </list>
     <recent_temporary>
@@ -326,7 +347,8 @@
       <workItem from="1602721581909" duration="1923000" />
       <workItem from="1602740640600" duration="651000" />
       <workItem from="1602742598793" duration="599000" />
-      <workItem from="1602746364123" duration="9115000" />
+      <workItem from="1602746364123" duration="11829000" />
+      <workItem from="1603070214585" duration="3333000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1601609066235</created>
@@ -440,7 +462,21 @@
       <option name="project" value="LOCAL" />
       <updated>1602826217948</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="gateway网关服务追加">
+      <created>1602837337747</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1602837337747</updated>
+    </task>
+    <task id="LOCAL-00018" summary="gateway网关服务里的 authFilter 修改">
+      <created>1602838497759</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1602838497759</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -488,17 +524,19 @@
     <MESSAGE value="针对maven plugins的[repackage failed: Unable to find main class]修改" />
     <MESSAGE value="格式化" />
     <MESSAGE value="删除注解" />
-    <option name="LAST_COMMIT_MESSAGE" value="删除注解" />
+    <MESSAGE value="gateway网关服务追加" />
+    <MESSAGE value="gateway网关服务里的 authFilter 修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="gateway网关服务里的 authFilter 修改" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="586" y="198" key="#Inspections" timestamp="1602832016136">
+    <state x="772" y="191" key="#Inspections" timestamp="1603073533029">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="586" y="198" key="#Inspections/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602832016136" />
-    <state x="695" y="343" key="#Notifications" timestamp="1600290329558">
+    <state x="772" y="191" key="#Inspections/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603073533029" />
+    <state x="695" y="343" key="#Notifications" timestamp="1602837400812">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="695" y="343" key="#Notifications/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600290329558" />
+    <state x="695" y="343" key="#Notifications/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602837400812" />
     <state x="552" y="161" key="#Plugins" timestamp="1600290377638">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -507,10 +545,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="440" y="94" key="#Project_Structure/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602644684804" />
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1600235506798">
+    <state x="414" y="175" width="1092" height="790" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603072032676">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600235506798" />
+    <state x="414" y="175" width="1092" height="790" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603072032676" />
     <state x="765" y="225" key="#com.intellij.ide.util.MemberChooser" timestamp="1600218982660">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -519,10 +557,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="640" y="255" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600290208661" />
-    <state x="774" y="101" key="CommitChangelistDialog2" timestamp="1602826214533">
+    <state x="774" y="101" key="CommitChangelistDialog2" timestamp="1602838496826">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="774" y="101" key="CommitChangelistDialog2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602826214533" />
+    <state x="774" y="101" key="CommitChangelistDialog2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602838496826" />
     <state x="337" y="65" key="FileChooserDialogImpl" timestamp="1602579138647">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -532,62 +570,62 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="771" y="439" key="Github.CreateGistDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1601608946995" />
-    <state width="1562" height="549" key="GridCell.Tab.0.bottom" timestamp="1602837180903">
+    <state width="1562" height="630" key="GridCell.Tab.0.bottom" timestamp="1603073465314">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1562" height="549" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602837180903" />
+    <state width="1562" height="630" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603073465314" />
     <state width="1562" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601609969418" />
-    <state width="1562" height="549" key="GridCell.Tab.0.center" timestamp="1602837180903">
+    <state width="1562" height="630" key="GridCell.Tab.0.center" timestamp="1603073465314">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1562" height="549" key="GridCell.Tab.0.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602837180903" />
+    <state width="1562" height="630" key="GridCell.Tab.0.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603073465314" />
     <state width="1562" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601609969418" />
-    <state width="1562" height="549" key="GridCell.Tab.0.left" timestamp="1602837180903">
+    <state width="1562" height="630" key="GridCell.Tab.0.left" timestamp="1603073465314">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1562" height="549" key="GridCell.Tab.0.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602837180903" />
+    <state width="1562" height="630" key="GridCell.Tab.0.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603073465314" />
     <state width="1562" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601609969418" />
-    <state width="1562" height="549" key="GridCell.Tab.0.right" timestamp="1602837180903">
+    <state width="1562" height="630" key="GridCell.Tab.0.right" timestamp="1603073465314">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1562" height="549" key="GridCell.Tab.0.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602837180903" />
+    <state width="1562" height="630" key="GridCell.Tab.0.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603073465314" />
     <state width="1562" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601609969418" />
-    <state width="1562" height="549" key="GridCell.Tab.1.bottom" timestamp="1602837180904">
+    <state width="1562" height="630" key="GridCell.Tab.1.bottom" timestamp="1603073465314">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1562" height="549" key="GridCell.Tab.1.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602837180904" />
-    <state width="1562" height="549" key="GridCell.Tab.1.center" timestamp="1602837180903">
+    <state width="1562" height="630" key="GridCell.Tab.1.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603073465314" />
+    <state width="1562" height="630" key="GridCell.Tab.1.center" timestamp="1603073465314">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1562" height="549" key="GridCell.Tab.1.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602837180903" />
-    <state width="1562" height="549" key="GridCell.Tab.1.left" timestamp="1602837180903">
+    <state width="1562" height="630" key="GridCell.Tab.1.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603073465314" />
+    <state width="1562" height="630" key="GridCell.Tab.1.left" timestamp="1603073465314">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1562" height="549" key="GridCell.Tab.1.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602837180903" />
-    <state width="1562" height="549" key="GridCell.Tab.1.right" timestamp="1602837180903">
+    <state width="1562" height="630" key="GridCell.Tab.1.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603073465314" />
+    <state width="1562" height="630" key="GridCell.Tab.1.right" timestamp="1603073465314">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1562" height="549" key="GridCell.Tab.1.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602837180903" />
-    <state width="1562" height="549" key="GridCell.Tab.2.bottom" timestamp="1602837180904">
+    <state width="1562" height="630" key="GridCell.Tab.1.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603073465314" />
+    <state width="1562" height="630" key="GridCell.Tab.2.bottom" timestamp="1603073465314">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1562" height="549" key="GridCell.Tab.2.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602837180904" />
-    <state width="1562" height="549" key="GridCell.Tab.2.center" timestamp="1602837180904">
+    <state width="1562" height="630" key="GridCell.Tab.2.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603073465314" />
+    <state width="1562" height="630" key="GridCell.Tab.2.center" timestamp="1603073465314">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1562" height="549" key="GridCell.Tab.2.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602837180904" />
-    <state width="1562" height="549" key="GridCell.Tab.2.left" timestamp="1602837180904">
+    <state width="1562" height="630" key="GridCell.Tab.2.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603073465314" />
+    <state width="1562" height="630" key="GridCell.Tab.2.left" timestamp="1603073465314">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1562" height="549" key="GridCell.Tab.2.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602837180904" />
-    <state width="1562" height="549" key="GridCell.Tab.2.right" timestamp="1602837180904">
+    <state width="1562" height="630" key="GridCell.Tab.2.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603073465314" />
+    <state width="1562" height="630" key="GridCell.Tab.2.right" timestamp="1603073465314">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1562" height="549" key="GridCell.Tab.2.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602837180904" />
-    <state x="540" y="254" key="IDE.errors.dialog" timestamp="1602819184957">
+    <state width="1562" height="630" key="GridCell.Tab.2.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603073465314" />
+    <state x="540" y="254" key="IDE.errors.dialog" timestamp="1603070951393">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="540" y="254" key="IDE.errors.dialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602819184957" />
+    <state x="540" y="254" key="IDE.errors.dialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603070951393" />
     <state x="490" y="175" key="Maven.ArtifactSearchDialog" timestamp="1602638527468">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -601,15 +639,19 @@
     </state>
     <state x="367" y="113" key="SettingsEditor/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602825778647" />
     <state x="367" y="113" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1601609309859" />
-    <state x="258" y="203" key="Vcs.Push.Dialog.v2" timestamp="1602826223424">
+    <state x="258" y="203" key="Vcs.Push.Dialog.v2" timestamp="1602838505552">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="258" y="203" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602826223424" />
+    <state x="258" y="203" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602838505552" />
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601609718504" />
     <state x="763" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601609687100">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="763" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601609687100" />
+    <state x="662" y="252" width="687" height="536" key="find.popup" timestamp="1603073482016">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="662" y="252" width="687" height="536" key="find.popup/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603073482016" />
     <state x="351" y="263" key="new project wizard" timestamp="1602640972979">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -618,10 +660,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600226067414" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1602663459060">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1603073475785">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602663459060" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603073475785" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1601609504981" />
   </component>
   <component name="XDebuggerManager">

@@ -17,70 +17,70 @@ import reactor.core.publisher.Mono;
 import java.util.Collections;
 import java.util.List;
 
-@Component
-public class CacheRequestFilter extends AbstractGatewayFilterFactory<CacheRequestFilter.Config> {
-    public CacheRequestFilter() {
-        super(Config.class);
-    }
-
-    @Override
-    public String name() {
-        return "CacheRequestFilter";
-    }
-
-    @Override
-    public GatewayFilter apply(Config config) {
-        CacheRequestGatewayFilter cacheRequestGatewayFilter = new CacheRequestGatewayFilter();
-        Integer order = config.getOrder();
-        if (order == null) {
-            return cacheRequestGatewayFilter;
-        }
-        return new OrderedGatewayFilter(cacheRequestGatewayFilter, order);
-    }
-
-    public static class CacheRequestGatewayFilter implements GatewayFilter {
-        @Override
-        public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-            // GET DELETE 不过滤
-            HttpMethod method = exchange.getRequest().getMethod();
-            if (method == null || method.matches("GET") || method.matches("DELETE")) {
-                return chain.filter(exchange);
-            }
-            return DataBufferUtils.join(exchange.getRequest().getBody()).map(dataBuffer -> {
-                byte[] bytes = new byte[dataBuffer.readableByteCount()];
-                dataBuffer.read(bytes);
-                DataBufferUtils.release(dataBuffer);
-                return bytes;
-            }).defaultIfEmpty(new byte[0]).flatMap(bytes -> {
-                DataBufferFactory dataBufferFactory = exchange.getResponse().bufferFactory();
-                ServerHttpRequestDecorator decorator = new ServerHttpRequestDecorator(exchange.getRequest()) {
-                    @Override
-                    public Flux<DataBuffer> getBody() {
-                        if (bytes.length > 0) {
-                            return Flux.just(dataBufferFactory.wrap(bytes));
-                        }
-                        return Flux.empty();
-                    }
-                };
-                return chain.filter(exchange.mutate().request(decorator).build());
-            });
-        }
-    }
-
-    @Override
-    public List<String> shortcutFieldOrder() {
-        return Collections.singletonList("order");
-    }
-
-    static class Config {
-        private Integer order;
-
-        public Integer getOrder() {
-            return order;
-        }
-
-        public void setOrder(Integer order) {
-            this.order = order;
-        }
-    }
-}
+//@Component
+//public class CacheRequestFilter extends AbstractGatewayFilterFactory<CacheRequestFilter.Config> {
+//    public CacheRequestFilter() {
+//        super(Config.class);
+//    }
+//
+//    @Override
+//    public String name() {
+//        return "CacheRequestFilter";
+//    }
+//
+//    @Override
+//    public GatewayFilter apply(Config config) {
+//        CacheRequestGatewayFilter cacheRequestGatewayFilter = new CacheRequestGatewayFilter();
+//        Integer order = config.getOrder();
+//        if (order == null) {
+//            return cacheRequestGatewayFilter;
+//        }
+//        return new OrderedGatewayFilter(cacheRequestGatewayFilter, order);
+//    }
+//
+//    public static class CacheRequestGatewayFilter implements GatewayFilter {
+//        @Override
+//        public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+//            // GET DELETE 不过滤
+//            HttpMethod method = exchange.getRequest().getMethod();
+//            if (method == null || method.matches("GET") || method.matches("DELETE")) {
+//                return chain.filter(exchange);
+//            }
+//            return DataBufferUtils.join(exchange.getRequest().getBody()).map(dataBuffer -> {
+//                byte[] bytes = new byte[dataBuffer.readableByteCount()];
+//                dataBuffer.read(bytes);
+//                DataBufferUtils.release(dataBuffer);
+//                return bytes;
+//            }).defaultIfEmpty(new byte[0]).flatMap(bytes -> {
+//                DataBufferFactory dataBufferFactory = exchange.getResponse().bufferFactory();
+//                ServerHttpRequestDecorator decorator = new ServerHttpRequestDecorator(exchange.getRequest()) {
+//                    @Override
+//                    public Flux<DataBuffer> getBody() {
+//                        if (bytes.length > 0) {
+//                            return Flux.just(dataBufferFactory.wrap(bytes));
+//                        }
+//                        return Flux.empty();
+//                    }
+//                };
+//                return chain.filter(exchange.mutate().request(decorator).build());
+//            });
+//        }
+//    }
+//
+//    @Override
+//    public List<String> shortcutFieldOrder() {
+//        return Collections.singletonList("order");
+//    }
+//
+//    static class Config {
+//        private Integer order;
+//
+//        public Integer getOrder() {
+//            return order;
+//        }
+//
+//        public void setOrder(Integer order) {
+//            this.order = order;
+//        }
+//    }
+//}

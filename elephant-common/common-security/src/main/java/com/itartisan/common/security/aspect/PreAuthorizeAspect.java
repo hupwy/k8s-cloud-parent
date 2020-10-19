@@ -23,73 +23,57 @@ import java.util.Collection;
  */
 @Aspect
 @Component
-public class PreAuthorizeAspect
-{
+public class PreAuthorizeAspect {
     @Autowired
     private TokenService tokenService;
 
-    /** 所有权限标识 */
+    /**
+     * 所有权限标识
+     */
     private static final String ALL_PERMISSION = "*:*:*";
 
-    /** 管理员角色权限标识 */
+    /**
+     * 管理员角色权限标识
+     */
     private static final String SUPER_ADMIN = "admin";
 
     @Around("@annotation(com.itartisan.common.security.annotation.PreAuthorize)")
-    public Object around(ProceedingJoinPoint point) throws Throwable
-    {
+    public Object around(ProceedingJoinPoint point) throws Throwable {
         Signature signature = point.getSignature();
         MethodSignature methodSignature = (MethodSignature) signature;
         Method method = methodSignature.getMethod();
         PreAuthorize annotation = method.getAnnotation(PreAuthorize.class);
-        if (annotation == null)
-        {
+        if (annotation == null) {
             return point.proceed();
         }
 
-        if (!StringUtils.isEmpty(annotation.hasPermi()))
-        {
-            if (hasPermi(annotation.hasPermi()))
-            {
+        if (!StringUtils.isEmpty(annotation.hasPermi())) {
+            if (hasPermi(annotation.hasPermi())) {
                 return point.proceed();
             }
             throw new PreAuthorizeException();
-        }
-        else if (!StringUtils.isEmpty(annotation.lacksPermi()))
-        {
-            if (lacksPermi(annotation.lacksPermi()))
-            {
+        } else if (!StringUtils.isEmpty(annotation.lacksPermi())) {
+            if (lacksPermi(annotation.lacksPermi())) {
                 return point.proceed();
             }
             throw new PreAuthorizeException();
-        }
-        else if (!StringUtils.isEmpty(annotation.hasAnyPermi()))
-        {
-            if (hasAnyPermi(annotation.hasAnyPermi()))
-            {
+        } else if (!StringUtils.isEmpty(annotation.hasAnyPermi())) {
+            if (hasAnyPermi(annotation.hasAnyPermi())) {
                 return point.proceed();
             }
             throw new PreAuthorizeException();
-        }
-        else if (!StringUtils.isEmpty(annotation.hasRole()))
-        {
-            if (hasRole(annotation.hasRole()))
-            {
+        } else if (!StringUtils.isEmpty(annotation.hasRole())) {
+            if (hasRole(annotation.hasRole())) {
                 return point.proceed();
             }
             throw new PreAuthorizeException();
-        }
-        else if (StringUtils.isEmpty(annotation.lacksRole()))
-        {
-            if (lacksRole(annotation.lacksRole()))
-            {
+        } else if (StringUtils.isEmpty(annotation.lacksRole())) {
+            if (lacksRole(annotation.lacksRole())) {
                 return point.proceed();
             }
             throw new PreAuthorizeException();
-        }
-        else if (StringUtils.isEmpty(annotation.hasAnyRoles()))
-        {
-            if (hasAnyRoles(annotation.hasAnyRoles()))
-            {
+        } else if (StringUtils.isEmpty(annotation.hasAnyRoles())) {
+            if (hasAnyRoles(annotation.hasAnyRoles())) {
                 return point.proceed();
             }
             throw new PreAuthorizeException();
@@ -100,15 +84,13 @@ public class PreAuthorizeAspect
 
     /**
      * 验证用户是否具备某权限
-     * 
+     *
      * @param permission 权限字符串
      * @return 用户是否具备某权限
      */
-    public boolean hasPermi(String permission)
-    {
+    public boolean hasPermi(String permission) {
         LoginUser userInfo = tokenService.getLoginUser();
-        if (StringUtils.isEmpty(userInfo) || CollectionUtils.isEmpty(userInfo.getPermissions()))
-        {
+        if (StringUtils.isEmpty(userInfo) || CollectionUtils.isEmpty(userInfo.getPermissions())) {
             return false;
         }
         return hasPermissions(userInfo.getPermissions(), permission);
@@ -120,8 +102,7 @@ public class PreAuthorizeAspect
      * @param permission 权限字符串
      * @return 用户是否不具备某权限
      */
-    public boolean lacksPermi(String permission)
-    {
+    public boolean lacksPermi(String permission) {
         return hasPermi(permission) != true;
     }
 
@@ -131,18 +112,14 @@ public class PreAuthorizeAspect
      * @param permissions 权限列表
      * @return 用户是否具有以下任意一个权限
      */
-    public boolean hasAnyPermi(String[] permissions)
-    {
+    public boolean hasAnyPermi(String[] permissions) {
         LoginUser userInfo = tokenService.getLoginUser();
-        if (StringUtils.isEmpty(userInfo) || CollectionUtils.isEmpty(userInfo.getPermissions()))
-        {
+        if (StringUtils.isEmpty(userInfo) || CollectionUtils.isEmpty(userInfo.getPermissions())) {
             return false;
         }
         Collection<String> authorities = userInfo.getPermissions();
-        for (String permission : permissions)
-        {
-            if (permission != null && hasPermissions(authorities, permission))
-            {
+        for (String permission : permissions) {
+            if (permission != null && hasPermissions(authorities, permission)) {
                 return true;
             }
         }
@@ -151,21 +128,17 @@ public class PreAuthorizeAspect
 
     /**
      * 判断用户是否拥有某个角色
-     * 
+     *
      * @param role 角色字符串
      * @return 用户是否具备某角色
      */
-    public boolean hasRole(String role)
-    {
+    public boolean hasRole(String role) {
         LoginUser userInfo = tokenService.getLoginUser();
-        if (StringUtils.isEmpty(userInfo) || CollectionUtils.isEmpty(userInfo.getRoles()))
-        {
+        if (StringUtils.isEmpty(userInfo) || CollectionUtils.isEmpty(userInfo.getRoles())) {
             return false;
         }
-        for (String roleKey : userInfo.getRoles())
-        {
-            if (SUPER_ADMIN.contains(roleKey) || roleKey.contains(role))
-            {
+        for (String roleKey : userInfo.getRoles()) {
+            if (SUPER_ADMIN.contains(roleKey) || roleKey.contains(role)) {
                 return true;
             }
         }
@@ -178,8 +151,7 @@ public class PreAuthorizeAspect
      * @param role 角色名称
      * @return 用户是否不具备某角色
      */
-    public boolean lacksRole(String role)
-    {
+    public boolean lacksRole(String role) {
         return hasRole(role) != true;
     }
 
@@ -189,17 +161,13 @@ public class PreAuthorizeAspect
      * @param roles 角色列表
      * @return 用户是否具有以下任意一个角色
      */
-    public boolean hasAnyRoles(String[] roles)
-    {
+    public boolean hasAnyRoles(String[] roles) {
         LoginUser userInfo = tokenService.getLoginUser();
-        if (StringUtils.isEmpty(userInfo) || CollectionUtils.isEmpty(userInfo.getRoles()))
-        {
+        if (StringUtils.isEmpty(userInfo) || CollectionUtils.isEmpty(userInfo.getRoles())) {
             return false;
         }
-        for (String role : roles)
-        {
-            if (hasRole(role))
-            {
+        for (String role : roles) {
+            if (hasRole(role)) {
                 return true;
             }
         }
@@ -208,13 +176,12 @@ public class PreAuthorizeAspect
 
     /**
      * 判断是否包含权限
-     * 
+     *
      * @param authorities 权限列表
-     * @param permission 权限字符串
+     * @param permission  权限字符串
      * @return 用户是否具备某权限
      */
-    private boolean hasPermissions(Collection<String> authorities, String permission)
-    {
+    private boolean hasPermissions(Collection<String> authorities, String permission) {
         return authorities.stream().filter(StringUtils::hasText)
                 .anyMatch(x -> ALL_PERMISSION.contains(x) || PatternMatchUtils.simpleMatch(permission, x));
     }

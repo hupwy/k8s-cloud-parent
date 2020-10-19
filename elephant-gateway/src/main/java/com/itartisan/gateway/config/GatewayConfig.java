@@ -11,7 +11,7 @@ import org.springframework.core.annotation.Order;
 /**
  * 网关限流配置
  */
-@Configuration
+//@Configuration
 public class GatewayConfig {
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
