@@ -80,10 +80,10 @@
         </dependency>
 
         <!-- Common Redis-->
-        <dependency>
+        <!--<dependency>
             <groupId>com.itartisan.common.redis</groupId>
             <artifactId>common-redis</artifactId>
-        </dependency>
+        </dependency>-->
 
         <!-- Swagger -->
         <dependency>

@@ -2,8 +2,25 @@
 server:
   port: 8080
 
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+
 # Spring
 spring:
   application:
     # 应用名称
     name: elephant-gateway
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+    kubernetes:
+      loadbalancer:
+        mode: service
+      discovery:
+        enabled: true
+      client:
+        namespace: hup-ns

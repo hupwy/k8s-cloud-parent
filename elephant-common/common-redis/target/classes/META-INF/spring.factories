@@ -1,5 +1,3 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.itartisan.common.redis.configure.RedisConfig,\
-  com.itartisan.common.redis.service.RedisService
-
-  
+#org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+#  com.itartisan.common.redis.configure.RedisConfig,\
+#  com.itartisan.common.redis.service.RedisService

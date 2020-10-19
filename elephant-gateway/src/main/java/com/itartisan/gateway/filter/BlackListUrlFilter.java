@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-/**
- * 黑名单过滤器
- */
+///**
+// * 黑名单过滤器
+// */
 //@Component
 //public class BlackListUrlFilter extends AbstractGatewayFilterFactory<BlackListUrlFilter.Config> {
 //    @Override

@@ -1,11 +1,11 @@
-#spring:
-#  cloud:
-#    gateway:
-#      routes:
-#        # 认证中心
-#        - id: auth
-#          uri: http://localhost:7000
-#          predicates:
-#            - Path=/auth/**
-#          filters:
-#            - StripPrefix=1
+spring:
+  cloud:
+    gateway:
+      routes:
+        # 认证中心
+        - id: auth
+          uri: http://localhost:7000
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1

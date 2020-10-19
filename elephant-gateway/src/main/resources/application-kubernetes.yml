@@ -1,17 +1,17 @@
-spring:
-  cloud:
-    gateway:
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
-      loadbalancer:
-        use404: true
-      routes:
-        # 认证中心
-        - id: auth
-          uri: lb://auth
-          predicates:
-            - Path=/auth/**
-          filters:
-            - StripPrefix=1
+#spring:
+#  cloud:
+#    gateway:
+#      discovery:
+#        locator:
+#          enabled: true
+#          lower-case-service-id: true
+#      loadbalancer:
+#        use404: true
+#      routes:
+#        # 认证中心
+#        - id: auth
+#          uri: lb://auth
+#          predicates:
+#            - Path=/auth/**
+#          filters:
+#            - StripPrefix=1
