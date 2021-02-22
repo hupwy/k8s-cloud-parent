@@ -1,19 +1,18 @@
 package com.itartisan.api.system;
 
-import com.itartisan.api.system.beans.domain.SysUser;
-import com.itartisan.api.system.beans.model.LoginUser;
+import com.itartisan.api.beans.model.LoginUser;
+import com.itartisan.common.core.constant.ServiceNameConstants;
 import com.itartisan.common.core.domain.R;
+import com.itartisan.api.system.factory.RemoteUserFallbackFactory;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.List;
-
 /**
  * 用户服务
  */
-@FeignClient(contextId = "remoteSysUserService", value = "system", url = "${local.feign.server.system.url:}")
-public interface RemoteSysUserService {
+@FeignClient(contextId = "remoteUserService", value = ServiceNameConstants.SYSTEM_SERVICE, fallbackFactory = RemoteUserFallbackFactory.class)
+public interface RemoteUserService {
     /**
      * 通过用户名查询用户信息
      *
@@ -22,13 +21,4 @@ public interface RemoteSysUserService {
      */
     @GetMapping(value = "/user/info/{username}")
     R<LoginUser> getUserInfo(@PathVariable("username") String username);
-
-    /**
-     * 取某个班级的所有学生
-     *
-     * @param classId
-     * @return
-     */
-    @GetMapping("/user/class/{classId}")
-    R<List<SysUser>> getStudentByClassId(@PathVariable("classId") Long classId);
 }

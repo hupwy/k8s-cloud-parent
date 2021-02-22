@@ -1,8 +1,6 @@
-package com.itartisan.api.system.beans.model;
+package com.itartisan.api.beans.model;
 
-
-
-import com.itartisan.api.system.beans.domain.SysUser;
+import com.itartisan.api.beans.domain.SysUser;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -10,7 +8,8 @@ import java.util.Set;
 /**
  * 用户信息
  */
-public class LoginUser implements Serializable {
+public class LoginUser implements Serializable
+{
     private static final long serialVersionUID = 1L;
 
     /**
@@ -29,7 +28,7 @@ public class LoginUser implements Serializable {
     private String username;
 
     /**
-     * 登录时间
+     * 登陆时间
      */
     private Long loginTime;
 
@@ -53,67 +52,83 @@ public class LoginUser implements Serializable {
      */
     private SysUser sysUser;
 
-    public String getToken() {
+    public String getToken()
+    {
         return token;
     }
 
-    public void setToken(String token) {
+    public void setToken(String token)
+    {
         this.token = token;
     }
 
-    public Long getUserid() {
+    public Long getUserid()
+    {
         return userid;
     }
 
-    public void setUserid(Long userid) {
+    public void setUserid(Long userid)
+    {
         this.userid = userid;
     }
 
-    public String getUsername() {
+    public String getUsername()
+    {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(String username)
+    {
         this.username = username;
     }
 
-    public Long getLoginTime() {
+    public Long getLoginTime()
+    {
         return loginTime;
     }
 
-    public void setLoginTime(Long loginTime) {
+    public void setLoginTime(Long loginTime)
+    {
         this.loginTime = loginTime;
     }
 
-    public Long getExpireTime() {
+    public Long getExpireTime()
+    {
         return expireTime;
     }
 
-    public void setExpireTime(Long expireTime) {
+    public void setExpireTime(Long expireTime)
+    {
         this.expireTime = expireTime;
     }
 
-    public Set<String> getPermissions() {
+    public Set<String> getPermissions()
+    {
         return permissions;
     }
 
-    public void setPermissions(Set<String> permissions) {
+    public void setPermissions(Set<String> permissions)
+    {
         this.permissions = permissions;
     }
 
-    public Set<String> getRoles() {
+    public Set<String> getRoles()
+    {
         return roles;
     }
 
-    public void setRoles(Set<String> roles) {
+    public void setRoles(Set<String> roles)
+    {
         this.roles = roles;
     }
 
-    public SysUser getSysUser() {
+    public SysUser getSysUser()
+    {
         return sysUser;
     }
 
-    public void setSysUser(SysUser sysUser) {
+    public void setSysUser(SysUser sysUser)
+    {
         this.sysUser = sysUser;
     }
 }
