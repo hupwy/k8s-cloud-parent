@@ -1,4 +1,4 @@
-package com.itartisan.api.system.beans.domain;
+package com.itartisan.system.api.beans.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.itartisan.common.core.web.domain.BaseEntity;

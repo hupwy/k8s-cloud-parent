@@ -1,4 +1,4 @@
-package com.itartisan.api.system.beans.domain;
+package com.itartisan.system.api.beans.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;

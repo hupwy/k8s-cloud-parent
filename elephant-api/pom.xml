@@ -13,6 +13,8 @@
     <modules>
         <module>api-system</module>
         <module>api-beans</module>
+        <module>api-content</module>
+        <module>api-lab</module>
     </modules>
 
     <artifactId>elephant-api</artifactId>

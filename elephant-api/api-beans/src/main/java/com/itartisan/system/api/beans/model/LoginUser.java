@@ -1,8 +1,8 @@
-package com.itartisan.api.system.beans.model;
+package com.itartisan.system.api.beans.model;
 
 
 
-import com.itartisan.api.system.beans.domain.SysUser;
+import com.itartisan.system.api.beans.domain.SysUser;
 
 import java.io.Serializable;
 import java.util.Set;

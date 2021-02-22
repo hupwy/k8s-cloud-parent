@@ -9,16 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>api-system</artifactId>
-    <groupId>com.itartisan.system.api</groupId>
+    <artifactId>api-content</artifactId>
+    <groupId>com.itartisan.content.api</groupId>
     <version>0.0.1</version>
 
-    <description>
-        api-system系统接口模块
-    </description>
-
     <dependencies>
-
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
@@ -43,17 +38,4 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>none</phase>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
 </project>
