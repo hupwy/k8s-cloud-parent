@@ -18,10 +18,22 @@
     </description>
 
     <dependencies>
-        <!-- Common Core-->
+
         <dependency>
-            <groupId>com.itartisan.common.core</groupId>
-            <artifactId>common-core</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-kubernetes</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-kubernetes-loadbalancer</artifactId>
         </dependency>
 
         <!-- 系统模块用的bean -->
