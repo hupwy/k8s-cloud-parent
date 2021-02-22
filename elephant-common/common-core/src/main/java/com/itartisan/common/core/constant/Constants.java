@@ -1,106 +1,167 @@
 package com.itartisan.common.core.constant;
 
-/**
- * 通用常量信息
- */
-public interface Constants {
+public class Constants {
     /**
-     * UTF-8 字符集
+     * 成功标记
      */
-    String UTF8 = "UTF-8";
-
-    /**
-     * GBK 字符集
-     */
-    String GBK = "GBK";
+    public static final Integer SUCCESS = 200;
 
     /**
      * http请求
      */
-    String HTTP = "http://";
+    public static final String HTTP = "http://";
 
     /**
      * https请求
      */
-    String HTTPS = "https://";
-
-    /**
-     * 成功标记
-     */
-    Integer SUCCESS = 200;
+    public static final String HTTPS = "https://";
 
     /**
      * 失败标记
      */
-    Integer FAIL = 500;
+    public static final Integer FAIL = 500;
 
     /**
      * 登录成功
      */
-    String LOGIN_SUCCESS = "Success";
+    public static final String LOGIN_SUCCESS = "Success";
 
     /**
      * 注销
      */
-    String LOGOUT = "Logout";
+    public static final String LOGOUT = "Logout";
 
     /**
      * 注册
      */
-    String REGISTER = "Register";
+    public static final String REGISTER = "Register";
 
     /**
      * 登录失败
      */
-    String LOGIN_FAIL = "Error";
+    public static final String LOGIN_FAIL = "Error";
 
     /**
-     * 当前记录起始索引
+     * 可见性：公有
      */
-    String PAGE_NUM = "pageNum";
+    public static final String SCOPE_PUBLIC = "1";
 
     /**
-     * 每页显示记录数
+     * 可见性：私有
      */
-    String PAGE_SIZE = "pageSize";
-
-    /**
-     * 排序列
-     */
-    String ORDER_BY_COLUMN = "orderByColumn";
-
-    /**
-     * 排序的方向 "desc" 或者 "asc".
-     */
-    String IS_ASC = "isAsc";
-
-    /**
-     * 验证码 redis key
-     */
-    String CAPTCHA_CODE_KEY = "captcha_codes:";
-
-    /**
-     * 验证码有效期（分钟）
-     */
-    long CAPTCHA_EXPIRATION = 2;
+    public static final String SCOPE_PRIVATE = "0";
 
     /**
      * 令牌有效期（分钟）
      */
-    long TOKEN_EXPIRE = 30;
-
-    /**
-     * 参数管理 cache key
-     */
-    String SYS_CONFIG_KEY = "sys_config:";
+    public final static long TOKEN_EXPIRE = 720;
 
     /**
      * 字典管理 cache key
      */
-    String SYS_DICT_KEY = "sys_dict:";
+    public static final String SYS_DICT_KEY = "sys_dict:";
 
     /**
-     * 资源映射路径 前缀
+     * 讨论区业务前缀
      */
-    String RESOURCE_PREFIX = "/profile";
+    public static final String DISCUSSION_KEY = "discussion:";
+
+    /**
+     * 讨论区-浏览量上限
+     */
+    public static final int DISCUSSION_COUNT = 50;
+
+    /**
+     * 站内信状态 未读
+     */
+    public static final String SYS_MESSAGE_STATUS_UNREAD = "0";
+
+    /**
+     * 站内信状态 已读
+     */
+    public static final String SYS_MESSAGE_STATUS_READ = "1";
+
+    /**
+     * 逻辑删除 未删除
+     */
+    public static final String NOT_DELETED_FLAG = "0";
+
+    /**
+     * 逻辑删除 已删除
+     */
+    public static final String DELETED_FLAG = "2";
+    /**
+     * 校验成功
+     */
+    public static final String VLID_SUCCESS = "1";
+    /**
+     * 校验失败
+     */
+    public static final String VLID_ERROR = "0";
+
+    /**
+     * 教学模块
+     */
+    public enum Teach {
+        /**
+         * 课程状态
+         */
+        COURSE_STATUS_STORAGE("0", "暂存"),
+        COURSE_STATUS_RELEASE("1", "发布"),
+        COURSE_STATUS_SOLDOUT("2", "下架"),
+
+        /**
+         * 授课状态
+         */
+        TRACHING_STATUS_CREATED("0", "已创建"),
+        TRACHING_STATUS_RUNNING("1", "授课中"),
+        TRACHING_STATUS_OVER("2", "已结束"),
+
+        /**
+         * 学习任务状态
+         */
+        TRACHING_TASK_CREATED("0", "未开始"),
+        TRACHING_TASK_RUNNING("1", "学习中"),
+        TRACHING_TASK_OVER("2", "已完成"),
+
+        /**
+         * 课程课件范围
+         */
+        PUBLIC_COURSE("0", "公共课程"),
+        PRIVATE_COURSE("1", "私有课程"),
+        /**
+         * 树节点类型标识（叶子/非叶子节点）
+         */
+        TREE_NODE_TYPE_LEAF("1", "是"),
+        TREE_NODE_TYPE_UNLEAF("0", "否"),
+        /**
+         * 实验类型
+         */
+        MATERIAL_TYPE_LAB("0", "实验"),
+        MATERIAL_TYPE_DOC("1", "文档"),
+        MATERIAL_TYPE_VIDEO("2", "视频"),
+        MATERIAL_TYPE_EXAM("3", "考试"),
+        /**
+         * 初始化实验版本
+         */
+        INIT_LAB_VERSION("1", "初始化实验版本");
+
+        private String code;
+
+        private String desc;
+
+        Teach(String code, String desc) {
+            this.code = code;
+            this.desc = desc;
+        }
+
+        public String code() {
+            return this.code;
+        }
+
+        public String desc() {
+            return this.desc;
+        }
+    }
+
 }

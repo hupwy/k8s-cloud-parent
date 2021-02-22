@@ -1,6 +1,7 @@
 package com.itartisan.common.core.domain;
 
-import com.itartisan.common.core.constant.Constants;
+
+import com.neuedu.cloudlab.common.core.constant.Constants;
 
 import java.io.Serializable;
 

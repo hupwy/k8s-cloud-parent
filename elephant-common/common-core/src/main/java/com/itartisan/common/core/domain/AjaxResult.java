@@ -1,7 +1,4 @@
-package com.itartisan.common.core.web.domain;
-
-import com.itartisan.common.core.constant.HttpStatus;
-import com.itartisan.common.core.utils.StringUtils;
+package com.itartisan.common.core.domain;
 
 import java.util.HashMap;
 
@@ -53,7 +50,7 @@ public class AjaxResult extends HashMap<String, Object> {
     public AjaxResult(int code, String msg, Object data) {
         super.put(CODE_TAG, code);
         super.put(MSG_TAG, msg);
-        if (StringUtils.isNotNull(data)) {
+        if (data != null) {
             super.put(DATA_TAG, data);
         }
     }
@@ -94,7 +91,7 @@ public class AjaxResult extends HashMap<String, Object> {
      * @return 成功消息
      */
     public static AjaxResult success(String msg, Object data) {
-        return new AjaxResult(HttpStatus.SUCCESS, msg, data);
+        return new AjaxResult(200, msg, data);
     }
 
     /**
@@ -124,7 +121,7 @@ public class AjaxResult extends HashMap<String, Object> {
      * @return 警告消息
      */
     public static AjaxResult error(String msg, Object data) {
-        return new AjaxResult(HttpStatus.ERROR, msg, data);
+        return new AjaxResult(500, msg, data);
     }
 
     /**

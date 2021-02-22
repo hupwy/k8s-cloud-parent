@@ -1,9 +1,10 @@
-package com.itartisan.common.core.utils.reflect;
+package com.itartisan.common.core.reflect;
 
-import com.itartisan.common.core.text.Convert;
-import com.itartisan.common.core.utils.DateUtils;
+import com.neuedu.cloudlab.common.core.text.Convert;
+import com.neuedu.cloudlab.common.core.utils.DateUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -150,7 +151,7 @@ public class ReflectUtils {
                         if (args[i] instanceof String) {
                             args[i] = DateUtils.parseDate(args[i]);
                         } else {
-//                            args[i] = DateUtil.getJavaDate((Double) args[i]);
+                            args[i] = DateUtil.getJavaDate((Double) args[i]);
                         }
                     }
                 }

@@ -1,7 +1,7 @@
-package com.itartisan.common.core.text;
+package com.itartisan.common.core.utils;
 
 
-import com.itartisan.common.core.exception.UtilException;
+import org.apache.commons.lang3.StringUtils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -424,7 +424,7 @@ public final class UUID implements java.io.Serializable, Comparable<UUID> {
         try {
             return SecureRandom.getInstance("SHA1PRNG");
         } catch (NoSuchAlgorithmException e) {
-            throw new UtilException(e);
+            throw new RuntimeException(e);
         }
     }
 
@@ -436,5 +436,14 @@ public final class UUID implements java.io.Serializable, Comparable<UUID> {
      */
     public static ThreadLocalRandom getRandom() {
         return ThreadLocalRandom.current();
+    }
+
+    /**
+     * 获取随机数生成的替换掉"-"的UUID<br>
+     *
+     * @return 值
+     */
+    public static String getUUID() {
+        return StringUtils.replace(randomUUID().toString(),"-", "");
     }
 }
