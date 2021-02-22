@@ -5,6 +5,10 @@ import com.itartisan.common.core.text.Convert;
 import com.itartisan.common.core.utils.ServletUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+
 /**
  * 权限获取工具类
  */
@@ -21,6 +25,39 @@ public class SecurityUtils {
      */
     public static Long getUserId() {
         return Convert.toLong(ServletUtils.getRequest().getHeader(CacheConstants.DETAILS_USER_ID));
+    }
+
+    /**
+     * 获取用户昵称
+     */
+    public static String getUserNickName() {
+        try {
+            return URLDecoder.decode(ServletUtils.getRequest().getHeader(CacheConstants.DETAILS_USERNICKNAME), StandardCharsets.UTF_8.name());
+        } catch (UnsupportedEncodingException e) {
+            return null;
+        }
+    }
+
+    /**
+     * 获取用户所属部门id
+     *
+     * @return
+     */
+    public static Long getDeptId() {
+        return Convert.toLong(ServletUtils.getRequest().getHeader(CacheConstants.DETAILS_DEPT_ID));
+    }
+
+    /**
+     * 获取用户所属部门名称
+     *
+     * @return
+     */
+    public static String getDeptName() {
+        try {
+            return URLDecoder.decode(ServletUtils.getRequest().getHeader(CacheConstants.DETAILS_DEPTNAME), StandardCharsets.UTF_8.name());
+        } catch (UnsupportedEncodingException e) {
+            return null;
+        }
     }
 
     /**

@@ -1,27 +1,28 @@
 package com.itartisan.common.security.service;
 
-import com.itartisan.api.beans.model.LoginUser;
+import com.google.common.base.Strings;
 import com.itartisan.common.core.constant.CacheConstants;
 import com.itartisan.common.core.constant.Constants;
-import com.itartisan.common.core.utils.IdUtils;
-import com.itartisan.common.core.utils.ServletUtils;
-import com.itartisan.common.core.utils.StringUtils;
-import com.itartisan.common.redis.service.RedisService;
+import com.itartisan.common.core.utils.UUID;
+import com.itartisan.system.api.beans.model.LoginUser;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-/**
- * token验证处理
- */
 @Component
 public class TokenService {
     @Autowired
-    private RedisService redisService;
+    private RedisTemplate redisTemplate;
 
     private final static long EXPIRE_TIME = Constants.TOKEN_EXPIRE * 60;
 
@@ -34,17 +35,18 @@ public class TokenService {
      */
     public Map<String, Object> createToken(LoginUser loginUser) {
         // 生成token
-        String token = IdUtils.fastUUID();
+        String token = UUID.fastUUID().toString();
+
         loginUser.setToken(token);
         loginUser.setUserid(loginUser.getSysUser().getUserId());
         loginUser.setUsername(loginUser.getSysUser().getUserName());
         refreshToken(loginUser);
 
         // 保存或更新用户token
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         map.put("access_token", token);
         map.put("expires_in", EXPIRE_TIME);
-        redisService.setCacheObject(ACCESS_TOKEN + token, loginUser, EXPIRE_TIME, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(ACCESS_TOKEN + token, loginUser, EXPIRE_TIME, TimeUnit.SECONDS);
         return map;
     }
 
@@ -54,7 +56,7 @@ public class TokenService {
      * @return 用户信息
      */
     public LoginUser getLoginUser() {
-        return getLoginUser(ServletUtils.getRequest());
+        return getLoginUser(((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest());
     }
 
     /**
@@ -65,18 +67,28 @@ public class TokenService {
     public LoginUser getLoginUser(HttpServletRequest request) {
         // 获取请求携带的令牌
         String token = getToken(request);
-        if (StringUtils.isNotEmpty(token)) {
+        if (!Strings.isNullOrEmpty(token)) {
             String userKey = getTokenKey(token);
-            LoginUser user = redisService.getCacheObject(userKey);
+            ValueOperations<String, LoginUser> operation = redisTemplate.opsForValue();
+            LoginUser user = operation.get(userKey);
             return user;
         }
         return null;
     }
 
+    /**
+     * 设置用户身份信息
+     */
+    public void setLoginUser(LoginUser loginUser) {
+        if (Objects.nonNull(loginUser) && StringUtils.isNotEmpty(loginUser.getToken())) {
+            refreshToken(loginUser);
+        }
+    }
+
     public void delLoginUser(String token) {
         if (StringUtils.isNotEmpty(token)) {
             String userKey = getTokenKey(token);
-            redisService.deleteObject(userKey);
+            redisTemplate.delete(userKey);
         }
     }
 
@@ -85,13 +97,12 @@ public class TokenService {
      *
      * @param loginUser 登录信息
      */
-    public Long refreshToken(LoginUser loginUser) {
+    public void refreshToken(LoginUser loginUser) {
         loginUser.setLoginTime(System.currentTimeMillis());
         loginUser.setExpireTime(loginUser.getLoginTime() + EXPIRE_TIME * MILLIS_SECOND);
         // 根据uuid将loginUser缓存
         String userKey = getTokenKey(loginUser.getToken());
-        redisService.setCacheObject(userKey, loginUser, EXPIRE_TIME, TimeUnit.SECONDS);
-        return EXPIRE_TIME;
+        redisTemplate.opsForValue().set(userKey, loginUser, EXPIRE_TIME, TimeUnit.SECONDS);
     }
 
     private String getTokenKey(String token) {
@@ -103,7 +114,7 @@ public class TokenService {
      */
     private String getToken(HttpServletRequest request) {
         String token = request.getHeader(CacheConstants.HEADER);
-        if (StringUtils.isNotEmpty(token) && token.startsWith(CacheConstants.TOKEN_PREFIX)) {
+        if (!Strings.isNullOrEmpty(token) && token.startsWith(CacheConstants.TOKEN_PREFIX)) {
             token = token.replace(CacheConstants.TOKEN_PREFIX, "");
         }
         return token;

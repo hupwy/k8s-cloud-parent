@@ -8,10 +8,9 @@ import java.lang.annotation.Target;
 /**
  * 权限注解
  */
-@Target({ ElementType.TYPE, ElementType.METHOD })
+@Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface PreAuthorize
-{
+public @interface PreAuthorize {
     /**
      * 验证用户是否具备某权限
      */
@@ -33,7 +32,7 @@ public @interface PreAuthorize
     public String hasRole() default "";
 
     /**
-     * 验证用户是否不具备某角色，与isRole逻辑相反
+     * 验证用户是否不具备某角色，与 isRole逻辑相反
      */
     public String lacksRole() default "";
 

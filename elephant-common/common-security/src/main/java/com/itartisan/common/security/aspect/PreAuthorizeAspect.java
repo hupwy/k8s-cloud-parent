@@ -1,9 +1,9 @@
 package com.itartisan.common.security.aspect;
 
-import com.itartisan.api.beans.model.LoginUser;
 import com.itartisan.common.core.exception.PreAuthorizeException;
 import com.itartisan.common.security.annotation.PreAuthorize;
 import com.itartisan.common.security.service.TokenService;
+import com.itartisan.system.api.beans.model.LoginUser;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
@@ -67,12 +67,12 @@ public class PreAuthorizeAspect {
                 return point.proceed();
             }
             throw new PreAuthorizeException();
-        } else if (StringUtils.isEmpty(annotation.lacksRole())) {
+        } else if (!StringUtils.isEmpty(annotation.lacksRole())) {
             if (lacksRole(annotation.lacksRole())) {
                 return point.proceed();
             }
             throw new PreAuthorizeException();
-        } else if (StringUtils.isEmpty(annotation.hasAnyRoles())) {
+        } else if (!StringUtils.isEmpty(annotation.hasAnyRoles())) {
             if (hasAnyRoles(annotation.hasAnyRoles())) {
                 return point.proceed();
             }
