@@ -1,26 +1,13 @@
-# Tomcat
+spring:
+  application:
+    name: gateway
+
 server:
   port: 8080
 
-#management:
-#  endpoints:
-#    web:
-#      exposure:
-#        include: "*"
-
-# Spring
-spring:
-  application:
-    # 应用名称
-    name: elephant-gateway
-  cloud:
-    loadbalancer:
-      ribbon:
-        enabled: false
-    kubernetes:
-      loadbalancer:
-        mode: service
-      discovery:
-        enabled: true
-      client:
-        namespace: hup-ns
+# 不鉴权白名单
+ignore:
+  whites:
+    - /auth/logout
+    - /auth/login
+    - /content/content/file
