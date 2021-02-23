@@ -1,6 +1,6 @@
 package com.itartisan.auth.redis.controller;
 
-import com.itartisan.api.system.beans.model.LoginUser;
+import com.itartisan.system.api.beans.model.LoginUser;
 import com.itartisan.auth.redis.form.LoginBody;
 import com.itartisan.auth.redis.service.SysLoginService;
 import com.itartisan.common.core.domain.R;

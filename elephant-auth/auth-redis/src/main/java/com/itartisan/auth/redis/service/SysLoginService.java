@@ -1,8 +1,8 @@
 package com.itartisan.auth.redis.service;
 
-import com.itartisan.api.system.RemoteSysUserService;
-import com.itartisan.api.system.beans.domain.SysUser;
-import com.itartisan.api.system.beans.model.LoginUser;
+import com.itartisan.system.api.RemoteSysUserService;
+import com.itartisan.system.api.beans.domain.SysUser;
+import com.itartisan.system.api.beans.model.LoginUser;
 import com.itartisan.common.core.constant.UserConstants;
 import com.itartisan.common.core.domain.R;
 import com.itartisan.common.core.enums.UserStatus;
