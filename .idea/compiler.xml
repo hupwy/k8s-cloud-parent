@@ -7,9 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="api-content" />
         <module name="common-security" />
+        <module name="api-lab" />
+        <module name="common-mybatis-plus" />
         <module name="redis-auth" />
-        <module name="common-log" />
         <module name="elephant-gateway" />
         <module name="common-redis" />
         <module name="api-beans" />
@@ -18,12 +20,13 @@
         <module name="common-swagger" />
         <module name="api" />
         <module name="auth-redis" />
-        <module name="job" />
         <module name="common-core" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="api" target="1.8" />
+      <module name="common-log" target="1.8" />
+      <module name="job" target="1.8" />
       <module name="k8s-srv-api" target="1.8" />
       <module name="k8s-srv-docker-monitor" target="1.8" />
       <module name="k8s-srv-login" target="1.8" />

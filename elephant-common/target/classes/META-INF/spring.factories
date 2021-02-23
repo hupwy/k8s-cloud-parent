@@ -1,0 +1,7 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.itartisan.common.core.handler.GlobalExceptionHandler,\
+  com.itartisan.common.core.utils.SpringUtils,\
+  com.itartisan.common.core.web.PageWebMvcConfigurer
+
+
+  

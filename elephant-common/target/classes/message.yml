@@ -1,0 +1,11 @@
+teach:
+  message:
+    1001: 名称已存在
+    1002: 顺序号码已存在
+    1003: 素材不唯一
+content:
+  message:
+system:
+  message:
+lab:
+  message:

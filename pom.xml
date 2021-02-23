@@ -33,15 +33,18 @@
         <spring-boot.version>2.3.3.RELEASE</spring-boot.version>
         <spring-boot-admin.version>2.2.3</spring-boot-admin.version>
         <spring-boot.mybatis>2.1.2</spring-boot.mybatis>
+        <mybatis.plus.version>3.4.0</mybatis.plus.version>
 
         <!--swagger-->
-        <swagger.fox.version>2.9.2</swagger.fox.version>
-        <swagger.core.version>1.5.24</swagger.core.version>
+        <swagger.fox.version>3.0.0</swagger.fox.version>
+        <swagger.core.version>1.5.20</swagger.core.version>
 
         <!--tools-->
         <commons.io.version>2.5</commons.io.version>
         <fastjson.version>1.2.73</fastjson.version>
         <common-pool.version>2.6.2</common-pool.version>
+        <commons.lang3.version>3.11</commons.lang3.version>
+        <com.google.guava>29.0-jre</com.google.guava>
 
     </properties>
 
@@ -64,22 +67,6 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- SpringCloud Alibaba 微服务 -->
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <!-- Alibaba Nacos 配置 -->
-            <dependency>
-                <groupId>com.alibaba.nacos</groupId>
-                <artifactId>nacos-client</artifactId>
-                <version>${nacos.version}</version>
-            </dependency>
-
             <!-- SpringBoot 依赖 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -89,11 +76,11 @@
                 <scope>import</scope>
             </dependency>
 
-            <!--  SpringBoot 监控客户端 -->
+            <!-- Mybatis-plus 依赖 -->
             <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-starter-client</artifactId>
-                <version>${spring-boot-admin.version}</version>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis.plus.version}</version>
             </dependency>
 
             <!-- Mybatis 依赖配置 -->
@@ -104,11 +91,11 @@
             </dependency>
 
             <!-- Apache Lang3 -->
-<!--            <dependency>-->
-<!--                <groupId>org.apache.commons</groupId>-->
-<!--                <artifactId>commons-lang3</artifactId>-->
-<!--                <version>${commons.lang3.version}</version>-->
-<!--            </dependency>-->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons.lang3.version}</version>
+            </dependency>
 
             <!-- Swagger 依赖配置 -->
             <dependency>
@@ -171,20 +158,6 @@
                 <version>${version}</version>
             </dependency>
 
-            <!-- 权限范围 -->
-            <!--<dependency>
-                <groupId>com.itartisan.common.datascope</groupId>
-                <artifactId>common-datascope</artifactId>
-                <version>${version}</version>
-            </dependency>-->
-
-            <!-- 日志记录 -->
-            <dependency>
-                <groupId>com.itartisan.common.log</groupId>
-                <artifactId>common-log</artifactId>
-                <version>${version}</version>
-            </dependency>
-
             <!-- 缓存服务 -->
             <dependency>
                 <groupId>com.itartisan.common.redis</groupId>
@@ -192,9 +165,30 @@
                 <version>${version}</version>
             </dependency>
 
+            <!-- Mybatis-Plus -->
+            <dependency>
+                <groupId>com.itartisan.common.mp</groupId>
+                <artifactId>common-mybatis-plus</artifactId>
+                <version>${version}</version>
+            </dependency>
+
+            <!-- 内容服务 -->
+            <!--<dependency>
+                <groupId>com.itartisan.cloudlab</groupId>
+                <artifactId>api-content</artifactId>
+                <version>${version}</version>
+            </dependency>-->
+
+            <!-- 实验服务 -->
+            <!--<dependency>
+                <groupId>com.itartisan.cloudlab</groupId>
+                <artifactId>api-lab</artifactId>
+                <version>${version}</version>
+            </dependency>-->
+
             <!-- 系统接口 -->
             <dependency>
-                <groupId>com.itartisan.api.system</groupId>
+                <groupId>com.itartisan.system.api</groupId>
                 <artifactId>api-system</artifactId>
                 <version>${version}</version>
             </dependency>
