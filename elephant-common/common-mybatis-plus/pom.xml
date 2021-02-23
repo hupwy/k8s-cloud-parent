@@ -9,8 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>common-mybatis-plus</artifactId>
     <groupId>com.itartisan.common.mp</groupId>
+    <artifactId>common-mybatis-plus</artifactId>
     <version>0.0.1</version>
 
     <description>mybatis-plus配置</description>
