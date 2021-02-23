@@ -1,84 +1,44 @@
 package com.itartisan.common.swagger.config;
 
-
+import io.swagger.annotations.Api;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.HttpAuthenticationBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.ApiKey;
-import springfox.documentation.service.AuthorizationScope;
-import springfox.documentation.service.Contact;
-import springfox.documentation.service.SecurityReference;
+import springfox.documentation.oas.annotations.EnableOpenApi;
+import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Configuration
-@EnableSwagger2
+@EnableOpenApi
 @EnableAutoConfiguration
-@ConditionalOnProperty(name = "swagger.enabled", matchIfMissing = true)
 public class SwaggerAutoConfiguration {
-    /**
-     * 默认的排除路径，排除Spring Boot默认的错误处理路径和端点
-     */
-    private static final List<String> DEFAULT_EXCLUDE_PATH = Arrays.asList("/error", "/actuator/**");
-
-    private static final String BASE_PATH = "/**";
-
     @Bean
-    @ConditionalOnMissingBean
-    public SwaggerProperties swaggerProperties() {
-        return new SwaggerProperties();
-    }
-
-    @Bean
-    public Docket api(SwaggerProperties swaggerProperties) {
-        // base-path处理
-        if (swaggerProperties.getBasePath().isEmpty()) {
-            swaggerProperties.getBasePath().add(BASE_PATH);
-        }
-        // noinspection unchecked
-        List<Predicate<String>> basePath = new ArrayList<Predicate<String>>();
-        swaggerProperties.getBasePath().forEach(path -> basePath.add(PathSelectors.ant(path)));
-
-        // exclude-path处理
-        if (swaggerProperties.getExcludePath().isEmpty()) {
-            swaggerProperties.getExcludePath().addAll(DEFAULT_EXCLUDE_PATH);
-        }
-        List<Predicate<String>> excludePath = new ArrayList<>();
-        swaggerProperties.getExcludePath().forEach(path -> excludePath.add(PathSelectors.ant(path)));
-
-        //noinspection Guava
-        return new Docket(DocumentationType.SWAGGER_2)
-                .host(swaggerProperties.getHost())
-                .apiInfo(apiInfo(swaggerProperties)).select()
-                .apis(RequestHandlerSelectors.basePackage(swaggerProperties.getBasePackage()))
-                .paths(Predicates.and(Predicates.not(Predicates.or(excludePath)), Predicates.or(basePath)))
+    public Docket api() {
+        return new Docket(DocumentationType.OAS_30)
+                .apiInfo(apiInfo())
+                .select()
+                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
                 .build()
                 .securitySchemes(securitySchemes())
-                .securityContexts(securityContexts())
-                .pathMapping("/");
+                .securityContexts(securityContexts());
     }
 
-    /**
-     * 安全模式，这里指定token通过Authorization头请求头传递
-     */
-    private List<ApiKey> securitySchemes() {
-        List<ApiKey> apiKeyList = new ArrayList<ApiKey>();
-        apiKeyList.add(new ApiKey("Authorization", "Authorization", "header"));
-        return apiKeyList;
+    private List<SecurityScheme> securitySchemes() {
+        List<SecurityScheme> securitySchemes = new ArrayList<>();
+        // token
+        securitySchemes.add(new HttpAuthenticationBuilder().name("token").scheme("bearer").build());
+        securitySchemes.add(new ApiKey("user_id", "user_id", "header"));
+        securitySchemes.add(new ApiKey("username", "username", "header"));
+        return securitySchemes;
     }
 
     /**
@@ -104,19 +64,18 @@ public class SwaggerAutoConfiguration {
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
         authorizationScopes[0] = authorizationScope;
         List<SecurityReference> securityReferences = new ArrayList<>();
-        securityReferences.add(new SecurityReference("Authorization", authorizationScopes));
+        securityReferences.add(new SecurityReference("token", authorizationScopes));
+        securityReferences.add(new SecurityReference("user_id", authorizationScopes));
+        securityReferences.add(new SecurityReference("username", authorizationScopes));
         return securityReferences;
     }
 
-    private ApiInfo apiInfo(SwaggerProperties swaggerProperties) {
+    //生成接口信息，包括标题、联系人等
+    private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title(swaggerProperties.getTitle())
-                .description(swaggerProperties.getDescription())
-                .license(swaggerProperties.getLicense())
-                .licenseUrl(swaggerProperties.getLicenseUrl())
-                .termsOfServiceUrl(swaggerProperties.getTermsOfServiceUrl())
-                .contact(new Contact(swaggerProperties.getContact().getName(), swaggerProperties.getContact().getUrl(), swaggerProperties.getContact().getEmail()))
-                .version(swaggerProperties.getVersion())
+                .title("云实验室文档")
+                .description("如有疑问，请联系首席架构师于昌洋。")
+                .version("5.0")
                 .build();
     }
 }
