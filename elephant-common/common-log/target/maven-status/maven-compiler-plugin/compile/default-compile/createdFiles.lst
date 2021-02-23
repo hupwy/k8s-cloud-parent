@@ -1,6 +1,0 @@
-com\itartisan\common\log\aspect\LogAspect.class
-com\itartisan\common\log\enums\OperatorType.class
-com\itartisan\common\log\enums\BusinessStatus.class
-com\itartisan\common\log\service\AsyncLogService.class
-com\itartisan\common\log\annotation\Log.class
-com\itartisan\common\log\enums\BusinessType.class

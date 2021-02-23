@@ -11,10 +11,10 @@
 
     <modules>
         <module>common-core</module>
-        <module>common-log</module>
         <module>common-redis</module>
         <module>common-security</module>
         <module>common-swagger</module>
+        <module>common-mybatis-plus</module>
     </modules>
 
     <artifactId>elephant-common</artifactId>
