@@ -1,9 +1,9 @@
 package com.itartisan.common.security.aspect;
 
+import com.itartisan.api.beans.system.model.LoginUser;
 import com.itartisan.common.core.exception.PreAuthorizeException;
 import com.itartisan.common.security.annotation.PreAuthorize;
 import com.itartisan.common.security.service.TokenService;
-import com.itartisan.system.beans.model.LoginUser;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;

@@ -1,6 +1,6 @@
 package com.itartisan.system.service.impl;
 
-import com.itartisan.system.beans.domain.SysUser;
+import com.itartisan.api.beans.system.domain.SysUser;
 import com.itartisan.system.service.ISysMenuService;
 import com.itartisan.system.service.ISysPermissionService;
 import com.itartisan.system.service.ISysRoleService;

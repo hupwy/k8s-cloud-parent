@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itartisan.system.mapper.SysMessageMapper">
+    <resultMap type="SysMessage" id="SysMessageResult">
+        <id property="msgId" column="msg_id"/>
+        <result property="msgTitle" column="msg_title"/>
+        <result property="msgContent" column="msg_content"/>
+        <result property="senderId" column="sender_id"/>
+        <result property="senderNickName" column="senderNickName"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <collection property="receivers" ofType="com.neuedu.cloudlab.system.beans.domain.SysMessageReceiver">
+            <result property="receiverId" column="receiver_id"/>
+            <result property="receiverUserName" column="receiverUserName"/>
+            <result property="status" column="status"/>
+            <result property="readTime" column="read_time"/>
+        </collection>
+    </resultMap>
+
+    <sql id="selectMessageVo">
+        select sm.msg_id,
+        sm.msg_title,
+        sm.msg_content,
+        sm.sender_id,
+        smu.user_name as senderUserName,
+        smr.receiver_id,
+        smru.user_name as receiverUserName,
+        smr.status,
+        smr.read_time
+        from sys_message sm
+        left join sys_message_receiver smr on sm.msg_id = smr.msg_id
+        left join sys_user smu on sm.sender_id = smu.user_id
+        left join sys_user smru on smr.receiver_id = smru.user_id
+    </sql>
+
+    <select id="selectSysMessageByPage" resultMap="SysMessageResult">
+        <include refid="selectMessageVo"/>
+        <where>
+            <if test="senderId != null and senderId != 0">
+                sm.sender_id = #{senderId}
+            </if>
+        </where>
+        order by sm.create_time desc
+    </select>
+
+    <select id="selectSysMessageByReceiverId" resultMap="SysMessageResult">
+        <include refid="selectMessageVo"/>
+        where smr.receiver_id = #{receiverId}
+        <if test="status !=null and status != ''">
+            and smr.status = #{status}
+        </if>
+        order by sm.create_time desc
+    </select>
+</mapper>

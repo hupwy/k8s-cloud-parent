@@ -1,9 +1,9 @@
 package com.itartisan.system.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.itartisan.api.beans.system.domain.SysMessageReceiver;
 import com.itartisan.common.core.constant.Constants;
 import com.itartisan.common.core.utils.DateUtils;
-import com.itartisan.system.beans.domain.SysMessageReceiver;
 import com.itartisan.system.mapper.SysMessageReceiverMapper;
 import com.itartisan.system.service.ISysMessageReceiverService;
 import org.springframework.beans.factory.annotation.Autowired;

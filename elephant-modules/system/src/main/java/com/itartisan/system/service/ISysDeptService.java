@@ -1,7 +1,7 @@
 package com.itartisan.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.itartisan.system.beans.domain.SysDept;
+import com.itartisan.api.beans.system.domain.SysDept;
 import com.itartisan.system.domain.vo.TreeSelect;
 
 import java.util.List;

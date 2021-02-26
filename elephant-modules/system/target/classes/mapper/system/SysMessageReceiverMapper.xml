@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itartisan.system.mapper.SysMessageReceiverMapper">
+    <update id="updateMessageStatus" parameterType="SysMessageReceiver">
+        update sys_message_receiver
+        set status=#{status},read_time=#{readTime},update_by=#{updateBy},update_time = sysdate()
+        where msg_id = #{msgId} AND receiver_id = #{receiverId}
+    </update>
+</mapper>

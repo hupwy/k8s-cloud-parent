@@ -4,7 +4,7 @@ package com.itartisan.system.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.itartisan.system.beans.domain.SysUser;
+import com.itartisan.api.beans.system.domain.SysUser;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.itartisan.system.api;
 
-import com.itartisan.system.beans.domain.SysUser;
-import com.itartisan.system.beans.model.LoginUser;
+import com.itartisan.api.beans.system.domain.SysUser;
+import com.itartisan.api.beans.system.model.LoginUser;
 import com.itartisan.common.core.domain.R;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,6 +1,6 @@
 package com.itartisan.system.api;
 
-import com.itartisan.system.beans.domain.SysMessage;
+import com.itartisan.api.beans.system.domain.SysMessage;
 import com.itartisan.common.core.domain.R;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;

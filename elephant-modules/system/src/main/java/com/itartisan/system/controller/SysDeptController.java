@@ -2,13 +2,13 @@ package com.itartisan.system.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.itartisan.api.beans.system.domain.SysDept;
 import com.itartisan.common.core.constant.Constants;
 import com.itartisan.common.core.constant.UserConstants;
 import com.itartisan.common.core.domain.AjaxResult;
 import com.itartisan.common.core.web.controller.BaseController;
 import com.itartisan.common.security.annotation.PreAuthorize;
 import com.itartisan.common.security.utils.SecurityUtils;
-import com.itartisan.system.beans.domain.SysDept;
 import com.itartisan.system.service.ISysDeptService;
 import io.swagger.annotations.*;
 import org.apache.commons.lang3.ArrayUtils;

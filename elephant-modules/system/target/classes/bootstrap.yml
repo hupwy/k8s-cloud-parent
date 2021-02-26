@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    kubernetes:
+      config:
+        sources:
+          - name: system
+            namespace: cloudlab
+      reload:
+        enabled: true
+        mode: polling
+        monitoring-secrets: true

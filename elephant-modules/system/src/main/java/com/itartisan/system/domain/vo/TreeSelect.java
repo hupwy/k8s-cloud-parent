@@ -1,7 +1,7 @@
 package com.itartisan.system.domain.vo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.itartisan.system.beans.domain.SysDept;
+import com.itartisan.api.beans.system.domain.SysDept;
 import com.itartisan.system.domain.SysMenu;
 
 import java.io.Serializable;

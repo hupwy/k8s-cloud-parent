@@ -1,6 +1,6 @@
 package com.itartisan.system.service;
 
-import com.itartisan.system.beans.domain.SysRole;
+import com.itartisan.api.beans.system.domain.SysRole;
 
 import java.util.List;
 import java.util.Set;

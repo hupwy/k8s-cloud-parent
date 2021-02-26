@@ -9,15 +9,32 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-
+    <groupId>com.itartisan</groupId>
     <artifactId>elephant-modules</artifactId>
     <packaging>pom</packaging>
 
     <description>
         elephant-modules业务模块
     </description>
+
     <modules>
         <module>system</module>
     </modules>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

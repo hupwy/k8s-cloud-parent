@@ -1,7 +1,7 @@
 package com.itartisan.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.itartisan.system.beans.domain.SysMessageReceiver;
+import com.itartisan.api.beans.system.domain.SysMessageReceiver;
 
 public interface SysMessageReceiverMapper extends BaseMapper<SysMessageReceiver> {
     /**

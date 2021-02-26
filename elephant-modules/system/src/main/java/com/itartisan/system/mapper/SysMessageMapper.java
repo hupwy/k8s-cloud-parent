@@ -2,7 +2,7 @@ package com.itartisan.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.itartisan.system.beans.domain.SysMessage;
+import com.itartisan.api.beans.system.domain.SysMessage;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.itartisan.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.itartisan.system.beans.domain.SysMessageReceiver;
+import com.itartisan.api.beans.system.domain.SysMessageReceiver;
 
 public interface ISysMessageReceiverService extends IService<SysMessageReceiver> {
     /**

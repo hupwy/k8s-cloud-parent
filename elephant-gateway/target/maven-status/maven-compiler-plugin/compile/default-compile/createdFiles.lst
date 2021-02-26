@@ -1,0 +1,4 @@
+com\itartisan\gateway\config\properties\IgnoreWhiteProperties.class
+com\itartisan\gateway\handler\GatewayExceptionHandler.class
+com\itartisan\gateway\filter\AuthFilter.class
+com\itartisan\gateway\ElephantGatewayApplication.class

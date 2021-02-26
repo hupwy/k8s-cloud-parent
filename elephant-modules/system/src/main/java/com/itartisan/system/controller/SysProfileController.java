@@ -1,10 +1,10 @@
 package com.itartisan.system.controller;
 
+import com.itartisan.api.beans.system.domain.SysUser;
+import com.itartisan.api.beans.system.model.LoginUser;
 import com.itartisan.common.core.domain.AjaxResult;
 import com.itartisan.common.security.service.TokenService;
 import com.itartisan.common.security.utils.SecurityUtils;
-import com.itartisan.system.beans.domain.SysUser;
-import com.itartisan.system.beans.model.LoginUser;
 import com.itartisan.system.service.ISysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

@@ -1,7 +1,7 @@
 package com.itartisan.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.itartisan.system.beans.domain.SysDept;
+import com.itartisan.api.beans.system.domain.SysDept;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
