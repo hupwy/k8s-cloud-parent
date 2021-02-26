@@ -45,6 +45,7 @@
         <common-pool.version>2.6.2</common-pool.version>
         <commons.lang3.version>3.11</commons.lang3.version>
         <com.google.guava>29.0-jre</com.google.guava>
+        <poi.version>3.17</poi.version>
 
     </properties>
 
@@ -121,6 +122,13 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
+            </dependency>
+
+            <!-- excel工具 -->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi.version}</version>
             </dependency>
 
             <!-- 公共资源池 -->

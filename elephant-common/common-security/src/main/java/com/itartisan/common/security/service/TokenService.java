@@ -4,7 +4,7 @@ import com.google.common.base.Strings;
 import com.itartisan.common.core.constant.CacheConstants;
 import com.itartisan.common.core.constant.Constants;
 import com.itartisan.common.core.utils.UUID;
-import com.itartisan.system.api.beans.model.LoginUser;
+import com.itartisan.system.beans.model.LoginUser;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;

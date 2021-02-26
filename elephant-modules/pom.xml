@@ -9,9 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <modules>
-        <module>system</module>
-    </modules>
 
     <artifactId>elephant-modules</artifactId>
     <packaging>pom</packaging>
@@ -19,5 +16,8 @@
     <description>
         elephant-modules业务模块
     </description>
+    <modules>
+        <module>system</module>
+    </modules>
 
 </project>

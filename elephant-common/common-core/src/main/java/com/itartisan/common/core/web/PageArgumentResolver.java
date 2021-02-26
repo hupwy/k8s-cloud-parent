@@ -37,7 +37,7 @@ public class PageArgumentResolver implements HandlerMethodArgumentResolver {
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return null != parameter.getParameterAnnotation(com.neuedu.cloudlab.common.core.web.PageSolver.class);
+        return null != parameter.getParameterAnnotation(PageSolver.class);
     }
 
     @Override

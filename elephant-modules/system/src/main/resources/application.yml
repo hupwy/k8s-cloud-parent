@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: system
+server:
+  port: 8001
+
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: del_flag
+      logic-delete-value: '2'
+      logic-not-delete-value: '0'
+  type-aliases-package: com.itartisan.system
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+sys:
+  user:
+    initPassword: 123456
