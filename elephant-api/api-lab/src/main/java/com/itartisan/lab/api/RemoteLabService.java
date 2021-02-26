@@ -2,8 +2,8 @@ package com.itartisan.lab.api;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.itartisan.api.lab.beans.domain.LabAtomEnv;
-import com.itartisan.api.lab.beans.model.ProcessModel;
+import com.itartisan.lab.beans.domain.LabAtomEnv;
+import com.itartisan.lab.beans.model.ProcessModel;
 import com.itartisan.common.core.domain.R;
 import io.fabric8.kubernetes.api.model.PodStatus;
 import org.springframework.cloud.openfeign.FeignClient;

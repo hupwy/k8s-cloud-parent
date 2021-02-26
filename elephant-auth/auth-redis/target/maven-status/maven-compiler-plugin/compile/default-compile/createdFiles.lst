@@ -1,4 +1,4 @@
 com\itartisan\auth\redis\controller\TokenController.class
+com\itartisan\auth\redis\service\SysLoginService.class
 com\itartisan\auth\redis\ElephantAuthApplication.class
 com\itartisan\auth\redis\form\LoginBody.class
-com\itartisan\auth\redis\service\SysLoginService.class

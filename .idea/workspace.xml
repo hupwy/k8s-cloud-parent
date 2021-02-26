@@ -30,149 +30,94 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3b68a67b-9ee6-4c3f-8d75-5952e8d9799a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/src/main/java/com/itartisan/common/core/annotation/Excel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/src/main/java/com/itartisan/common/core/annotation/Excels.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-common/common-core/src/main/java/com/itartisan/common/core/utils/poi/ExcelUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/SystemApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/controller/SysDeptController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/controller/SysDictDataController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/controller/SysDictTypeController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/controller/SysMenuController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/controller/SysMessageController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/controller/SysProfileController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/controller/SysUserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/domain/SysDictData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/domain/SysDictType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/domain/SysMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/domain/SysRoleMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/domain/SysUserRole.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/domain/vo/MetaVo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/domain/vo/RouterVo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/domain/vo/TreeSelect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/mapper/SysDeptMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/mapper/SysDictDataMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/mapper/SysDictTypeMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/mapper/SysMenuMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/mapper/SysMessageMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/mapper/SysMessageReceiverMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/mapper/SysRoleMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/mapper/SysRoleMenuMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/mapper/SysUserMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/mapper/SysUserRoleMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/service/ISysDeptService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/service/ISysDictDataService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/service/ISysDictTypeService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/service/ISysMenuService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/service/ISysMessageReceiverService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/service/ISysMessageService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/service/ISysPermissionService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/service/ISysRoleService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/service/ISysUserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/service/impl/SysDeptServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/service/impl/SysDictDataServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/service/impl/SysDictTypeServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/service/impl/SysMenuServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/service/impl/SysMessageReceiverServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/service/impl/SysMessageServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/service/impl/SysPermissionServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/service/impl/SysRoleServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/service/impl/SysUserServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/java/com/itartisan/system/util/DictUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/resources/bootstrap.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/resources/mapper/system/SysDeptMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/resources/mapper/system/SysDictDataMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/resources/mapper/system/SysDictTypeMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/resources/mapper/system/SysMenuMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/resources/mapper/system/SysMessageMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/resources/mapper/system/SysMessageReceiverMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/resources/mapper/system/SysRoleMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/resources/mapper/system/SysRoleMenuMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/resources/mapper/system/SysUserMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/src/main/resources/mapper/system/SysUserRoleMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elephant-modules/system/system.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/src/main/java/com/itartisan/api/content/beans/model/StorageModel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/src/main/java/com/itartisan/api/lab/beans/domain/LabAtomEnv.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/src/main/java/com/itartisan/api/lab/beans/domain/LabAtomEnvPod.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/src/main/java/com/itartisan/api/lab/beans/domain/LabAtomEnvPodEnv.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/src/main/java/com/itartisan/api/lab/beans/domain/LabAtomEnvPodPorts.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/src/main/java/com/itartisan/api/lab/beans/domain/LabAtomEnvPodVolumes.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/src/main/java/com/itartisan/api/lab/beans/domain/LabAtomEnvService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/src/main/java/com/itartisan/api/lab/beans/domain/LabAtomEnvServicePorts.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/src/main/java/com/itartisan/api/lab/beans/model/ProcessModel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/src/main/java/com/itartisan/api/lab/beans/model/ResourceType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/src/main/java/com/itartisan/api/lab/beans/model/TypeModel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/src/main/java/com/itartisan/system/api/beans/domain/SysDept.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/src/main/java/com/itartisan/system/api/beans/domain/SysMessage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/src/main/java/com/itartisan/system/api/beans/domain/SysMessageReceiver.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/src/main/java/com/itartisan/system/api/beans/domain/SysOperLog.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/src/main/java/com/itartisan/system/api/beans/domain/SysRole.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/src/main/java/com/itartisan/system/api/beans/domain/SysUser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/src/main/java/com/itartisan/system/api/beans/model/LoginUser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/target/api-beans.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/target/classes/com/itartisan/api/beans/domain/SysDept.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/target/classes/com/itartisan/api/beans/domain/SysOperLog.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/target/classes/com/itartisan/api/beans/domain/SysRole.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/target/classes/com/itartisan/api/beans/domain/SysUser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/target/classes/com/itartisan/api/beans/model/LoginUser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/api-beans/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/api-beans/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-beans/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-lab/src/main/java/com/itartisan/lab/api/RemoteLabService.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/api-lab/src/main/java/com/itartisan/lab/api/RemoteLabService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/elephant-api/api-system/src/main/java/com/itartisan/system/api/RemoteSysMessageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/api-system/src/main/java/com/itartisan/system/api/RemoteSysMessageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/src/main/java/com/itartisan/system/api/RemoteSysUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/api-system/src/main/java/com/itartisan/system/api/RemoteSysUserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-auth/auth-redis/src/main/java/com/itartisan/auth/redis/controller/TokenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/src/main/java/com/itartisan/auth/redis/controller/TokenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-auth/auth-redis/src/main/java/com/itartisan/auth/redis/service/SysLoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/src/main/java/com/itartisan/auth/redis/service/SysLoginService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-core/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/src/main/java/com/itartisan/common/core/domain/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-core/src/main/java/com/itartisan/common/core/domain/R.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/src/main/java/com/itartisan/common/core/reflect/ReflectUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-core/src/main/java/com/itartisan/common/core/reflect/ReflectUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/src/main/java/com/itartisan/common/core/web/PageArgumentResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-core/src/main/java/com/itartisan/common/core/web/PageArgumentResolver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/META-INF/spring.factories" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/META-INF/spring.factories" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/constant/CacheConstants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/constant/Constants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/constant/HttpStatus.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/constant/ScheduleConstants$Status.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/constant/ScheduleConstants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/constant/ServiceNameConstants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/constant/UserConstants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/domain/R.class" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/domain/R.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/enums/UserStatus.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/exception/CheckedException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/exception/CustomException.class" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/exception/CustomException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/exception/PreAuthorizeException.class" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/exception/PreAuthorizeException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/exception/UtilException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/exception/job/TaskException$Code.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/exception/job/TaskException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/exception/user/UserException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/exception/user/UserPasswordNotMatchException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/text/CharsetKit.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/text/Convert.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/text/StrFormatter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/text/UUID$Holder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/text/UUID.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/DateUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/DateUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/ExceptionUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/IdUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/ReUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/ServletUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/ServletUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/SpringUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/StringUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/bean/BeanUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/file/FileUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/ip/IpUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/reflect/ReflectUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/sign/Base64.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/utils/sql/SqlUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/web/controller/BaseController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/web/controller/BaseController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/web/domain/AjaxResult.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/web/domain/BaseEntity.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/classes/com/itartisan/common/core/web/domain/TreeEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/target/api-system.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/target/classes/META-INF/spring.factories" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/api-system/target/classes/META-INF/spring.factories" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/target/classes/com/itartisan/api/system/RemoteLogService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/target/classes/com/itartisan/api/system/RemoteUserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/target/classes/com/itartisan/api/system/factory/RemoteLogFallbackFactory$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/target/classes/com/itartisan/api/system/factory/RemoteLogFallbackFactory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/target/classes/com/itartisan/api/system/factory/RemoteUserFallbackFactory$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/target/classes/com/itartisan/api/system/factory/RemoteUserFallbackFactory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/api-system/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-api/api-system/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/api-system/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-api/target/classes/META-INF/spring.factories" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-auth/auth-redis/src/main/java/com/itartisan/auth/redis/ElephantAuthApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/src/main/java/com/itartisan/auth/redis/ElephantAuthApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-auth/auth-redis/target/auth-redis.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-auth/auth-redis/target/auth-redis.jar.original" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-auth/auth-redis/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-auth/auth-redis/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-auth/auth-redis/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-auth/auth-redis/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-auth/auth-redis/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-auth/target/classes/application-dev.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-auth/target/classes/application.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-auth/target/classes/banner.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-auth/target/classes/bootstrap.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/common-core.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/maven-archiver/pom.properties" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-core/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-core/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-core/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-redis/target/classes/META-INF/spring.factories" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-redis/target/classes/META-INF/spring.factories" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-redis/target/classes/com/itartisan/common/redis/configure/RedisConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-redis/target/classes/com/itartisan/common/redis/configure/RedisConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-redis/target/common-redis.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-redis/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-redis/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-redis/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-redis/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-redis/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-redis/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/src/main/java/com/itartisan/common/security/annotation/EnableCustomConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/src/main/java/com/itartisan/common/security/annotation/EnableItartisanFeignClients.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/elephant-common/common-security/src/main/java/com/itartisan/common/security/aspect/PreAuthorizeAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-security/src/main/java/com/itartisan/common/security/aspect/PreAuthorizeAspect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/src/main/java/com/itartisan/common/security/service/TokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-security/src/main/java/com/itartisan/common/security/service/TokenService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-modules/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-modules/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-modules/system/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-modules/system/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-modules/system/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-modules/system/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-modules/system/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/elephant-modules/system/target/system.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/target/classes/META-INF/spring.factories" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-security/target/classes/META-INF/spring.factories" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/target/classes/com/itartisan/common/security/annotation/EnableCustomConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/target/classes/com/itartisan/common/security/annotation/EnableItartisanFeignClients.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/target/classes/com/itartisan/common/security/aspect/PreAuthorizeAspect.class" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-security/target/classes/com/itartisan/common/security/aspect/PreAuthorizeAspect.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/target/classes/com/itartisan/common/security/config/ApplicationConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/target/classes/com/itartisan/common/security/handler/GlobalExceptionHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/target/classes/com/itartisan/common/security/service/TokenService.class" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-security/target/classes/com/itartisan/common/security/service/TokenService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/target/classes/com/itartisan/common/security/utils/SecurityUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-security/target/classes/com/itartisan/common/security/utils/SecurityUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/target/common-security.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-security/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-common/common-security/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-security/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-swagger/target/classes/META-INF/spring.factories" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-swagger/target/classes/com/itartisan/common/swagger/annotation/EnableCustomSwagger2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-swagger/target/classes/com/itartisan/common/swagger/config/SwaggerAutoConfiguration.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-swagger/target/classes/com/itartisan/common/swagger/config/SwaggerProperties$Authorization.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-swagger/target/classes/com/itartisan/common/swagger/config/SwaggerProperties$AuthorizationScope.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-swagger/target/classes/com/itartisan/common/swagger/config/SwaggerProperties$Contact.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-swagger/target/classes/com/itartisan/common/swagger/config/SwaggerProperties.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-swagger/target/common-swagger.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-swagger/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-swagger/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-swagger/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/common-swagger/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/target/classes/META-INF/spring.factories" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-common/target/classes/message.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-gateway/target/classes/application-dev.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-gateway/target/classes/application-kubernetes.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-gateway/target/classes/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-gateway/target/classes/banner.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-gateway/target/classes/bootstrap.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-gateway/target/elephant-gateway.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-gateway/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-gateway/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-gateway/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -488,7 +433,7 @@
       <workItem from="1613972562162" duration="8915000" />
       <workItem from="1614039915784" duration="3792000" />
       <workItem from="1614126466580" duration="1182000" />
-      <workItem from="1614299133364" duration="3815000" />
+      <workItem from="1614299133364" duration="4355000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1601609066235</created>
@@ -728,7 +673,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614043640816</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="系统管理模块添加">
+      <created>1614303440724</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1614303440724</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -762,7 +714,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="RemoteUserService.java update" />
     <MESSAGE value="modules-system update" />
     <MESSAGE value="project refactor" />
     <MESSAGE value="针对maven plugins的[repackage failed: Unable to find main class]修改" />
@@ -787,7 +738,8 @@
     <MESSAGE value="修改gateway代码" />
     <MESSAGE value="auth-redis代码重构" />
     <MESSAGE value="整体代码重构" />
-    <option name="LAST_COMMIT_MESSAGE" value="整体代码重构" />
+    <MESSAGE value="系统管理模块添加" />
+    <option name="LAST_COMMIT_MESSAGE" value="系统管理模块添加" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

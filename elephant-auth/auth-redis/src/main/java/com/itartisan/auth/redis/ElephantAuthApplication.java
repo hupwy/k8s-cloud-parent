@@ -1,13 +1,13 @@
 package com.itartisan.auth.redis;
 
-import com.itartisan.common.security.annotation.EnableItartisanFeignClients;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * 认证授权中心
  */
-@EnableItartisanFeignClients
+@EnableFeignClients(basePackages = "com.itartisan.system.api")
 @SpringCloudApplication
 public class ElephantAuthApplication
 {
