@@ -17,7 +17,7 @@
 
 **CI/CD 流程图**
 
-![img](./jenkins-kubernetes-ci&cd-diagram.png)
+![img](./images/jenkins-kubernetes-ci&cd-diagram.png)
 
 **整个流程**
 
@@ -450,31 +450,31 @@ spec:
 
    输入 Kubernetes 集群地址和上面设置的 `Nodeport` 方式的端口号 `32001`，然后输入上面获取的 `Token` 字符串。例如，本人 Kubernetes 集群 IP 为 `192.168.3.51` ，所以就可以访问地址 `http://192.168.3.51:32001/jenkins` 进入 Jenkins 初始化界面。
 
-   ![img](kubernetes-jenkins-1002.jpg)
+   ![img](./images/kubernetes-jenkins-1002.jpg)
    
 2.    安装插件
 
       安装插件，选择 `推荐安装` 方式进行安装即可，后续再安装需要的插件。
 
-      ![img](jenkins-kubernetes-ci&cd-1003.png)
+      ![img](./images/jenkins-kubernetes-ci&cd-1003.png)
 
 3.    设置用户名、密码
 
       在这里输入一个用户名、密码，方便后续登录，如果不设置可能下次登录需要使用之前日志中默认的 Token 串来登录。
 
-      ![img](jenkins-kubernetes-ci&cd-1004.png)
+      ![img](./images/jenkins-kubernetes-ci&cd-1004.png)
 
 4.    配置 Jenkins 地址
 
       配置 Jenkins URL 地址，来告知 Jenkins 自己的 URL，在发送邮件、触发钩子等可能用到。
 
-      ![img](jenkins-kubernetes-ci&cd-1005.png)
+      ![img](./images/jenkins-kubernetes-ci&cd-1005.png)
 
 5.    进入 Jenkins 界面
 
       到此 Jenkins 初始化就配置完成，成功进入 Jenkins 界面。
 
-      ![img](jenkins-kubernetes-ci&cd-1006.png)
+      ![img](./images/jenkins-kubernetes-ci&cd-1006.png)
 
 ## Jenkins 安装相关插件
 
@@ -505,7 +505,7 @@ Jenkins 中可以打开`系统管理`->`插件管理`->`可选插件`来安装�
 - ID：global-git-credential
 - 描述：全局 Git 凭据
 
-![image-20201004203916053](image-20201004203916053.png)
+![image-20201004203916053](./images/image-20201004203916053.png)
 
 ### 添加 Kubernetes Token 凭据
 
@@ -517,7 +517,7 @@ Jenkins 中可以打开`系统管理`->`插件管理`->`可选插件`来安装�
 - ID：global-kubernetes-credential
 - 描述：全局的 K8S Token
 
-![image-20201004204038386](image-20201004204038386.png)
+![image-20201004204038386](./images/image-20201004204038386.png)
 
 
 
@@ -532,7 +532,7 @@ Jenkins 中可以打开`系统管理`->`插件管理`->`可选插件`来安装�
 - ID：docker-hub-credential
 - 描述：Docker 仓库认证凭据
 
-![image-20201004204914344](image-20201004204914344.png)
+![image-20201004204914344](./images/image-20201004204914344.png)
 
 ## Jenkins 配置 Kubernetes 插件 
 
@@ -544,7 +544,7 @@ Jenkins 中可以打开`系统管理`->`插件管理`->`可选插件`来安装�
 
    配置 Kubernetes API 地址，然后再选择 Kubernetes Token 凭据。
 
-   ![image-20201004205830822](image-20201004205830822.png)
+   ![image-20201004205830822](./images/image-20201004205830822.png)
 
    **注意：** 如果你的 Jenkins 也是安装在 Kubernetes 环境中，那么可以直接使用 Kubernetes 集群内的 Kubernetes API 地址，如果 Jnekins 是在安装在正常物理机或者虚拟机环境中，那么使用集群外的 Kubernetes API 地址，两个地址如下：
 
@@ -555,7 +555,7 @@ Jenkins 中可以打开`系统管理`->`插件管理`->`可选插件`来安装�
 
 2. 配置 Jenkins 地址
 
-   ![image-20201004210225625](image-20201004210225625.png)
+   ![image-20201004210225625](./images/image-20201004210225625.png)
 
    **注意：** 这里的 Jenkins 地址是供Slave节点连接 Jenkins Master节点用的，所以这里需要配置 Jenkins Master 的 URL 地址。这里和上面一样，也是考虑 Jenkins 是部署在 Kubernetes 集群内还是集群外，两个地址如下：
 
@@ -570,7 +570,7 @@ Jenkins 中可以打开`系统管理`->`插件管理`->`可选插件`来安装�
 
    配置Pod模板的名称和标签列表名，Pod模板名可用于子模板继承，标签列表可用于Jenkins Job中指定，使用此Pod模板来执行任务。
 
-   ![image-20201004210521117](image-20201004210521117.png)
+   ![image-20201004210521117](./images/image-20201004210521117.png)
 
 2. 配置 Pod 的原始 yaml
 
@@ -578,7 +578,7 @@ Jenkins 中可以打开`系统管理`->`插件管理`->`可选插件`来安装�
 
    > Jenkins Slave JNLP 镜像官方地址 https://hub.docker.com/r/jenkins/slave 可以从中下载相关 JNLP 代理镜像。
 
-   ![image-20201004210824515](image-20201004210824515.png)
+   ![image-20201004210824515](./images/image-20201004210824515.png)
 
    yaml 内容如下：
 
@@ -611,7 +611,7 @@ Jenkins 中可以打开`系统管理`->`插件管理`->`可选插件`来安装�
    
      > Maven 镜像可以从官方 Docker Hub 下载，地址：https://hub.docker.com/_/maven
 
-![image-20201004211614390](image-20201004211614390.png)
+![image-20201004211614390](./images/image-20201004211614390.png)
 2. 配置 Docker In Docker 镜像
 
    - 名称：docker
@@ -622,7 +622,7 @@ Jenkins 中可以打开`系统管理`->`插件管理`->`可选插件`来安装�
 
      > Docker-IN-Docker 镜像可以从官方 Docker Hub 下载，地址：https://hub.docker.com/_/docker
 
-     ![image-20201004211944608](image-20201004211944608.png)
+     ![image-20201004211944608](./images/image-20201004211944608.png)
 
 3. 配置 Kubectl 镜像
 
@@ -634,7 +634,7 @@ Jenkins 中可以打开`系统管理`->`插件管理`->`可选插件`来安装�
 
      > Kubectl 镜像可以从官方 Docker Hub 下载，地址：https://hub.docker.com/r/bitnami/kubectl
 
-     ![image-20201004212122104](image-20201004212122104.png)
+     ![image-20201004212122104](./images/image-20201004212122104.png)
 
      
 
@@ -706,7 +706,7 @@ Jenkins 中可以打开`系统管理`->`插件管理`->`可选插件`来安装�
    - 申明值（PVC 名称）：maven
    - 挂在路径（容器内的目录）：/root/.m2
    
-   ![image-20201004212645367](image-20201004212645367.png)
+   ![image-20201004212645367](./images/image-20201004212645367.png)
    
 3. 配置 Docker 挂载
 
@@ -727,7 +727,7 @@ Jenkins 中可以打开`系统管理`->`插件管理`->`可选插件`来安装�
      - 主机路径（宿主机目录）：/etc/docker
      - 挂载路径（容器内的目录）：/etc/docker
 
-     ![image-20201004212951115](image-20201004212951115.png)
+     ![image-20201004212951115](./images/image-20201004212951115.png)
 
      ​    
 
@@ -1132,13 +1132,13 @@ docker.withRegistry("http://xxxx Docker仓库地址", "Docker仓库凭据ID") {
 
 - **任务类型：** 流水线项目
 
-  ![img](jenkins-kubernetes-ci&cd-template-job-1.png)
+  ![img](./images/jenkins-kubernetes-ci&cd-template-job-1.png)
 
 ### 配置项目构建基本参数
 
 配置同一时间一个Job只能构建一个，不允许多个并发构建。另外需要设置项目构建后，包的保留时间，以防止包过多且大占用大量空间（一个包很肯能占 10MB~200MB 大小）导致储不足。
 
-![img](jenkins-kubernetes-ci&cd-template-job-base-1.png)
+![img](./images/jenkins-kubernetes-ci&cd-template-job-base-1.png)
 
 ### 配置 Git 变量
 
@@ -1151,7 +1151,7 @@ docker.withRegistry("http://xxxx Docker仓库地址", "Docker仓库凭据ID") {
 - 描述：项目Git地址
 - 默认值：https://github.com/hupwy/k8s-cloud-parent.git
 
-![image-20201006160129348](image-20201006160129348.png)
+![image-20201006160129348](./images/image-20201006160129348.png)
 
 ### Git 分支变量
 
@@ -1163,7 +1163,7 @@ docker.withRegistry("http://xxxx Docker仓库地址", "Docker仓库凭据ID") {
 
 - 默认值：mian
 
-  ![image-20201006160323804](image-20201006160323804.png)
+  ![image-20201006160323804](./images/image-20201006160323804.png)
 
 ### Git 凭据变量
 
@@ -1172,7 +1172,7 @@ docker.withRegistry("http://xxxx Docker仓库地址", "Docker仓库凭据ID") {
 - 描述：Git 凭据
 - 默认值：global-git-credential
 
-![image-20201006163944664](image-20201006163944664.png)
+![image-20201006163944664](./images/image-20201006163944664.png)
 
 ### 配置 Maven 变量
 
@@ -1188,7 +1188,7 @@ docker.withRegistry("http://xxxx Docker仓库地址", "Docker仓库凭据ID") {
 
 - 默认值：install
 
-  ![image-20201006164050109](image-20201006164050109.png)
+  ![image-20201006164050109](./images/image-20201006164050109.png)
 
 ### 配置 Docker 变量
 
@@ -1202,7 +1202,7 @@ docker.withRegistry("http://xxxx Docker仓库地址", "Docker仓库凭据ID") {
 
 - 默认值（默认 Docker 仓库地址）：”registry.cn-hangzhou.aliyuncs.com”
 
-  ![image-20201006164136789](image-20201006164136789.png)
+  ![image-20201006164136789](./images/image-20201006164136789.png)
 
 #### Docker 仓库项目组变量
 
@@ -1214,7 +1214,7 @@ docker.withRegistry("http://xxxx Docker仓库地址", "Docker仓库凭据ID") {
 
 - 默认值：”docker-hub-demo-cicd”
 
-  ![image-20201006164224562](image-20201006164224562.png)
+  ![image-20201006164224562](./images/image-20201006164224562.png)
 
 #### Docker 仓库认证凭据变量
 
@@ -1226,7 +1226,7 @@ docker.withRegistry("http://xxxx Docker仓库地址", "Docker仓库凭据ID") {
 
 - 默认值：docker-hub-credential
 
-  ![image-20201006164335787](image-20201006164335787.png)
+  ![image-20201006164335787](./images/image-20201006164335787.png)
 
 #### Docker Dockerfile文件ID变量
 
@@ -1238,7 +1238,7 @@ docker.withRegistry("http://xxxx Docker仓库地址", "Docker仓库凭据ID") {
 
 - 默认值：”global-dockerfile-file”
 
-  ![image-20201006164422358](image-20201006164422358.png)
+  ![image-20201006164422358](./images/image-20201006164422358.png)
 
 ### 配置 Kubernetes 变量
 
@@ -1252,7 +1252,7 @@ docker.withRegistry("http://xxxx Docker仓库地址", "Docker仓库凭据ID") {
 
 - 默认值：global-kubernetes-credential
 
-  ![image-20201006164618342](image-20201006164618342.png)
+  ![image-20201006164618342](./images/image-20201006164618342.png)
 
 #### Kubernetes Namespace变量
 
@@ -1264,7 +1264,7 @@ docker.withRegistry("http://xxxx Docker仓库地址", "Docker仓库凭据ID") {
 
 - 默认值：”hup-ns”                                               `根据自己的Namespace填写`
 
-  ![image-20201006164655814](image-20201006164655814.png)
+  ![image-20201006164655814](./images/image-20201006164655814.png)
 
 #### Kubernetes 应用实例副本数
 
@@ -1276,7 +1276,7 @@ docker.withRegistry("http://xxxx Docker仓库地址", "Docker仓库凭据ID") {
 
 - 默认值：1
 
-  ![image-20201006164808718](image-20201006164808718.png)
+  ![image-20201006164808718](./images/image-20201006164808718.png)
 
 #### Kubernetes应用部署yaml文件ID
 
@@ -1288,7 +1288,7 @@ docker.withRegistry("http://xxxx Docker仓库地址", "Docker仓库凭据ID") {
 
 - 默认值：”global-kubernetes-deployment”
 
-  ![image-20201006164904258](image-20201006164904258.png)
+  ![image-20201006164904258](./images/image-20201006164904258.png)
 
 ### 配置 HTTP 变量
 
@@ -1302,7 +1302,7 @@ docker.withRegistry("http://xxxx Docker仓库地址", "Docker仓库凭据ID") {
 
 - 默认值：8080
 
-  ![image-20201006164952686](image-20201006164952686.png)
+  ![image-20201006164952686](./images/image-20201006164952686.png)
 
 #### HTTP 健康检查地址
 
@@ -1314,7 +1314,7 @@ docker.withRegistry("http://xxxx Docker仓库地址", "Docker仓库凭据ID") {
 
 - 默认值：/actuator/health
 
-  ![image-20201006165033915](image-20201006165033915.png)
+  ![image-20201006165033915](./images/image-20201006165033915.png)
 
 #### HTTP 健康检查次数
 
@@ -1328,7 +1328,7 @@ docker.withRegistry("http://xxxx Docker仓库地址", "Docker仓库凭据ID") {
 
 - 默认值：10
 
-  ![image-20201006165117179](image-20201006165117179.png)
+  ![image-20201006165117179](./images/image-20201006165117179.png)
 
 #### HTTP 健康检查时间间隔
 
@@ -1342,7 +1342,7 @@ docker.withRegistry("http://xxxx Docker仓库地址", "Docker仓库凭据ID") {
 
 - 默认值：10
 
-  ![image-20201006165220994](image-20201006165220994.png)
+  ![image-20201006165220994](./images/image-20201006165220994.png)
 
 ## 创建 Pipeline 脚本
 
@@ -1859,7 +1859,7 @@ timeout(time: 900, unit: 'SECONDS') {
 
 ### 创建新的 Job 并复制模板项目配置
 
-![image-20201006172214040](image-20201006172214040.png)
+![image-20201006172214040](./images/image-20201006172214040.png)
 
 ### 修改新建 Job 的部分配置项
 
@@ -1883,13 +1883,13 @@ timeout(time: 900, unit: 'SECONDS') {
 
 执行上面创建的 Pipeline Job，点击 Build with Parameters 查看配置的参数是否有误，没有错误就开始执行任务。
 
-![image-20201006172828724](image-20201006172828724.png)
+![image-20201006172828724](./images/image-20201006172828724.png)
 
-![image-20201006172912516](image-20201006172912516.png)
+![image-20201006172912516](./images/image-20201006172912516.png)
 
 查看整个执行的各个节点，是否哪部都能够成功构建，如果出现错误，需要查看控制台输出的日志查找错误点，然后对脚本进行修改。
 
-![image-20201006172944522](image-20201006172944522.png)
+![image-20201006172944522](./images/image-20201006172944522.png)
 
 
 
