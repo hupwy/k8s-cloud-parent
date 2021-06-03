@@ -481,7 +481,7 @@ public RespResult deleteTypeItems(@RequestParam(value = "id") Integer id){
 
 使用`@CacheConfig`优化注解，可以将`cacheNames`挪到类上，每个方法上就不用重复写`cacheNames`了。
 
-![1603549802172](../../../../../baidu/BaiduNetdiskDownLoad/2020 SpringCloud Alibaba云商城/03-SpringCloud Alibaba 云商城 高性能门户网构建/【课堂笔记】SpringCloud Alibaba 云商城  高性能门户网构建/images/1603549802172.png)
+![1603549802172](images/1603549802172.png)
 
 其他地方肯定会调用这几个方法用于实现缓存更新，我们可以在`goods-api`中添加feigin接口。
 
@@ -849,7 +849,7 @@ docker restart canal
 
 ### 5.3 多级缓存架构缓存一致性实战
 
-![1603725736932](../../../../../baidu/BaiduNetdiskDownLoad/2020 SpringCloud Alibaba云商城/03-SpringCloud Alibaba 云商城 高性能门户网构建/【课堂笔记】SpringCloud Alibaba 云商城  高性能门户网构建/images/1603725736932.png)
+![1603725736932](images/1603725736932.png)
 
 
 
