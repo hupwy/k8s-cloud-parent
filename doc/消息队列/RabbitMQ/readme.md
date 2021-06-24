@@ -1,11 +1,5 @@
 # RabbitMQ
 
-**概览**
-
-![](images/RabbitMQ.png)
-
-
-
 ## MQ入门
 
 ### 为什么用MQ
@@ -116,9 +110,75 @@
 
 ### 高级特性
 
-- 死信队列
+- 死信队列（Dead Letter Queue）
+
+	- 进入条件
+
+		- 超过队列最大长度（Max length），队头消息被抛弃
+		- 超过队列最大容量（Max length bytes），队头消息被抛弃
+		- Queue TTL（x-message-ttl超时）
+		- MessageTTL超时
+		- 消费者拒绝并且未设置重回队列，(NACKI Reject)&&requeue == false
+
+	- 存储
+
+		- 由死信交换机DLX（Dead Letter Exchange）路由到死信队列
+
+	- 使用
+
+		- 1.声明原交换机，原队列，相互绑定，并且指定死信交换机
+		- 2.声明死信交换机，死信队列，并用“#”绑定，代码无条件路由
+		- 3.最终消费者监听死信队列，进行业务处理
+
 - 延时队列
+
+	- MessageTTL
+
+		- messageProperties.setExpiration（"4000"），超时进入死信队列进行处理
+
+	- Queue TTL
+
+		- 设置x-message-ttl属性，超时进入死信队列进行处理
+
+	- 定时任务
+
+		- 消息落表，定时任务扫描，但是如果消息过多会影响业务程序
+
 - 流量控制
+
+	- 服务器端
+
+		- 队列长度
+
+			- 超过队列最大长度（Max length），队头消息被抛弃
+			- 超过队列最大容量（Max length bytes），队头消息被抛弃
+
+		- 内存控制
+
+			- 默认占用当前MQ的40%以上内存时会报警，阻塞所有连接，修改rabbitmq.config文件里的内存阈值
+
+				- [{rabbit.[vm_memory _high_watermark.0.4}]
+
+			- 命令
+
+				- rabbitmqctl set_vm_memory high_watermark 0.3
+
+			- 设置成0，则所有的消息都不能发布
+
+		- 磁盘控制
+
+			- 当磁盘剩余低于指定值时触发流控措施
+
+				- disk_free limit.relative=3.0
+disk_free limit.absolute=2GB
+
+	- 消费端
+
+		- 默认情况下消费者会本地缓存消息，如果数量过多可能会导致OOM或者影响其他进程
+		- 消费者数太少，处理时间过长，可以考虑设置prefetch count的值，含义是消费端最大的unacked messages数目，当超过这个数会停止投递给这个消费者
+
+			- 例如：
+channel.basicQos（2）;//如果超过 2条消息没有发送 ACK，当前消费者不再接受队列消息 channel.basicConsume((QUEUE NAME, false, consumer);
 
 ## 入门
 
@@ -130,6 +190,16 @@
 
 ### 界面管理
 
+- windows
+
+	- cd rabbit_home/sbin 
+rabbitmg-plugins.bat enable rabbitmq_management
+
+- linux
+
+	- cd rabbit_home/bin
+/rabbitmq-plugins enable rabbitmqmanagement
+
 ## 使用
 
 ### RabbitMQ Java API
@@ -140,17 +210,121 @@
 
 	- 模板
 
+		- 通过@Autowired注入AmqpTemplate实现send方法进行消息发送
+
 - 消费者
 
 	- 对象定义
+
+		- 配置文件
+
+			- 定义交换机
+
+				- 利用@Bean将new DirectExchange放到Ioc容器管理
+				- 利用@Bean将new TopicExchange放到Ioc容器管理
+				- 利用@Bean将new FanoutExchange放到Ioc容器管理
+
+			- 定义队列
+
+				- 利用@Bean将new Queue放到Ioc容器管理
+
+			- 定义绑定关系
+
+				- 利用@Bean将BindingBuilder.bind(queue).to(exchange).with("gupao.best");放到Ioc容器管理
+
 	- 监听
+
+		- @RabbitListener
+
+			- queues
+
+				- 指定消费队列
+
+			- @RabbitHandler
+
+				- 指定消费处理方法
+
+			- @Payload
+
+				- 取得消费主题
+
+### Spring Boot 参数
+
+- https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/common-application-properties.html 
+- https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html 
 
 ## 可靠性于高可用
 
 ### 可靠性分析
 
 - 服务端ACK
+
+	- 事务模式（Transaction）
+
+		- Java API中设置
+
+			- 在创建channel时设置事务模式
+
+				- channel txSelect()
+
+			- 发送消息后提交事务
+
+				- channel.txCommit()
+
+			- 如果事务处理中发送异常可以进行回滚
+
+				- channel.txRollback()
+
+		- SpringBoot中的设置
+
+			- rabbitTemplate.setChannelTransacted(true)
+
+		- 缺点：生产者和服务器之间进行事务确认时会阻塞，降低RabbitMQ服务器的性能，不建议在生产环境中使用
+
+	- 确认模式（Confirm）
+
+		- Java API设置
+
+			- 通过channel.confirmSelect()开启确认模式
+
+				- 普通确认模式
+
+					- 通过channel.waitForConfirms(true|false)确认消息是否成功发送到Broker
+缺点：发送一条确认一条，效率低
+
+				- 批量确认模式
+
+					- 通过channel.waitForConfirmsOrDie()方法可以批量确认消息发送是否成功
+批量确认的效率比单挑确认效率高
+缺点：一批消息中只要有一个消息不成功全部回滚
+
+				- 异步确认模式
+
+					- 添加一个ConfirmListener，用一个SortedSet来维护批次中没确认的消息
+
+			- 网络错误会抛出异常，交换机不存在会抛出404
+
+		- Spring Boot设置
+
+			- 再模板中通过rabbitTemplate.setConfirmCallback()进行确认
+
 - 路由
+
+	- 消息重发
+
+		- Java API设置
+
+			- 添加channel.addReturnListener来监听无法路由的消息进行重发
+
+		- Spring Boot设置
+
+			- rabbitTemplate.setMandatory(true)
+在rabbitTemplate.setReturnCallback()回调函数里进行重发
+
+	- 备份交换机
+
+		- 使用属性[alternate-exchange]来指定备份交换机
+
 - 队列存储
 - 消费者ACK
 - 回调
@@ -171,7 +345,42 @@
 	- 普通集群
 
 - HAProxy+KeepAlived
+
 - Lvs
+
+## 特性
+
+### 支持多客户端
+
+- 对主流开发语言（Python、Java、Ruby、PHP、C#、JavaScript、Go、Elixir、Objective-C、Swift 等）都有客户端实现。
+
+### 灵活的路由
+
+- 通过交换机（Exchange）实现消息的灵活路由。
+
+### 权限管理
+
+- 通过用户与虚拟机实现权限管理。
+
+### 插件系统
+
+- 支持各种丰富的插件扩展，同时也支持自定义插件。
+
+### Spring集成
+
+- Spring对AMQP进行了封装。
+
+### 高可靠
+
+- RabbitMQ提供了多种多样的特性让你在可靠性和性能之间做出权衡，包括持久化、发送应答、发布确认以及高可用性。
+
+### 集群与扩展性
+
+- 多个节点组成一个逻辑的服务器，支持负载。
+
+### 高可用队列
+
+- 通过镜像队列实现队列中数据的复制。
 
 ## 实践经验
 
@@ -188,3 +397,5 @@
 ### 日志追踪
 
 ### 如何减少链接
+
+*XMind - Trial Version*
