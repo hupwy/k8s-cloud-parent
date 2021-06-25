@@ -289,18 +289,17 @@ rabbitmg-plugins.bat enable rabbitmq_management
 
 				- 普通确认模式
 
-					- 通过channel.waitForConfirms(true|false)确认消息是否成功发送到Broker
-缺点：发送一条确认一条，效率低
+					- 通过channel.waitForConfirms(true|false)确认消息是否成功发送到Broke
+					- 缺点：发送一条确认一条，效率低
 
 				- 批量确认模式
 
-					- 通过channel.waitForConfirmsOrDie()方法可以批量确认消息发送是否成功
-批量确认的效率比单挑确认效率高
-缺点：一批消息中只要有一个消息不成功全部回滚
+					- 通过channel.waitForConfirmsOrDie()方法可以批量确认消息发送是否成功，批量确认的效率比单挑确认效率高
+					- 缺点：一批消息中只要有一个消息不成功全部回滚
 
 				- 异步确认模式
 
-					- 添加一个ConfirmListener，用一个SortedSet来维护批次中没确认的消息
+					- 添加一个ConfirmListener，用一个SortedSet来维护批次中没确认的消息，推荐使用
 
 			- 网络错误会抛出异常，交换机不存在会抛出404
 
@@ -326,27 +325,216 @@ rabbitmg-plugins.bat enable rabbitmq_management
 		- 使用属性[alternate-exchange]来指定备份交换机
 
 - 队列存储
+
+	- 队列持久化
+
+		- channel.queueDeclare(QUEUE_NAME,false,false,false,null);
+
+			- durable
+
+				- 没有持久化的队列，保存在内存中，服务重启后队列和消息都会消失
+
+			- autoDelete
+
+				- 没有消费者连接的时候，自动删除
+
+			- exclusive
+
+				- 排他性队列的特点是
+
+					- 只对首次声明它的连接（Connection）可见
+					- 会在其连接断开的时候自动删除
+
+	- 交换机持久化
+
+		- new DirectExchange("EXCHANGE",true,false,new HashMap<))
+
+			- durable
+
+				- 没有持久化的队列，保存在内存中，服务重启后队列和消息都会消失
+
+			- autoDelete
+
+				- 没有消费者连接的时候，自动删除
+
+			- exclusive
+
+				- 排他性队列的特点是
+
+					- 只对首次声明它的连接（Connection）可见
+					- 会在其连接断开的时候自动删除
+
+	- 消息持久化
+
+		- deliveryMode(2)//2 代表持久化
+
+			- 如果消息没有持久化，保存在内存中，队列还在 ，但是消息在重启后会消失
+
+	- 集群
+
+		- 备份机制
+
+			- 磁盘节点
+			- 内存节点
+
 - 消费者ACK
+
+	- 自动
+
+		- 会在消息收到时自动发送ACK，而不是在方法执行完毕时发送ACK，并不关心消息是否正常被消费
+		- autoAck(true) 默认值就是true
+
+	- 手动
+
+		- Java API
+
+			- 1.autoAck(false)
+			- 2.channel.basicAck(envelope.getDeliveryTag),true));
+
+		- SpringBoot
+
+			- 代码
+
+				- spring.rabbitmqlistener.direct acknowledge-mode=manual 
+spring.rabbitmqlistener.simple.acknowledge-mode=manual
+				- SimpleRabbitListenerContainer 或者SimpleRabbitListenerContainerFactory
+
+					- factory.setAcknowledgeMode(AcknowledgeMode.MANUAL);
+
+			- 设定值分类
+
+				- NONE：自动ACK
+				- MANUAL：手动ACK
+				- AUTO：
+
+					- 未抛出异常发送ACK
+					- 抛出异常
+
+						- 不是AmqpRejectAndDontRequeueException
+
+							- 发送nack，重新入队列
+
+						- AmqpRejectAndDontRequeueException
+
+							- 发送nack，不重新入队列
+
+	- 消费者代码
+
+		- 调用ACK
+
+			- channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
+
+		- 拒绝消费
+
+			- Basic.Reject() 拒绝单挑
+			- BasicNack() 批量拒绝
+
 - 回调
-- 重发
+
+	- 调用生产者API
+
+		- 消费者处理完成后需要调用生产者API改变数据状态，表示已成功消费
+		- 缺点：服务之间耦合度高
+
+	- 发送响应消息给生产者
+
+		- 消费者处理完成后需要给生产者发出响应消息，表示已成功消费
+
+- 重发（消息补偿）
+
+	- 回调失败尝试重发消息
+
+		- 设定超时时间
+
+			- 1，设计一张表，保存所有异步消息的中间状态（确认中，完成），重发次数，发送时间，消息内容等信息
+			- 2，该时间范围内没得到消息回执（消息还处于中间状态“确认中”），确认消息发送失败
+			- 3，创建定时任务每个30秒扫描一次发送未成功的消息进行重新发送
+
+		- 设置衰减重试规则，比如：30s，1m，2m，5m，8m，1m等 逐渐加长时间
+		- 设置重试次数，控制重发次数
+
 - 幂等
+
+	- 原因
+
+		- 生产者问题，比如开启的Confirm模式单未收到确认消息，消息重复发送
+		- 消费者位发送ACK，消息也会重新发送
+		- 生产者代码或网络问题，消息重新发送
+
+	- 解决方案
+
+		- 对每条消息生成一个唯一的业务ID
+		- 通过数据库主键唯一性排他处理
+		- 通过redis的setnx进行排他处理
+		- 通过记录日志文件进行排他处理
+
 - 最终一致性
 
+	- 无法正常消费的消息怎么保证最终一致性呢？
+
+		- 人工介入，查找丢失数据
+
+- 消息的顺序性
+
+	- 一个队列多个消费者是无法保证顺序性
+	- 一个队列只有一个消费者是可以保证顺序性
+	- 结论：尽量保证一个消费者进行消费
+
 ### 高可用架构
+
+- 为什么做集群
+
+	- 高可用
+
+		- 保证某个节点服务器不可用，可以连接其他节点，不影响业务
+
+	- 负载均衡
+
+		- 在高并发的场景下，可以分发给多个MQ服务器，减少延迟
 
 - 集群节点
 
 	- 磁盘节点
+
+		- 将元数据保存到磁盘（默认节点）
+
+			- 队列属性
+			- 交换机类型名字属性
+			- 绑定关系
+			- vhost
+
+		- 集群中至少要有一个磁盘节点做持久化
+
 	- 内存节点
+
+		- 将元数据放到内存中
+		- 集群一般会连接到内从节点，读写快
+
+	- 集群配置步骤
+
+		- 配置host以便相互通信
+		- 同步erlang.cookie
+		- 加入集群（join cluster命令）
 
 - 集群模式
 
 	- 镜像队列
-	- 普通集群
+
+		- 不用节点只会相互同步元数据（交换机，队列，绑定关系，vhost的定义），但是不同步消息内容
+		- 访问A节点，消费B节点的消息时，请求会从A节点转发到B节点
+		- 缺点：消息没有备份，一点有一个节点宕机，会丢失数据
+
+	- 普通队列
+
+		- 消息内容也会在不同的节点上同步，这样可用性更高，但是系统性能会降低
 
 - HAProxy+KeepAlived
 
+	- 四层，七层负载
+
 - Lvs
+
+	- 四层负载
 
 ## 特性
 
@@ -388,14 +576,77 @@ rabbitmg-plugins.bat enable rabbitmq_management
 
 ### 配置文件与命名规范
 
+- 元数据命名集中在properties里
+- 元数据类型
+
+	- 虚拟机命名
+
+		- XXX_VHOST
+
+	- 交换机命名
+
+		- XXX_EXCHANGE
+
+	- 队列命名
+
+		- XXX_QUEUE
+
 ### 调用封装
+
+- 抽象封装，减少代码改动量
 
 ### 信息落库+定时任务
 
+- 消息补偿
+
 ### 生产环境运维监控
+
+- zabbix+grafana
+- 监控磁盘，内存，连接数
 
 ### 日志追踪
 
+- Firehose
+
+	- https:/www.rabbitmg.com/firehose.html
+https//www.rabbitma.com/plugins.html
+
 ### 如何减少链接
+
+- 批量发送消息时，可以把批量消息系列化成一个JSON数据包发送
+
+## Troubleshoot
+
+### channel和vhost的作用
+
+- channel
+
+	- 减少TCP资源的消耗，也是重要的编程接口
+
+- Vhost
+
+	- 提高硬件资源的利用率，实现资源隔离
+
+### RabbitMQ的消息有哪些路由方式
+
+- direct
+- topic
+- fanout
+
+### 无法路由的消息去哪了
+
+- 直接丢弃，可用备份交换机接收
+
+### 消息在什么时候会编程Dead Letter(死信)
+
+- 消息过期
+- 消息超过队列长度和容量
+- 消息呗拒绝并且未设置回收队列
+
+### 如何时间延时队列
+
+- 基于数据库+定时任务
+- 消息过期+死信队列
+- 延迟队列插件
 
 *XMind - Trial Version*
