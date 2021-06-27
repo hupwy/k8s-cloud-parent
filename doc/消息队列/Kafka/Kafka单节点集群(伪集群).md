@@ -90,7 +90,7 @@ sh kafka-topics.sh -list -zookeeper localhost:2181
 在一个新的远程窗口中：
 
 ```shell
-sh kafka-console-consumer.sh --bootstrap-server 192.168.44.161:9093,192.168.44.161:9094,192.168.44.161:9095 --topic gptest --from-beginning
+sh kafka-console-consumer.sh --bootstrap-server 192.168.100.1:9093,192.168.100.1:9094,192.168.100.1:9095 --topic gptest --from-beginning
 ```
 
 ## 6、集群下启动Producer
@@ -98,7 +98,7 @@ sh kafka-console-consumer.sh --bootstrap-server 192.168.44.161:9093,192.168.44.1
 打开一个新的窗口，在kafka解压目录下：
 
 ```shell
-sh kafka-console-producer.sh --broker-list 192.168.44.161:9093,192.168.44.161:9094,192.168.44.161:9095 --topic gptest
+sh kafka-console-producer.sh --broker-list 192.168.100.1:9093,192.168.100.1:9094,192.168.100.1:9095 --topic gptest
 ```
 
 ## 7、集群下Producer窗口发送消息
