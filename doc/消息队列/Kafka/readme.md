@@ -387,15 +387,47 @@ props.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG interceptors;
 		- 分区器(Pratitioner)
 
 			- 指定partition
+
+				- 直接将指定的值作为partition值
+
 			- 没有指定partition，自定义分区器
+
+				- 自定义分区器算法选择分区
+
+					- props.put("partitioner.class","com.qingshan.partition.SimplePartitioner")
+
 			- 没有指定partition，没有自定义分区器，但是key不为空
+
+				- 使用默认分区器DefaultPartitioner将key的hash值与topic的partition数进行取余得到partition值
+
+					- Utils.toPositive(Utils.murmur2(keyBytes))% numPartitions;
+
 			- 没有指定partition，没有自定义分区器，但是key是空的
+
+				- 第一次调用时随机生成一个整数（后面每次调用在这个整数上自增），将这个值与topic可用的partition总数取余得到partition值，也就是常说的round-robin算法
+
+					- Integer random= Utils.toPositive(ThreadLocalRandom.current().nextIntO));
+newPart=availablePartitions.get(random %availablePartitions.size()).partition)
 
 		- 消息累加器
 
+			- RecordAccumulator本质上是一个ConcurrentMap
+
+				- ConcurrentMap<TopicPartition.Deque<ProducerBatch>>batches
+
+			- 一个partition一个Batch，Batch满了之后会唤醒sender线程发送消息
+
+				- if (result.batchIsFull | result.newBatchCreated) {
+log.trace("Waking up the sender since topic {partition {is either full or getting a new batch". record.topic(), partition); 
+this.sender. wakeup();
+
 	- sender线程
 
-		- 在创建KafkaProducer的时候，创建一个sender线程，并且启动了一个IO线程
+		- 在创建KafkaProducer的时候，创建一个sender线程，并且启动了一个IO线程,用于发送消息
+
+	- 小结
+
+		- 拦截器里面自定义消息处理逻辑，也可以选择自己喜欢的序列化工具，还可以自由选择分区
 
 - 数据可靠性保证ACK
 
