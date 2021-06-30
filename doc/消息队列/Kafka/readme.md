@@ -431,7 +431,235 @@ this.sender. wakeup();
 
 - 数据可靠性保证ACK
 
+	- 服务端效应策略
+
+		- 1.需要半数以上的follower节点完成同步，发送ACK给客户端，等待时间会短一些，延迟低
+		- 2.所有的follower节点全部完成同步，发送ACK给客户端，延迟高，但是节点挂掉的影响小一些，因为所有节点数据都是完整的
+		- Kafka选择了第2中策略，因为可靠性更高，数据不会丢失，网络延迟对kafka的影响不大
+
+	- ISR
+
+		- 定义
+
+			- 正常和leader保持同步的replica维护起来，叫做in-sync replica set （ISR）队列
+			- 不能正常和leader保持同步的replica踢出ISR队列
+			- 不正常同步的标准是大于阈值replicalag.time.max.ms决定（默认值30秒）这个时间不能与leader正常通信
+			- 如果恢复正常通信，则可以再次加入ISR队列
+			- 如果leader挂了，从ISR里重新选举leader，一般默认是首个节点
+
+		- 作用
+
+			- leader收到数据，有一个follower出现网络问题，不能同步leader数据，这样leader不能长时间等待不发送ACK，所以这样ISR队列中的follower同步完成就可以发送ACK
+
+	- ACK应答机制
+
+		- 参数（acks）
+
+			- 0：不用等待broker的ack，broker一接收到还没有写入磁盘就已经返回，broker故障有事可能会丢失数据，但是延迟最低
+			- 1：等待broker的ack，leader落盘成功后返回ack，follower同步成功之前leader故障，会丢失数据
+			- -1：等待broker的ack，leader和follower全部落盘成功后才返回ack
+
+				- follower同步完成后，发送ack之前，leader发送故障，没有发送ack，会造成数据重复，这样需要把reties设置成0（不重发），才不会重复发送消息
+
+		- 三种机制性能依次递减，数据的健壮性依次增强
+		- 类比Mysql的Binlog组从复制，同步，异步，半同步
+
 ### 存储原理
+
+- 文件存储结构
+
+	- 配置文件：config/erver.properties
+	- logs.dir配置
+
+		- 默认/tmp/kafka-logs
+
+	- partition分区
+
+		- 把topic中的数据分割成多个partition，存放到不同的broker上，减低单台服务器的访问压力
+		- 一个partition中消息是有序的，但不一个全局有序
+		- 服务器上每个partition都有一个物理目录，topic名字后面的数字标号代码分区
+
+			- 例如：topic-0，topic-1，topic-2
+
+	- replica副本
+
+		- 为了提高可靠性，但是副本只从leader异步拉取数据，做数据备份
+		- 创建topic命令里，replication-factor确定topic的副本数，副本数必须小于等于节点数，否则报错，这样就可以保证，一个分区不会出现两个副本
+		- 命令：./kafka-topics.sh --create--zookeeper localhost:2181 --replication-factor 4 --partitions 2 --topic overrep
+		- 只要leader副本对外提供读写服务，这样就不存在数据同步的一致性问题，被叫做单调读一致性
+
+	- 副本在Broker的分布
+
+		- 查看副本中谁是leader
+
+			- ./kafka-topics.sh --topic test --describe--zookeeperlocalhost:2181
+
+		- 副本的编号从1开始，第一个副本位leader
+		- 分布规则
+
+			- firt fo all，副本因子不能大于broker的个数
+			- 第一个分区（编号为0的分区）第一个副本防止位置随机从borkerlist选择
+			- 其他分区的第一个副本放置位置相对于第0个分区依次往后移动，这样可以把每个分区的第一个副本放到不公的broker上
+			- 每个分区剩余的副本相对于第1个副本放置位置其实由nextReplicaShift决定的，这个数也是随机产生的
+
+		- 优点
+
+			- 提高容灾能力
+			- 每个分区的第一个副本错开之后，一般第一个分区的第一个副本都是leader，leader错开，不至于一个broker挂了影响太大
+
+		- 命令
+
+			- bin目录下的kafka-reassign-partitions.sh可以根据Broker数量变化情况重新分配分区
+
+	- segment
+
+		- 为了防止log不断追加导致文件过大，检索消息效率变低，一个partition又被划分成多个segment来组织数据
+		- 组成文件
+
+			- 一个log文件和2个index文件，这三个文件是成套出现的
+			- leader-epoch-checkpoint中保存了每一任leader开始些人消息时的offset
+
+		- .log 日志文件
+
+			- 日志就是数据，日志追加写入，满足一定条件就会切分日志文件，产生一个新的segment
+			- 控制切分segment的参数
+
+				- 文件大小 log.segment.bytes（默认1073741824 bytes 1G）
+				- 最大时间戳 
+
+					- log.roll.hours=168（小时，一周）
+					- log.roll.ms（毫秒），优先级比小时（hours）的高
+
+				- 索引文件或timestamp索引文件达到一定大小，默认是10485760字节（10M）,log.index.size.max.bytes
+
+	- 索引(稀疏索引)
+
+		- 偏移量索引
+
+			- 记录offset和物理地址映射关系
+			- 特点
+
+				- 系数索引，不是每一条都记录，是隔几天才产生一条索引，这个间隔由参数设定控制
+
+					- log.index.intervalbytes=4096（4KB）
+
+				- 只要超过4KB，偏移量索引文件.index和时间戳索引文件.timeindex就会增加一条记录
+				- 这个值越小，索引越密集，越大，索引越稀疏
+				- 越稠密检索数据越快，消耗的存储空间越多，越稀疏索引占用存储空间越小，单插入和删除时所需维护的开销越小
+				- 时间复杂度位O(log2n)+O(m),  n是索引文件里索引的个数，m为稀疏程度
+
+		- 时间戳索引
+
+			- 记录时间戳和offset的关系
+			- 背景
+
+				- 要基于时间切分日志文件，必须要记录时间戳
+				- 要基于时间清理消息，必须要记录时间戳
+
+			- 类型
+
+				- 创建的时间戳
+
+					- log.message.timestamp.type=CreateTime（默认）
+
+				- broker上追加写入的时间
+
+					- log.message.timestamp.type=LogAppendTime
+
+		- 查看工具
+
+			- ./kafka-dump-log.sh --files /tmp/kafka-logs/mytopic-0/00000000000000000000.index|head-n 10
+
+		- 检索步骤
+
+			- 1.消费的时候可以确定分区，这样找到了在那个segment中，segment文件用base offset命名，所以用二分法很抠确定
+			- 2.这个segment有对应的所有文件，他们成套出现，所以现在要在索引文件中根据offset找position
+			- 3.得到position之后，到对应的log文件开始查找offset，和消息的offset进行比较，知道找到消息
+
+	- 消息保留机制
+
+		- 开关
+
+			- log.cleaner.enable=true（默认位true）
+			- log.cleanup.policy
+
+				- delete 直接删除（默认值）
+				- compact 压缩
+
+		- 刪除策略
+
+			- log.retention.check.interval.ms=300000（5分钟），每个5分钟删除一次
+			- 删除周期
+
+				- log.retention.hours=168（默认一周）
+				- log.retention.minutes（默认值空），优先级比小时高
+				- log.retention.ms（默认值空），优先级比分钟高
+
+			- 删除大小
+
+				- log.retention.bytes（默认值-1），代表不限制大小
+				- log.segment.bytes（1073741824字节）1G
+
+		- 压缩策略
+
+			- 把相同key合并为最后一个value
+			- log compaction执行后的偏移量不再是连续的，不过不影响日志查询
+
+	- 高可用架构
+
+		- Controller选举
+
+			- 选举是有其中一个broker统一指挥，这个broker的角色就叫做Controller（控制器）。
+			- 因为利用zk帮助选举Controller，Controller节点宕机后，broker通过watch监听到下线通知，开始竞选Controller
+			- Controller节点的任务
+
+				- 监听Broker变化
+				- 监听Topic变化
+				- 监听Partition变化
+				- 获取和管理Broker，Topic，Partition的信息
+				- 管理Partition的主从信息
+
+		- 分区副本leader选举
+
+			- 资料网站
+
+				- https://kafka.apache.org/documentation/#replication
+				- https://kafka.apache.org/documentation/#design_replicatedlog
+
+			- 队列
+
+				- 一个人去的所有副本叫Assigned-Replicas（AR）
+				- 所有副本中跟leader数据保持一定程度同步的叫做In-Sync Replicas（ISR）
+				- 跟leader同步滞后过多的副本叫做Out-Sysnc-Replicas（OSR）
+				- AR=ISR+OSR
+
+			- 默认情况下leader副本发生故障是，只有ISR集合中的副本才有资格被选举位新leader
+			- 如果ISR为空，只能从OSR队列中选举，需要设置unclean.leader.election,默认位false，一般不建议开启，会造成数据丢失
+			- 选举算法
+
+				- zab（ZK）
+				- Raft（Redis Sentinel）
+				- PacificA（kafka）
+
+					- 默认让ISR第一个repica编程leader
+
+		- 主从同步
+
+			- LEO（log end offset）
+
+				- 下一条等待写入的消息的offset（最新的offset+1）
+				- 命令：./kafka-consumer-groups.sh--bootstrap-server 192.168.44.160:9092--describe--group gp-test-group
+
+			- HW（hign watermark）
+
+				- ISR中最小的LEO，leader会管理所有的ISR中最小的LEO作为HW
+
+			- consumer最多只能消费到HW之前的位置，因为同步成功之前，consumer group的offset会偏大，如果leader崩溃，中间会缺失消息
+			- 步骤
+
+				- 1.follower节点会向leader发送一个fetch请求，leader向follower发送数据后，需要更新follower的LEO
+
+		- replica故障处理
 
 ### 消费者原理
 
