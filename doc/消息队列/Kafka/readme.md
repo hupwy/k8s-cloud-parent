@@ -637,7 +637,7 @@ this.sender. wakeup();
 			- 如果ISR为空，只能从OSR队列中选举，需要设置unclean.leader.election,默认位false，一般不建议开启，会造成数据丢失
 			- 选举算法
 
-				- zab（ZK）
+				- Zab（ZK）
 				- Raft（Redis Sentinel）
 				- PacificA（kafka）
 
@@ -658,11 +658,174 @@ this.sender. wakeup();
 			- 步骤
 
 				- 1.follower节点会向leader发送一个fetch请求，leader向follower发送数据后，需要更新follower的LEO
+				- 2.follower接收到数据响应后，依次写入消息并更新LEO
+				- 3.leader更新HW（ISR最小的LEO）
+
+			- kafka设计了独特的ISR复制，可以在保障数据一致性情况下又可提高高吞吐量
 
 		- replica故障处理
 
+			- follower故障处理
+
+				- follower发生故障，会被踢出ISR
+				- follower恢复后，首先根据之前的记录HW，把高于现在HW的消息截掉，向leader同步消息，追上leader后，重新加入ISR
+
+			- leader故障处理
+
+				- 在ISR中选取leader节点，默认第一个
+				- 其他follower需要把高于HW的消息截取掉
+				- 依照follower故障处理的步骤依次进行消息同步
+
+			- 缺点：只能保证副本建数据一致性，并不能保证数据不丢失或不重复
+
 ### 消费者原理
 
+- Offset维护
+
+	- Offset存储（__consumer_offsets）
+
+		- 特殊的topic,默认值有50个分区,需要自定义可以修改参数offsets.tipic.unm.partitions，每个分区默认一个replication
+		- 存储对象
+
+			- GroupMetadata
+
+				- 保存消费者组中各个消费者的信息（每个消费者的编号）
+
+			- OffsetAndMetadata
+
+				- 保存消费者组和各个partition的offset位移信息元数据
+
+			- 命令
+
+				- ./kafka-console-consumer.sh --topic consumer offsets--bootstrap-server 192.168.44.161:9093,192.168.44.161:9094,192.168.44.161:9095--formatter
+"kafka.coordinator.group.GroupMetadataManager\$OffsetsMessageFormatter"--from-beginning
+
+	- 消费的offset
+
+		- 这种情况可以改变参数[auto.offset.reset=[latest(默认), earliest, none]]
+
+			- latest
+
+				- 从最新（最后）消息开始消费
+
+			- earliest
+
+				- 从最早消息开始消费
+
+			- none
+
+				- 报错
+
+	- Offset更新
+
+		- enable.auto.commit 设置自动提交
+
+			- 默认是true，表示消费者消费消息后自动提交此时Broker更新消费者组的offset
+
+		- auto.commit.interval.ms 设置提交频率
+
+			- 默认5秒
+
+		- 如果消费完做业务逻辑处理后才commit，就要把enable.auto.commit改为false，必须调用方法才能更新offset
+
+			- consumer.commitSync()
+
+				- 手动同步提交
+
+			- consumer.commitAsync()
+
+				- 手动异步提交
+
+- 消费者消费策略
+
+	- 消费策略
+
+		- RangeAssignor(范围)-（默认策略）
+		- RoundRobinAssignor(轮训)
+		- StickyAssignor(粘滞)
+
+			- 分区的分配尽可能均匀
+			- 分区的分配尽可能和上次分配保持相同
+
+	- 通过partition.assignment.strategy 修改消费策略
+
+		- props.put("partition.assignment.strategy","org.apache.kafka.clients.consumer.RoundRobinAssignor")
+
+	- 消费方法
+
+		- assign
+
+			- 手动指定分区消费，相当于consumer group id失效了
+
+				- TopicPartition tp=new TopicPartition("ass5part",0)
+consumer.assign(Arrays.asList(tp));
+
+		- subscribe
+
+			- 自动分配消费者组的分区
+
+- rebalance
+
+	- 触发条件
+
+		- 消费者组的消费者数量变化
+		- Topic的分区数变化
+
+	- 步骤
+
+		- 1.从每一个broker选举出一个GroupCoordinator
+		- 2.消费者连接到GroupCoordinator，这个过程叫join group请求
+		- 3.GroupCoordinator在所有的消费者里选举出一个leader，由这个leader根据情况设置策略，确定方案，上报给GroupCoordinator，由GroupCoordinator通知所有消费者
+
 ### 为什么这么快
+
+- 磁盘顺序I/O
+
+	- 读写数据在磁盘上是集中的，不需要重复寻址的过程，kafka的消息是不断追加到本地磁盘文件的末尾，而不是随机写入，显著提高写入吞吐量
+
+- 索引机制
+
+	- 索引(稀疏索引)
+
+- 批量操作
+
+	- 把所有消息都变成一个批量的文件，并进行合理的批量压缩，减少网络IO损耗
+
+- 零拷贝
+
+	- 虚拟内存
+
+		- 内核空间
+
+			- 可以执行任意命令调用系统的一切资源
+
+		- 用户空间
+
+			- 需要调用系统接口向内核发出指令
+
+	- 读取数据
+
+		- kafka消费，从磁盘读取数据，必须先把数据从磁盘拷贝到内核缓冲区，然后从内核缓冲区到用户缓冲区，最后才能返回给用户
+		- DMA拷贝，直接内存访问，在I/O设备和内存数据传输时，数据的拷贝工作交给DMA控制器，解放CPU资源
+
+	- kafka数据拷贝过程
+
+		- 1.通过DMA把磁盘数据拷贝到内核缓冲区
+		- 2.通过CPU拷贝到用户缓冲区
+		- 3.通过CPU拷贝到socket缓冲区
+		- 4.通过DMA拷贝到网卡设备
+
+	- kafka只有DMA拷贝把磁盘文件从内核缓冲区拷贝到网卡设备，没有CPU拷贝叫做零拷贝，linux里有个“sendFile”函数可以实现零拷贝，性能至少提高一倍
+
+### 消息不丢失的配置
+
+- producer端是有带有回调的send方法，如果回调消息失败，进行业务处理
+
+	- producer.send(msg, calback)
+
+- 设置acks=all 表明所有broker都接收到消息，该消息才算“已提交”
+- 设置retries为一个较大的值
+- 设置unclean.leader.election.enable= false
+- 设置 replication.factor>=3。需要三个以上的副本。
 
 *XMind - Trial Version*
