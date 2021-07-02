@@ -45,7 +45,7 @@ RocketMQ的 externals 包里面提供了一个 web 控制台，需要单独部�
 
   > 其中最常用的是集群，主题，消费者和消息这四部分。
 
-## RocketMQ架构
+## 4.RocketMQ架构
 
 http://rocketmq.apache.org/docs/rmq-arc
 
@@ -53,7 +53,7 @@ http://rocketmq.apache.org/docs/rmq-arc
 
 > 一般见到的架构图都是这样的，其中这些重要的角色需要解释下。
 
-### Broker
+### 4.1 Broker
 
 RocketMQ的服务, 或者说一个进程，叫做 Broker, Broker的作用是存储和转发消息。
 
