@@ -96,4 +96,5 @@ sh mqshutdown namesrv
 sh mqshutdown broker
 ```
 
-[RocketMQ常用管理命令](https://gper.club/articles/7e7e7f7ff3g58gc3g69)
+[RocketMQ常用管理命令](https://blog.csdn.net/gwd1154978352/article/details/80829534)
+
