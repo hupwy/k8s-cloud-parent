@@ -59,3 +59,6 @@ RocketMQ的服务, 或者说一个进程，叫做 Broker, Broker的作用是存�
 
 RocketMQ单机大约能承受 10万 QPS的请求。
 
+为了提升 Broker的可用性（防止单点故障），以及提升服务器的性能（实现负载），通常会做集群的部署。
+
+跟kafka 或者 Redis Cluster一样，RocketMQ集群的每个 Broker节点保存总数据的一部分，因此可以实现横向扩展。
