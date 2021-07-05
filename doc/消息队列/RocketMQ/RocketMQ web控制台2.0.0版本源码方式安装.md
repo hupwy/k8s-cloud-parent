@@ -54,7 +54,7 @@ java -jar rocketmq-console-ng-2.0.0.jar
 ## 访问
 http://192.168.44.162:7298
 
-![image.png](\images\448d19ed905f411e92fee3ee69b34c6b.png)
+![image.png](images/448d19ed905f411e92fee3ee69b34c6b.png)
 
 ## 日志
 日志配置：
