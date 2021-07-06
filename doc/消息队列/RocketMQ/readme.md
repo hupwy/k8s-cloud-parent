@@ -116,7 +116,9 @@ namesrvAddr=localhost:9876
 
 RocketMQ的架构设计决定了只需要一个轻量级的元数据服务器就足够了，只需要保持最终一致，而不需要 Zookeeper 这样的强一致性解决方案，不需要再依赖另一个中间件，从而减少整体维护成本。
 
-根据著名的 CAP 理论∶ 一致性（Consistency）、可用性（Availability）、分区容错（Partiton Tolerance）。Zookeeper 实现了 CP，NameServer 选择了AP放弃了实时一致性。
+根据著名的 CAP 理论∶ 一致性（Consistency）、可用性（Availability）、分区容错（Partiton Tolerance）。
+
+Zookeeper 实现了 CP，NameServer 选择了AP放弃了实时一致性。
 
 
 
@@ -220,7 +222,7 @@ NameServer 之间是互相不通信的，也没有主从之分，它们是怎么
    }
    ```
 
-   拉取的时间间隔由 DefaultMQPushConsumer的 pollNameServerlnterval参数决定，默认是 30 秒。
+   拉取的时间间隔由DefaultMQPushConsumer的pollNameServerlnterval参数决定，默认是 30 秒。
 
    `org.apache.rocketmq.client.ClientConfig`
 
@@ -228,14 +230,187 @@ NameServer 之间是互相不通信的，也没有主从之分，它们是怎么
    private int pollNameServerInterval=1000*30;
    ```
 
-   总结一下，各个 NameServer 的数据是能够保持一致的。而且生产者和消费者会定期更新路由信息，所以可以获取最新的信息。
+   总结一下，各个NameServer的数据是能够保持一致的，而且生产者和消费者会定期更新路由信息，所以可以获取最新的信息。
 
-   问题∶ 如果 Broker 刚挂，客户端 30 秒以后才更新路由信息，那是不是会出现最多30 秒钟的数据延迟?比如说一个 Broker 刚挂了，客户端缓存的还是旧的路由信息，发消息和接收消息都会失败。
+   > 问题∶ 如果 Broker 刚挂，客户端30秒以后才更新路由信息，那是不是会出现最多30 秒钟的数据延迟?
+   >
+   > 比如说一个 Broker 刚挂了，客户端缓存的还是旧的路由信息，发消息和接收消息都会失败。
 
    这个问题有几个解决思路∶
 
-   1. 重试;
-   2. 把无法连接的 Broker 隔离掉，不再连接;
-   3. 3）或者优先选择延迟小的节点，就能避免连接到容易挂的 Broker 了。
-      问题∶ 如果作为路由中心的 NameServer 全部挂掉了，而且暂时没有恢复呢?
-      也没有关系，客户端肯定要缓存 Broker 的信息，不能完全依赖于NameServer。
+   1. 重试
+   2. 把无法连接的Broker隔离掉，不再连接;
+   3. 者优先选择延迟小的节点，就能避免连接到容易挂的Broker了。
+
+   > 问题∶ 如果作为路由中心的NameServer全部挂掉了，而且暂时没有恢复呢?
+   > 也没有关系，客户端肯定要缓存Broker的信息，不能完全依赖于NameServer。
+
+### 4.4 Producer
+
+生产者，用于生产消息，会定时从NameServer拉取路由信息(不用配置RocketMQ的服务地址)，然后根据路由信息与指定的Broker建立TCP长连接，从而将消息发送到Broker中。
+
+**特点**
+
+1. 发送逻辑一致的Producer可以组成一个Group。
+2. RocketMQ的生产者同样支持批量发送，不过List要自己传进去。
+3. Producer写数据只能操作 master节点。
+
+### 4.5 Consumer
+
+消息的消费者，通过NameServer集群获得Topic的路由信息，连接到对应的Broker上消费消息。
+
+**特点**
+
+- 消费逻辑一致的Consumer可以组成一个 Group，这时候消息会在Consumer之间负载。
+
+- 由于Master和Slave都可以读取消息，因此Consumer会与Master和Slave 都建立连接。
+
+> 注意∶ 同一个 consumer group内的消费者应该订阅同一个topic。
+>
+> 或者反过来，消费不同 topic的消费者不应该采用相同的consumer group名字。
+>
+> 如果不一样，后面的消费者的订阅，会覆盖前面的订阅。
+
+**消费者有两种消费方式∶** 
+
+- 一种是集群消费（消息轮询）
+
+- 一种是广播消费（全部收到相同副本）。
+
+#### 4.5.1 pull
+
+从消费模型来说，RocketMQ 支持 pull 和 push 两种模式。
+
+- Pull 模式是consumer 轮询从broker拉取消息。
+
+  - 实现类∶`DefaultMQPulIConsumer`(过时)，替代类:`DefaultLitePullConsumer`。
+
+    ```java
+    DefaultMQPullConsumer consumer =new DefaultMQPullConsumer("my test consumer group");
+    ```
+
+- Pull有两种实现方式∶ 
+
+  - 一种是普通的轮询（Polling）
+
+    不管服务端数据有无更新，客户端每隔定长时间请求拉取一次数据，可能有更新数据返回，也可能什么都没有。
+
+    > 普通轮询的缺点∶因为大部分时候没有数据，这些无效的请求会大大地浪费服务器的资源。而且定时请求的间隔过长的时候，会导致消息延迟。
+
+  - RocketMQ用长轮询(Long Polling)来实现
+
+    客户端发起Long Polling，如果此时服务端没有相关数据，会hold住请求，直到服务端有相关数据，或者等待一定时间超时才会返回。
+
+    返回后，客户端又会立即再次发起下一次Long Polling(所谓的hold住请求指的服务端暂时不回复结果，不关闭请求连接，等相关数据准备好，写回客户端）。
+
+    > 长轮询解决了轮询的问题，唯一的缺点是服务器在挂起的时候比较耗内存。
+
+#### 4.5.2 push
+
+Push模式是Broker推送消息给consumer，实现类: `DefaultMQPushConsumer`
+
+```java
+DefaultMOPushConsumer consumer= new DefaultMQPushConsumer("my test consumer group")
+```
+
+RocketMQ的push模式实际上是基于pull 模式实现的，只不过是在 pull模式上封装了一层，所以RocketMQ的push模式并不是真正意义上的"推模式"。
+
+在 RocketMQ中，`PushConsumer`会注册`MessageListener`监听器，取到消息后，唤醒`MessageListener`的`consumeMessage`来消费，对用户而言，感觉消息是被推送过来的。
+
+```java
+while (!this.isStopped()) {
+    try {
+        PullRequest pullRequest = this.pullRequestQueue.take();
+        this.pullMessage(pullRequest);
+    } catch (InterruptedException ignored){
+    } catch (Exception e) {
+        log.error("Pull Message Service Run Method exception",e);
+    }
+}
+```
+
+### 4.6 Message Queue
+
+RocketMQ支持多master的架构。
+
+> 思考一个这样的问题∶ 当有多个master的时候，发往一个Topic的多条消息会在多个master的Broker上存储，那么发往某一个Topic的多条消息，是不是在所有的Broker上存储完全相同的内容?
+>
+> 肯定不是的。
+>
+> 如果所有的master存储相同的内容，而slave又跟master存储相同的内容∶ 
+>
+> 1. 浪费了存储空间。
+>
+> 2. 无法通过增加机器数量线性地提升Broker的性能，
+>
+> 也就是只能垂直扩展，通过升级硬件的方式提升性能，无法实现横向(水平)扩展，那么在分布式的环境中，RocketMQ的性能肯定会受到非常大的限制。
+>
+> 一句话∶不符合分片的思想。
+
+
+
+> 那么最关键的问题来了，怎么把发到一个Topic里面的消息分布到不同的master上呢?
+>
+> 在kafka里面设计了一个partition，一个Topic可以拆分成多个partition，这些partition可以分布在不同的Broker上，这样就实现了数据的分片，也决定了kafka 可以实现横向扩展。
+
+
+
+RocketMQ 有没有这样的设计呢?
+
+在一个Broker上，RocketMQ只有一个存储文件，并没有像kafka一样按照不同的Topic分开存储。数据目录∶
+
+```
+/rocketmq/store/broker-a/commitlog
+```
+
+如果有3个Broker，也就是只有3个用来存储不同数据的commitlog。
+
+
+
+那问题就来了，如果不按照分区去分布，数据应该根据什么分布呢?
+
+RocketMQ里面设计了一个叫做 Message Queue的逻辑概念，作用跟 partition类似。
+
+首先，我们创建Topic的时候会指定队列的数量，一个叫**writeQueueNums** (写队列数量)，一个**readQueueNums**(读队列数量)
+
+写队列的数量决定了有几个Message Queue，读队列的数量决定了有几个线程来消费这些Message Queue(只是用来负载的)
+
+那不指定MQ的时候，默认有几个MQ呢?
+
+服务端创建一个 Topic 默认8个队列(`BrokerConfig`)∶
+
+```java
+private int defaultTopicQueueNums=8;
+```
+
+topic不存在，生产者发送消息时创建默认4个队列(`DefaultMQProducer`)
+
+```java
+private volatile int defaultTopicQueueNums=4;
+```
+
+服务端创建的时候有一个判断，取小一点的值，MQClientInstance 616 行∶
+
+```java
+int queueNums= Math.min(defaultMQProducer.getDefaultTopicQueueNums(), data.getReadQueueNums());
+```
+
+MessageQueue 在磁盘上是可以看到的，但是数量只跟写队列相关。 
+
+比如TopicTest有4个写队列，consumequeue目录下面就会出现四个目录∶/usr/local/soft/rocketmq/store/broker-a/consumequeue/TopicTest/
+
+```
+drwxr-xr-x.2 root root 34 Sep 22 04:26 0 
+drwxr-xr-x.2 root root 34 Sep 22 04:26 1
+drwxr-xr-x.2 root root 34 Sep 22 04:26 2
+drwxr-xr-x.2 root root 34 Sep 22 04:26 3
+```
+
+客户端封装了一个 MessageQueue 对象，里面其实就是三块内容
+
+```java
+private String topic; 
+private String brokerName; 
+private int queueld;
+```
+
