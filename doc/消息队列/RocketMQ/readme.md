@@ -406,7 +406,7 @@ drwxr-xr-x.2 root root 34 Sep 22 04:26 2
 drwxr-xr-x.2 root root 34 Sep 22 04:26 3
 ```
 
-客户端封装了一个 MessageQueue 对象，里面其实就是三块内容
+客户端封装了一个MessageQueue对象，里面其实就是三块内容
 
 ```java
 private String topic; 
