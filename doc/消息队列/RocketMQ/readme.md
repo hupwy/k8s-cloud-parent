@@ -414,5 +414,7 @@ private String brokerName;
 private int queueld;
 ```
 
-Topic表示它是哪个topic的队列。Broker代表它在哪个Broker上，比如有两个master，一个叫broker-a，一个叫broker-b。queueld代表它是第几个分片。
+- Topic表示它是哪个topic的队列
+- Broker代表它在哪个Broker上，比如有两个master，一个叫broker-a，一个叫broker-b
+- queueld代表它是第几个分片
 
