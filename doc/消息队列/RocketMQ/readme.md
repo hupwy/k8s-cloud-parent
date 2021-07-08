@@ -517,5 +517,75 @@ for (int i= 0; i<6; i++){
 
 ## 5. RocketMQ原理
 
-### 5.1 
+### 5.1 生产者
 
+前面我们说Message Queue是用来实现横向扩展的，生产者利用队列可以实现消息的负载和平均分布，那什么时候消息会发到哪个队列呢?
+
+##### 5.1.1.消息发送规则
+
+从Producer的send方法开始跟踪，在`DefaultMQProducerlmpl`的`select`方法会选择要发送的Queue(568 行)∶
+
+```java
+public MessageQueue selectOneMessageQueue(final TopicPublishInfo tpInfo, final String lastBrokerName){
+    return this.mqFaultStrategy.selectOneMessageQueue(tpInfo, lastBrokerName);
+}   
+```
+
+调用的是`MQFaultStratage`的选择队列的方法，这个类是 MQ负载均衡的核心类 
+
+```java
+int index= tpInfo.getSendWhichQueue().getAndIncrement();
+for (int i=0;i<tpInfo.getMessageQueueList().size();i++){
+    int pos= Math.abs(index++) % tpInfo.getMessageQueueList().size();
+    if(pos < 0)
+        pos = 0;
+    MessageQueue mq= tpInfo.getMessageQueueList().get(pos);
+    if (latencyFaultTolerance.isAvailable(mq.getBrokerName))){
+        if (null == lastBrokerName || mq.getBrokerName().equals(lastBrokerName))
+            return mq;
+    }
+}
+
+```
+
+之前我们看过默认的结果，是轮询的∶a-q0，a-q1，b-q0，b-q1……
+
+MessageQueueSelector 有三个实现类∶
+
+1. `SelectMessageQueueByHash`(默认) : 它是一种不断自增、轮询的方式。
+
+2. `SelectMessageQueueByRandom`∶ 随机选择一个队列。
+
+3. `SelectMessageQueueByMachineRoom`∶ 返回空，没有实现。
+
+除了上面自带的策略，也可以自定义`MessageQueueSelector`，作为参数传进去：
+
+```java
+SendResult sendResult = producer.send(msg, new MessageQueueSelector(){
+    public MessageQueue select(List<MessageQueue>mqs, Message msg, Object arg) {
+        Integer id = (Integer) arg;
+        int index = id % mqs.size();
+        return mqs.get(index);
+    }
+}.i);
+```
+
+##### 5.1.2 顺序消息
+
+顺序消息的场景∶ 一个客户先提交了一笔订单，订单号位1688，然后支付，后面又发起了退款，产生了三条消息∶ 
+
+1. 提交订单的消息
+2. 支付的消息
+3. 退款的消息。
+
+这三笔消息到达消费者的顺序，肯定要跟生产者产生消息的顺序一致。不然，没有订单，不可能付款，没有付款，是不可能退款的。
+
+在RPC调用的场景中我们不用考虑有序性的问题，本来代码中调用就是有序的。而消息中间件经过了Broker的转发，而且可能出现多个消费者并发消费，就会导致乱序的问题。
+
+这里我们先区分一个概念，全局有序和局部有序。
+
+- 全局有序就是不管有几个生产者，在服务端怎么写入，有几个消费者，消费的顺序跟生产的顺序都是一致的，实现比较麻烦，而且即使实现了，也会对MQ的性能产生很大的影响
+
+- 我们这里说的顺序消息其实是局部有序
+
+  比如不同的颜色表示不同的订单相关的消息，只要同一个订单相关的消费的时候是有序的时候就OK了。
