@@ -418,3 +418,104 @@ private int queueld;
 - Broker代表它在哪个Broker上，比如有两个master，一个叫broker-a，一个叫broker-b
 - queueld代表它是第几个分片
 
+> 例如：
+>
+> -  一个Topic有3个Message Queue，编号是1、2、3。
+>
+> - 刚好有三个Broker，第一个MQ指向Broker1，第二个MQ指向Broker2，第三个MQ指向 Broker3。
+>
+> - 发送消息的时候，生产者会根据一定的规则，获得MessageQueue，只要拿到了queueld，就知道要发往哪个Broker，然后在commitlog写入消息。
+
+磁盘上看到的队列数量，是由写队列的数量决定的，而且在所有master上的个数是一样的（但是数据存储不一样）。
+
+
+
+#### 事例1
+
+> 例如∶集群有两个master。如果创建一个topic，有2个写队列、1个读队列（topic名字∶q-2-1）。
+>
+> 那么两台机器的 consumequeue 目录会出现2个队列，一共4个队列。
+
+/usr/local/soft/rocketmq/store/broker-a/consumequeue/q-2-1也就是总队列数量是∶**写队列数*节点数。**
+
+![image-20210708112316140](images/image-20210708112316140.png)
+
+如果我们发送6条消息，给消息依次编号，会选择什么队列发送呢?
+
+```java
+for (int i= 0; i<6; i++){
+    Message msg = new Message("q-2-1",
+                              "TagA",
+                              "test",
+                              ("RocketMQ" + String.format("%05d",i)).getBytes());
+    SendResult sendResult = producer.send(msg);
+    System.out.println(String.format("%05d",i)+":"+sendResult)
+}
+```
+
+**消息接收顺序（看SendResult）∶ a-q0,a-q1,b-q0,b-q1,a-q0,a-q1**
+
+| 输出列表                      |
+| ----------------------------- |
+| BrokerName=broker-a,queueId=0 |
+| BrokerName=broker-a,queueId=1 |
+| BrokerName=broker-b,queueId=0 |
+| BrokerName=broker-b,queueId=1 |
+| BrokerName=broker-a,queueId=0 |
+| BrokerName=broker-a,queueId=1 |
+
+因为消费者只有1个读队列，只能消费编号为0的队列，所以读到的消息是 a-q0，b-q0，a-q0的消息，序号是0，2，4。
+
+**则1，3，5序号的消息没有被消费**
+
+| 输出列表                      |
+| ----------------------------- |
+| BrokerName=broker-a,queueId=0 |
+| BrokerName=broker-b,queueId=0 |
+| BrokerName=broker-a,queueId=0 |
+
+
+
+#### 事例2
+
+> 如果是1个写队列，2个读队列（topic名字∶q-1-2），那么两个 broker 的 consumequeue 目录会出现1个队列。
+
+/usr/local/soft/rocketmq/store/broker-a/consumequeue/q-1-2
+
+![image-20210708112341042](images/image-20210708112341042.png)
+
+发送6条消息，依次编号∶消息接收顺序 a-q0，b-q0，a-q0，b-q0a-q0，b-q0
+
+| 输出列表                      |
+| ----------------------------- |
+| BrokerName=broker-a,queueId=0 |
+| BrokerName=broker-b,queueId=0 |
+| BrokerName=broker-a,queueId=0 |
+| BrokerName=broker-b,queueId=0 |
+| BrokerName=broker-a,queueId=0 |
+| BrokerName=broker-b,queueId=0 |
+
+消费者有 2 个读队列，可以消费编号0 的队列。
+
+**所有消息都可以接收到。**
+
+
+
+#### 结论
+
+根据`事例1`和`事例2`的表述，读写队列数量最好一致，否则会出现消费不了的情况。
+
+
+
+> 思考∶Queue 的数量到底会产生什么影响? 
+>
+> Queue的数量要比Broker的数量多（倍数），才能实现尽量平均的负载，或者应对未来的扩容。
+>
+> 队列数量也要比消费者数量多，否则有部分消费者无法消费消息。
+
+
+
+## 5. RocketMQ原理
+
+### 5.1 
+
