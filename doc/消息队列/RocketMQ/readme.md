@@ -1129,7 +1129,7 @@ private void cleanFilesPeriodically {
 
   2. 如果磁盘空间使用率超过90%，会拒绝消息写入。
 
-  在DefaultMessageStore类中能找到这两个默认值的定义∶
+  在`DefaultMessageStore`类中能找到这两个默认值的定义∶
 
   ```java
   System.getProperty("rocketmg.broker.diskSpaceWarningLevelRatio","0.90"); 
