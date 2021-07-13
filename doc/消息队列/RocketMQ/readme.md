@@ -589,3 +589,274 @@ SendResult sendResult = producer.send(msg, new MessageQueueSelector(){
 - 我们这里说的顺序消息其实是局部有序
 
   比如不同的颜色表示不同的订单相关的消息，只要同一个订单相关的消费的时候是有序的时候就OK了。
+
+**要保证消息有序，要分成几个环节分析∶**
+
+1. 生产者发送消息的时候，到达Broker应该是有序的，所以对于生产者不能使用多线程异步发送，而是顺序发送。
+2. 写入Broker的时候，应该是顺序写入的，也就是相同主题的消息应该集中写入选择同一个queue，而不是分散写入。
+3. 消费者消费的时候只能有一个线程，否则由于消费的速率不同，有可能出现记录到数据库的时候无序。
+
+**RocketMQ 的顺序消息怎么实现呢?**
+
+1. 首先是生产者发送消息，是单线程的。
+
+   案 例：`example.ordermessage.Producer` ， 跟 踪`send`方 法，在`DefaultMQProducerlmpl`类 `send`方法里面有一个默认的参数（1092行）∶
+
+   ```java
+   CommunicationMode.SYNC
+   ```
+
+   表示消息是同步发送的，生产者需要等待Broker的响应，最终其实是调用了∶`MQClientAPIlmpl`的`sendMessageSync`方法同步发送消息。
+
+   1126行`sendKernellmpl`，再到849行的 `switch case`。
+
+   ```java
+   private SendResult sendMessageSync(
+       final String addr, 
+       final String brokerName, 
+       final Message msg, 
+       final long timeoutMillis, 
+       final RemotingCommand request
+   )throws RemotingException, MQBrokerException, InterruptedException {
+       RemotingCommand response=this.remotingClient.invokeSync(addr, request,timeoutMillis); 
+       assert response != null;
+       return this.processSendResponse(brokerName, msg, response);
+   }
+   ```
+
+   生产者收到Broker的成功的`Response`才算是消息发送成功。
+
+2. 其次是消息要路由到相同的queue（关键是大家要在相同的通道排队，不能各排各的队，才能实现先进先出）。
+
+   **生产者怎么控制队列的选择?**
+
+   通过`MessageQueueSelector`，默认是用HashKey选择。
+
+   Spring Boot 的源码跟着跟着，orderly不见了，其实是传了一个hashKey进去，只要大家使用相同的hashKey，就会选择同一个队列。
+
+   ```java
+   producer.sendOneway(rocketMsg.messageQueueSelector. hashKey));
+   ```
+
+3. 最后在消费者，需要保证一个队列只有一个线程消费。
+   在Spring Boot 中，`consumeMode` 设置为orderly。Java API中，传入`MessageListenerOrderly`的实现类。
+   example.ordermessage.Consumer
+
+   ```java
+   consumer.registerMessageListener(new MessageListenerOrderly(){
+   ```
+
+   注意看这个接口的注释∶
+
+   ```java
+   //A MessageListenerOrderly object is used to receive messages orderly. Onequeue by one thread
+   ```
+
+   一个队列只能有一个线程消费。
+   消费者在启动`consumer.start`的时候会判断`getMessageListenerlnner` 的实现∶
+
+   ```java
+   if (this.getMessageListenerInner() instanceof MessageListenerOrderly) {
+       this.consumeOrderly = true; 
+       this.consumelMessageService = 
+           new ConsumeMessageOrderlyService(this, (MessageListenerOrderly) this.getMessageListenerInner());
+   } else if(this.getMessageListenerInner()instanceof MessageListenerConcurrently) {
+       this.consumeOrderly = false; 
+       this.consumeMessageService = 
+           new ConsumeMessageConcurrentlyService(this, (MessageListenerConcurrently)
+   this.getMessageListenerInner());
+   }
+   ```
+
+   根据 Listener 类型使用不同的 Service，紧接着然后会启动这个 Service∶
+
+   ```java
+   if(this.getMessageListenerInner()instanceof MessageListenerOrderly){
+       this.consumeOrderly = true; 
+       this.consumelMessageService = 
+           new ConsumeMessageOrderlyService(this,MessageListenerOrderly)this.getMessageListenerlnner();
+   } else if (this.getMessageListenerInner() instanceof MessageListenerConcurrently) { 
+       this.consumeOrderly = false; 
+       this. consumelMessageService = 
+           new ConsumeMessageConcurrentlyService(this, (MessageListenerConcurrently) this.getMessageListenerInner());
+   }
+   this.consumelMessageService.start();
+   ```
+
+   在`DefaultMQPushConsumerlmpl#pullMessage ` 的325行，将拉取到的消息放入ProcessQueue:
+
+   ````java
+   boolean dispatchToConsume= processQueue.putMessage(pullResult.getMsgFoundList)); DefaultMQPushConsumerlmpl.this.consumeMessageService.submitConsumeRequest(
+       pullResult.getMsgFoundList(), 
+       processQueue,
+       pullRequest.getMessageQueue(), 
+       dispatchToConsume);
+   ````
+
+   然后进入`ConsumeMessageOrderlyService`的`submitConsumeRequest`方法
+
+   ```java
+   public void submitConsumeRequest(
+       final List<MessageExt> msgs, 
+       final ProcessQueue processQueue, 
+       final MessageQueue messageQueue, 
+       final boolean dispathToConsume) { 
+       if (dispathToConsume){
+           ConsumeRequest consumeRequest= new ConsumeRequest(processQueue,messageQueue);
+           this.consumeExecutor.submit(consumeRequest);
+       }
+   }
+   ```
+
+   拉取到的消息构造成 ConsumeRequest（实现了Runnable），然后放入线程池等待执行。
+   既然是多线程，那它的执行还能保证有序吗?
+   回头看一下放消息的`ProcessQueue`，它是用TreeMap来存放消息的∶
+
+   ```java
+   private final TreeMap<Long, MessageExt> msgTreeMap=new TreeMap<Long, MessageExt>();
+   ```
+
+   TreeMap是红黑树的实现，自平衡的排序二叉树，因为key是当前消息的`offset`，消息是按照`offset`排序的。
+   再看`ConsumeRequest`的`run`方法∶
+
+   ```java
+   final Object objLock= messageQueueLock.fetchLockObject(this.messageQueue); 
+   synchronized (objLock){
+   ```
+
+   因为只有一个队列，而消费的时候必须要加锁，RocketMQ顺序消息消费会将队列锁定，当队列获取锁之后才能进行消费，所以能够实现有序消费。
+
+##### 5.1.3 事务消息
+
+http://rocketmg.apache.org/rocketmq/the-design-of-transactional-message
+
+我们先来说一下事务消息的应用场景。
+
+随着应用的拆分，从单体架构变成分布式架构，每个服务或者模块也有了自己的数据库。一个业务流程的完成需要经过多次的接口调用或者多条MQ消息的发送。
+
+举个例子，在一笔贷款流程中，提单系统登记了本地的数据库，资金系统和放款系统必须也要产生相应的记录。
+
+这个时候，作为消息生产者的提单系统，不仅要保证本地数据库记录是成功的，还要关心发出去的消息是否被成功Broker接收，也就是要么都成功要么都失败。
+
+> 问题来了，如果是多个 DML 的操作，数据库的本地事务是可以保证原子性的（通过undo log）。
+>
+> 但是一个本地数据库的操作，一个发送MQ的操作，怎么把他们两个放在一个逻辑单元里面执行呢?
+
+
+
+我们来分析一下情况，如果先发送MQ消息，再操作本地数据库。
+
+- 第一步失败和两个都成功就不说了，这个是一致的。
+
+  关键就是第一步发送消息成功了，第二步操作本地数据库失败了，比如出现了各种数据库异常，主键重复或者字段超长。
+
+  也就是下游的业务系统有最新的数据，而我自己本地数据库反而没有。
+
+  因为这条数据可能是业务异常，所以就是没办法登记到数据库。
+
+  修改以后再登记也没用，这个时候跟其他系统已经登记的数据就不一样了。
+
+  而发出去的消息又不可能撤回，有可能别人都已经消费了，这个叫做覆水难收。所以不能先发MQ消息。
+
+- 改一下，如果先操作本地数据库，再发送 MQ 消息。
+
+  如果操作本地数据库成功，而发送 MQ消息失败，比如网络出了问题。自己的业务系统有最新的数据，但是其他系统没有。
+  
+  
+
+> 所以，现在我们的问题就是，怎么设计发送消息的流程，才能让这两个操作要么都成功，要么都失败呢?
+>
+> 如果能有一个协调的方法，那先发MQ消息还是先操作数据库就不是那么重要了。
+>
+> 我们可不可以参照XA两阶段提交的思想，把发送消息分成两步，然后把操作本地数据库包括在这个流程里面呢?
+
+
+
+**例如∶**
+
+  1. 为了防止 MQ 关键时刻掉链子，先去试探一下。生产者先发送一条消息到 Broker，把这个消息状态标记为"未确认"。
+  2. Broker通知生产者消息接收成功，现在你可以执行本地事务。
+  3. 生产者执行本地事务。
+
+第3步会有两种结果∶
+
+- 如果本地事务执行成功，那么第4步∶ 生产者给Broker发送请求，把消息状态标记为"已确认"，这样的消息就可以让消费者去消费了。那就全部成功了。
+- 如果本地事务执行失败，那么第4步∶ 生产者给Broker发送请求，把消息状态标记为"丢弃"。那就全部失败了。
+
+看起来好像很美好，但是还有一种异常情况，第3步之后生产者迟迟没有告诉Broker本地事务是否执行成功，有可能是连接数据库超时，也可能是连接Broker超时。那Broker也不能一直等待下去吧，这个消息是确认还是丢弃，必须有个最终状态。
+
+这个时候Broker就要主动出击了，去生产者检查本地事务是否执行成功。
+
+- 成功：确认; 
+- 失败：丢弃;
+
+RocketMQ 里面就是这么实现的。这个里面出现了两个新的概念∶
+
+1. 半消息(half message)∶暂不能投递消费者的消息，发送方已经将消息成功发送到了MQ服务端，但是服务端未收到生产者对该消息的二次确认，此时该亥消息被标记成"暂不能投递"状态，处于该种状态下的消息即半消息。
+2. 消息回查（Message Status Check）∶由于网络闪断、生产者应用重启等原因，导致某条事务消息的二次确认丢失，MQ服务端通过扫描发现某条消息长期处于"半消息"时，需要主动向消息生产者询问该消息的最终状态（`Commit`或是`Rollback`），该过程即消息回查。
+
+看一下事务消息的整体流程∶
+
+![image-20210713165820996](images/image-20210713165820996.png)
+
+**描述流程：**
+
+1. 生产者向 MQ 服务端发送消息。
+2. MQ 服务端将消息持久化成功之后，向发送方 ACK 确认消息已经发送成功，此时消息为半消息。
+3. 发送方开始执行本地数据库事务逻辑。
+4. 发送方根据本地数据库事务执行结果向 MQ Server 提交二次确认（`Commit`或是`Rollback`），MQ Server 收到 Commit 状态则将半消息标记为可投递，订阅方最终将收到该消息;MQ Server收到`Rollback`状态则删除半消息，订阅方将不会接受该消息。
+5. 在断网或者是应用重启的特殊情况下，上述步骤 4 提交的二次确认最终未到达MQ Server，经过固定时间后 MQ Server 将对该消息发起消息回查。
+6. 发送方收到消息回查后，需要检查对应消息的本地事务执行的最终结果。
+7. 发送方根据检查得到的本地事务的最终状态再次提交二次确认，MQ Server 仍按照步骤 4 对半消息进行操作（`Commit`/`Rollback`）。
+
+**在代码中怎么实现呢?**
+
+ocketMQ提供了一个TransactionListener 接口，这个里面可以实现执行本地事务。
+
+```java
+public RocketMQLocalTransactionState executeLocalTransaction(Message msg, Object arg){
+    // local transaction process, return bollback, commit or unknown 
+    log.info("executeLocalTransaction:"+JSON.toJSONString(msg)); 
+    return RocketMQLocalTransactionState.UNKNOWN:
+}
+```
+
+executeLocalTransaction 方法中执行本地事务逻辑。
+
+这个方法会决定Broker是`commit`消息还是丢弃消息，所以必须return一个状态这个状态可以有三种∶
+
+- `COMMIT`状态，表示事务消息被提交，会被正确分发给消费者。
+
+- `ROLLBACK`状态，该状态表示该事务消息被回滚，因为本地事务逻辑执行失败导致。如果既没有收到`COMMIT`，也没有收到`ROLLBACK`，可能是事务执行时间太长，或者报告 Broker 的时候网络出了问题呢? 那就是第三种状态。
+
+- `UNKNOW`状态∶表示事务消息未确定。
+  返回 UNKNOW之后，因为不确定到底事务有没有成功，Broker 会主动发起对事务执行结果的查询∶`checkLocalTransaction`方法执行事务回查逻辑。
+
+  ```java
+  @Oeride
+  public RocketMQLocalTransactionState checkLocalTransaction(Message msg){
+      log.info("checkLocalTransaction:"+JSON.toJSONString(msg)); 
+      return RocketMQLocalTransactionState.UNKNOWN;
+  }
+  ```
+
+  默认回查总次数是 15 次，第一次回查间隔时间是 6s，后续每次间隔 60s。
+
+  生产者消息发送用的是`TransactionMQProducer`，指定`Listener`，Spring Boot 中使用`rocketMQTemplate#sendMessagelnTransaction`。
+
+  ```java
+  public String sendTx(@PathVariable String topic, @PathVariable String msg) throws InterruptedException {
+      Message message = MessageBuilder.withPayload(msg).build(); 
+      System.out.println(Thread.currentThread().getName());
+      TransactionSendResult result = rocketMQTemplate.sendMessageInTransaction("groupl", topic, message,"test");
+      System.out.println(result.getTransactionId()); 
+      return "sendtx";
+  }
+  ```
+
+##### 5.1.4 延迟消息
+
+
+
+
+
