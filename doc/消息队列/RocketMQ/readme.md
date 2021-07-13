@@ -521,7 +521,7 @@ for (int i= 0; i<6; i++){
 
 前面我们说Message Queue是用来实现横向扩展的，生产者利用队列可以实现消息的负载和平均分布，那什么时候消息会发到哪个队列呢?
 
-##### 5.1.1.消息发送规则
+#### 5.1.1.消息发送规则
 
 从Producer的send方法开始跟踪，在`DefaultMQProducerlmpl`的`select`方法会选择要发送的Queue(568 行)∶
 
@@ -570,7 +570,7 @@ SendResult sendResult = producer.send(msg, new MessageQueueSelector(){
 }.i);
 ```
 
-##### 5.1.2 顺序消息
+#### 5.1.2 顺序消息
 
 顺序消息的场景∶ 一个客户先提交了一笔订单，订单号位1688，然后支付，后面又发起了退款，产生了三条消息∶ 
 
@@ -726,7 +726,7 @@ SendResult sendResult = producer.send(msg, new MessageQueueSelector(){
 
    因为只有一个队列，而消费的时候必须要加锁，RocketMQ顺序消息消费会将队列锁定，当队列获取锁之后才能进行消费，所以能够实现有序消费。
 
-##### 5.1.3 事务消息
+#### 5.1.3 事务消息
 
 http://rocketmg.apache.org/rocketmq/the-design-of-transactional-message
 
@@ -854,7 +854,299 @@ executeLocalTransaction 方法中执行本地事务逻辑。
   }
   ```
 
-##### 5.1.4 延迟消息
+#### 5.1.4 延迟消息
+
+延迟消息的场景在 RabbitMQ课程中已经说过，为什么不直接用定时任务也说了。
+
+在 RabbitMQ 里面需要通过死信队列或者插件来实现。
+
+RocketMQ 可以直接支持延迟消息，但是开源版本功能被阉割了，只能支持特定等级的消息。商业L版本可以任意指定时间。
+
+```java
+msg setDelayTimeLevel(3)
+```
+
+比如 level=3 代表 10 秒。一共支持 18 个等级，延时级别配置代码在MessageStoreConfig#messageDelayLevel 中∶
+
+```java
+this.messageDelayLevel="Is 5s 10s 30s lm 2m 3m 4m 5m6m 7m 8m 9m 10m 20m 30m Ih 2h"
+```
+
+Spring Boot 中这样使用∶
+
+```java
+rocketMQTemplate.syncSend（topic，message，1000，3）;//表示延时 10 秒
+```
+
+**实现原理∶**
+
+Broker 端内置延迟消息处理能力，核心实现思路都是一样∶将延迟消息通过一个临时存储进行暂存，到期后才投递到目标Topic中。
+
+![](images/image-20210713200740857.png)
+
+**步骤说明如下∶**
+
+1. producer要将一个延迟消息发送到某个Topic中;
+
+2. Broker判断这是一个延迟消息后，将其通过临时存储进行暂存;
+
+3. Broker内部通过一个延迟服务（delay service）检查消息是否到期，将到期的消息投递到目标Topic中;
+
+4. 消费者消费目标Topic中的延迟投递的消息。
+
+临时存储和延迟服务都是在Broker内部实现，对业务透明。
+`org.apache.rocketmq.store.CommitLog#putMessage`
+
+````java
+if (msg.getDelayTimeLevel()> 0) {
+    //超过2个小时，设置为 2个小时
+    if(msg.getDelayTimeLevel(>this.defaultMessageStore.getScheduleMessageService().getMaxDelayLevel)){
+        msg.setDelayTimeLevel(this.defaultMessageStore.getScheduleMessageService(0.getMaxDelayLevel));
+    }
+    // opic 名字设置为∶ SCHEDULE TOPIC XXXX
+    topic = TopicValidator.RMQ_SYS_SCHEDULE_TOPIC;
+    // 根据 level 选择 Queue
+    queueId = ScheduleMessageService.delayLevel2QueueId(msg.getDelayTimeLevel());
+    // Backup real topic， queueld 记录原始的 topic和 Queue
+    MessageAccessor.putProperty(msg, MessageConst.PROPERTY_REAL_TOPIC,msg.getTopic()); 
+    MessageAccessor.putProperty(msg, MessageConst.PROPERTY_REAL_QUEUE_ID, String.valueOf(msg.getQueueld)));
+    msg.setPropertiesString(MessageDecoder.messageProperties2String(msg.getProperties()));
+    // 更新 topic 和 queue 
+    msg.setTopic(topic); 
+    msg.setQueueld(queueId);
+}
+````
+
+当然在这个地方，消息实际是存储在commitlog，异步写入consume queue。
+然后有一个∶ `ScheduleMessageService#start`
+
+```java
+// 每个延迟级别都创建一个任务
+for (Map.Entry<Integer,Long> entry:this.delayLevelTable.entrySet()){
+    Integer level = entry.getKey();
+    // 获得每个级别的延迟时间 
+    Long timeDelay = entry.getValue(); 
+    Long offset = this.offsetTable.get(level); 
+    if null = offset) { 
+        offse = OL;
+    }
+    
+    if (timeDelay != null) {
+        // 创建 TimerTask
+        this.timer.schedule(new DeliverDelayedMessageTimerTask(level,offset), FIRST DELAY TIME);
+    }
+
+```
+
+时间到期后∶ `DeliverDelayedMessageTimerTask#messageTimeup`（内部类）其中有几行关键代码∶
+
+```java
+// 获取索引 
+ConsumeQueue cq = ScheduleMessageService.this.defaultMessageStore findConsumeQueue(TopicValidator.RMQ SYS SCHEDU LE_TOPIC,
+                                                                                   delayLevel2QueueId(delayLevel));
+// 读取消息
+MessageExt msgExt = ScheduleMessageService.this.defaultMessageStore.lookMessageByOffset offsePy, sizePy);
+// 获取原 topic 名称等
+MessageExtBrokerInner msgInner= this.messageTimeup(msgExt);
+//重新将消息持久化到 commitlog 中 
+PutMessageResult putMessageResult = ScheduleMessageService.this.writeMessageStore .putMessage(msgInner);
+```
+
+最后一步，由于消息已经重新存储到 commitlog 并且异步写入 consume queue，所以消费者可以正常消费了。
+
+事实上，RocketMQ的消息重试也是基于延迟消息来完成的。在消息消费失败的情况下，将其重新当做延迟消息投递回 Broker。
+
+### 5.2 Broker
+
+#### 5.2.1 消息存储设计理念
+
+RocketMQ的消息存储与Kafka 有所不同。既没有分区的概念，也没有按分区存储消息。
+
+RocketMQ 官方对这种设计进行了解释∶
+
+http://rocketmq.apache.org/rocketmq/how-to-support-more-queues-in-rocketmq/
+
+1. 每个分区存储整个消息数据，尽管每个分区都是有序写入磁盘的，但随着并发写入分区的数量增加，从操作系统的角度来看，写入变成了随机的。
+
+2. 由于数据文件分散，很难使用 Linux IO Group Commit机制（指的是一次把多个数据文件刷入磁盘。例如∶ 批量发送 3 条数据，分散在 3个文件里面，做不到—次刷盘）。
+
+
+所以 RocketMQ干脆另辟蹊径，设计了一种新的文件存储方式，就是所有的Topic的所有的消息全部写在同一个文件中（这种存储方式叫集中型存储或者混合型存储），这样就能够保证绝对的顺序写。
+
+![](images/image-20210713203424408.png)
+
+**这样做的优势∶**
+
+- 队列轻量化，单个队列数据量非常少。
+
+- 对磁盘的访问串行化，完全顺序写，避免磁盘竞争，不会因为队列增加导致 IOWAIT增高。
+
+当然消费的时候就有点复杂了。
+
+在kafka中是一个topic下面的partition有独立的文件，只要在一个topic里面找消息就OK了，kafka把这个consumer group跟topic的offset 的关系保存在一个特殊的 topic 中。
+
+现在变成了∶要到一个统一的巨大的commitLog中去找消息，需要遍历全部的消息，效率太低了。
+
+怎么办呢?
+
+如果想要每个 consumer group 只查找自己的topic的offset信息，可以为每一个consumer group把他们消费的topic的最后消费到的offset单独存储在一个地方。
+
+这个存储消息的偏移量的对象就叫做 consume queue。
+
+![image-20210713204419120](images/image-20210713204419120.png)
+
+也就是说，消息在 Broker存储的时候，不仅写入commit log，同时也把在commit log中的最新的offset（异步）写入对应的 consume queue。
+
+消费者在消费消息的时候，先从consume queue 读取持久化消息的起始物理位置偏移量offset、大小size和消息Tag的HashCode值，随后再从commit log 中进行读取待拉取消费消息的真正实体内容部分。
+
+consume queue可以理解为消息的索引，它里面没有存消息。
+
+> 总结∶
+>
+> 1. 写虽然完全是顺序写，但是读却变成了完全的随机读（对于commit log）。
+> 2. 读一条消息，会先读 consume queue，再读 commit log，增加了开销
+
+#### 5.2.2 物理存储文件分析
+
+源码方式安装，默认的存储路径在/root/store。存储路径也可以自定义，例如∶
+
+```
+/usr/local/soft/rocketmq/store/broker-a
+
+checkpoint 
+commitlog 
+config 
+consumequeue 
+index 
+lock
+```
+
+| 文件名       | 描述                                                         |
+| ------------ | ------------------------------------------------------------ |
+| checkpoint   | 文件检查点，存储 commitlog 、consumequeue、indexfile 最后一次刷盘时间或时间戳 |
+| index        | 消息索引文件存储目录                                         |
+| consumequeue | 消息消费队列存储目录                                         |
+| commitlog    | 消息存储目录                                                 |
+| config       | 运行时的配置信息，包含主题消息过滤信息、集群消费模式消息消费进度、延迟消息队列拉取进度、消息消费组配置信息、 topic 配置属性等 |
+
+1. commit log
+
+   commit log，一个文件集合，每个默认文件1G大小。当第一个文件写满了，第二个文件会以初始偏移量命名。比如起始偏移量 1080802673，第二个文件名为 00000000001080802673，以此类推。
+
+   跟kafka 一样，commit log 的内容是在消费之后是不会删除的。有什么好处? 
+
+   - 可以被多个 consumer group 重复消费。只要修改 consumer group，就可以从头开始消费，每个consumer group维护自己的offset。
+   - 支持消息回溯，随时可以搜索。
+   
+2. consume queue
+   
+   consume queue∶ 一个Topic可以有多个，每一个文件代表一个逻辑队列，这里存放消息在commit log的偏移值以及大小和Tag属性。
+   
+   从实际物理存储来说，consume queue 对应每个Topic和Queueld下面的文件，单个文件由 30W条数据组成，大小600万个字节（约 5.72M）。
+   
+   当一个ConsumeQueue类型的文件写满了，则写入下一个文件。
+   
+3. index file
+
+   前面我们在使用API方法的时候，看到Message有一个keys参数，它是用来检索消息的。所以，如果出现了keys，服务端就会创建索引文件，以空格分割的每个关键字都会产生一个索引。
+
+   单个IndexFile 可以保存 2000W个索引，文件固定大小约为 400M。
+
+   > 索引的目的是根据关键字快速定位消息。根据关键字定位消息? 那这样的索引用什么样的数据结构合适?
+   >
+   > HashMap，没错，RocketMQ的索引是一种哈希索引。由于是哈希索引，key尽量设置为唯一不重复。
+
+#### 5.2.3 RocketMQ存储关键技术（持久化 / 刷盘）
+
+> RocketMQ消息存储在磁盘上，但是还是能做到这么低的延迟和这么高的吞吐，到底是怎么实现的呢?
+
+首先要介绍 Page Cache 的概念。
+
+CPU 如果要读取或者操作磁盘上的数据，必须要把磁岛的数据加载至到内存，这个是由硬件结构和访问速度的差异决定的。
+
+这个加载的大小有一个固定的单位，叫做Page。x86 的linux中一个标准页面大小是4KB。
+
+如果要提升磁盘访问速度，或者说尽量减少磁盘 I/O，可以把访问过的Page在内存中缓存起来。这个内存的区域就叫做 Page Cache。
+
+下次处理 I/O请求的时候，先到 Page Cache 查找，找到了就直接操作。没找到就到磁盘查找。
+
+Page Cache本身也会对数据文件进行预读取，对于每个文件的第一个读请求操作，系统在读入所请求页面的同时会读入紧随其后的少数几个页面。
+
+但这里还是有一个问题。我们知道，虚拟内存分为内核空间和用户空间。Page Cache属于内核空间，用户空间访问不了，因此读取数据还需要从内核空间拷贝到用户空间缓冲区。
+
+![image-20210713211459410](images/image-20210713211459410.png)
+
+> 可以看到数据需要从Page Cache 再经过一次拷贝程序才能访问得到。这个copy的过程会降低数据访问的速度。有什么办法可以避免从内核空间到用户空间的copy 呢?
+>
+> 这里用到了一种零拷贝的技术。
+>
+> 干脆把Page Cache的数据在用户空间中做一个地址映射，这样用户进程就可以通过指针操作直接读写 Page Cache，不再需要系统调用(例如 read())和内存拷贝。
+
+![image-20210713213612859](images/image-20210713213612859.png)
+
+RocketMQ中具体的实现是使用mmap（memory map，内存映射），不论是CommitLog还是CosumerQueue都采用了mmap。Kafka用的是sendfile。
+
+#### 5.2.4 文件清理策略
+
+跟kafka 一样，RocketMQ中被消费过的消息是不会删除的，所以保证了文件的顺序写入。如果不清理文件的话，文件数量不断地增加，最终会导致磁盘可用空间越来越少。
+
+> 哪些文件需要清理?
+
+主要清除CommitLog、ConsumeQueue的过期文件。
+
+```java
+private void cleanFilesPeriodically {
+    this.cleanCommitLogServicerun(); 
+    this.cleanConsumeQueueServicerun();
+}
+```
+
+其次，什么情况下这些文件变成过期文件?默认是超过72 个小时的文件。
+
+```java
+// MessageStoreConfig.java
+// The number ofhours to keep alog file before deleting it(in hours)
+    private int fileReservedTime = 72;
+```
+
+再者，过期的文件什么时候删除呢?有两种情况∶
+
+- 第一种情况∶通过定时任务，每天凌晨4点，删除这些过期的文件。
+
+  ```java
+  // MessageStoreConfig.java
+  // When to delete,default is at 4 am 
+  private String deleteWhen="04"
+  ```
+
+- 第二种情况∶磁盘使用空间超过了75%，开始删除过期文件。
+
+  ```java
+  private int diskMaxUsedSpaceRatio=75
+  ```
+
+  1. 如果磁盘空间使用率超过85%，会开始批量清理文件，不管有没有过期，直到空间充足。
+
+  2. 如果磁盘空间使用率超过90%，会拒绝消息写入。
+
+  在DefaultMessageStore类中能找到这两个默认值的定义∶
+
+  ```java
+  System.getProperty("rocketmg.broker.diskSpaceWarningLevelRatio","0.90"); System.getProperty("rocketmq.broker.diskSpaceCleanForciblyRatio","0.85")
+  ```
+
+
+### 5.2 消费者
+
+
+
+
+
+
+
+
+
+
 
 
 
