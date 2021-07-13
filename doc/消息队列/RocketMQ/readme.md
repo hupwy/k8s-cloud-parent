@@ -1132,9 +1132,10 @@ private void cleanFilesPeriodically {
   在DefaultMessageStore类中能找到这两个默认值的定义∶
 
   ```java
-  System.getProperty("rocketmg.broker.diskSpaceWarningLevelRatio","0.90"); System.getProperty("rocketmq.broker.diskSpaceCleanForciblyRatio","0.85")
+  System.getProperty("rocketmg.broker.diskSpaceWarningLevelRatio","0.90"); 
+  System.getProperty("rocketmq.broker.diskSpaceCleanForciblyRatio","0.85");
   ```
-
+  
 
 ### 5.2 消费者
 
