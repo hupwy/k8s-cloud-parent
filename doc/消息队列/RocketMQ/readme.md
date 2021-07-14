@@ -1135,21 +1135,339 @@ private void cleanFilesPeriodically {
   System.getProperty("rocketmg.broker.diskSpaceWarningLevelRatio","0.90"); 
   System.getProperty("rocketmq.broker.diskSpaceCleanForciblyRatio","0.85");
   ```
-  
 
 ### 5.2 消费者
 
+> 思考：
+>
+> - 在集群消费模式下，如果我们要提高消费者的负载能力，必然要增加消费者的数量。消费者的数量增加了，怎么做到尽量平均的消费消息呢? 
+> - 队列怎么分配给相应的消费者?
+> - 队列的数量是固定的。比如有 4个队列，假设有3个消费者，或者5个消费者，这个时候队列应该怎么分配?
+> - 消费者挂了，消费者增加了，队列又怎么分配?
+
+#### 5.2.1 消费端的负载均衡与rebalance
+
+消费者增加的时候肯定会引起rebalance，所以先从消费者启动的代码入手，这里面有几行关键的代码:
+
+```java
+public class DefaultMQPushConsumerlmpl implements MQConsumerInner {
+    private MQClientInstance mQClientFactory;
+    //启动 Consumer 的入口函数
+    public synchronized void start() throws MQClientException {
+        this.mQClientFactory = MQClientManager.getInstance().getOrCreateMOClientInstance(
+            this.defaultMQPushConsumer, this.rpcHook);
+        //调用 MQClientInstance 的 start 方法 
+        mQClientFactory.start();
+    }
+}
+```
+
+`start`里面就调用了`rebalanceService`
+
+```java
+public class MQClientInstance {
+    private final RebalanceService rebalanceService
+        public void start() throws MQClientException {
+        synchronized (this) {
+            // 调用 RebalanceService 的 start 方法 
+            this.rebalanceService.start();
+        }
+    }
+}
+```
+
+这里实际上是调用了`RebalanceService`的`run`方法∶
+
+```java
+while(!this.isStopped()){ 
+    this.waitForRunning(waitnterval); 
+    this.mqClientFactory.doRebalance();
+}
+```
+
+也就是说，消费者启动的时候，或者有消费者挂掉的时候，默认最多 20 秒，就会做一次 rebalance，让所有的消费者可以尽量均匀地消费队列的消息。
+
+> 但是 20 秒钟是不是太长了?
+
+在`DefaultMQPushConsumerlmpl`的start方法末尾还有一句∶
+
+```java
+this.mQClientFactory.rebalanceImmediately);
+```
+
+会唤醒沉睡的线程，也就是立即执行`RebalanceService`的`run`方法
+
+```java
+public void rebalanceImmediately({
+    this rebalanceServicewakeup();
+}
+```
+
+> 具体到底怎么rebalance的呢?
+>
+>  一直往后面跟（case CLUSTERING，277行）
+
+```java
+llocateMessageQueueStrategy strategy=this.allocateMessageQueueStrategy;
+List<MessageQueue> allocateResult = null;
+try {
+    allocateResult=strategy.allocate(
+        this.consumerGroup,
+        this.mQClientFactory.getClientld(), 
+        mqAll, 
+        cdAll);
+}
+```
+
+AllocateMessageQueueStrategy有6种实现的策略，可以指定，也可以自定义实现∶
+
+```java
+consumer.setAllocateMessageQueueStrategy()
+```
+
+- AllocateMessageQueueAveragely∶连续分配（默认）
+
+  ![image-20210714105334500](images/image-20210714105334500.png)
+
+- AllocateMessageQueueAveragelyByCircle∶每人轮流一个
+
+  ![image-20210714105521726](images/image-20210714105521726.png)
+
+- AllocateMessageQueueByConfig∶通过配置
+
+- AllocateMessageQueueConsistentHash∶一致性哈希
+
+- AllocateMessageQueueByMachineRoom∶指定一个broker的topic中的 queue消费
+
+- AllocateMachineRoomNearby∶ 按Broker的机房就近分配队列的数量尽量要大于消费者的数量。
+
+#### 5.2.2 消费端重试与死信队列
+
+先看一个业务流程中RocketMQ的使用场景。
+
+> 订单系统是消息的生产者，物流系统是消息的消费者。
+>
+> 物流系统收到消费消息后需要登记数据库，生成物流记录。
+
+![image-20210714110659208](images/image-20210714110659208.png)
+
+然后反馈给Broker，通知消费成功，更新offset。消费者的代码是这样写的∶
+
+```java
+consumer.registerMessageListener(new MessageListenerConcurrently() {
+    public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs,
+                                                    ConsumeConcurrentlyContext context) {
+        System.out.printf("%s Receive New Messages:%s %n", Thread.currentThread().getName(), msgs); 
+        for(MessageExt msg: msgs) {
+            String topic = msg.getTopic(); 
+            String messageBody = ""; 
+            try {
+                messageBody = new String(msg.getBody(,"utf-8"));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();// 重新消费
+                return ConsumeConcurrentlyStatus.RECONSUME LATER;
+                String tags = msg.getTags();
+                System.out.println("topic:"+topic+",tags:"+tags+",msg:"+messageBody);
+            }
+            // 消费成功
+            return ConsumeConcurrentlyStatus.CONSUME SUCCESS;
+        }
+    }
+});
+```
+
+如果物流系统处理消息的过程发生异常，比如数据库不可用，或者网络出现问题，这时候返回给Broker的是`RECONSUME_LATER`，表示稍后重试。
+
+这个时候消息会发回给Broker，进入到RocketMQ的重试队列中。
+
+服务端会为consumer group创建一个名字为`%RETRY%`开头的重试队列，dashboard页面可也查看到。
+
+```tex
+%RETRY%qs-consumer-group
+```
+
+重试队列的消息过一段时间会再次发送给消费者，如果还是异常，会再次进入重试队列。
+
+重试的时间间隔会不断衰减，从10 秒开始直到 2 个小时∶ 10s 30s 1m 2m 3m 4m5m 6m 7m 8m 9m 10m 20m 30m 1h 2h，最多重试 16次。
+
+这个时间间隔似乎之前见过?没错，这个就是延迟消息的时间等级，从 Level=3 开始。 
+
+也就是说重试队列是用延迟队列的功能实现的 ， 发到对应的`SCHEDULE_TOPIC_XXXX`，到时间后再替换成真实的Topic，实现重试。
+
+> 重试消费 16 次都没有成功怎么处理呢?
+>
+> 这个时候消息就会丢到死信队列了。
+>
+> Broker会创建一个死信队列 ，死信队列的名字是`%DLQ%`+`ConsumerGroupName`。
+
+```java
+    private boolean handleRetryAndDLQ(SendMessageRequestHeader requestHeader,
+                                      RemotingCommand response,
+                                      RemotingCommand request,
+                                      MessageExt msg,
+                                      TopicConfig topicConfig) {
+        // 获取 topic 进行判断逻辑
+        String newTopic = requestHeader.getTopic();
+        //重试队列是以%RETRY%+consumerGroup 作为维度的
+        if (null != newTopic && newTopic.startsWith(MixAll.RETRY GROUP_TOPIC_PREFIX)) {
+            String groupName = newTopic.substring(MixAll.RETRY_GROUP_TOPIC_PREFIX.length));
+            SubscriptionGroupConfig subscriptionGroupConfig =
+                    this.brokerController.getSubscriptionGroupManager).findSubscriptionGroupConfig(groupName);
+            if (null == subscriptionGroupConfig) {
+                response.setCode(ResponseCode.SUBSCRIPTION GROUP NOT EXIST));
+                response.setRemark("subscription group not exist, " +
+                        groupName +
+                        "" +
+                        FAQUrlsuggestTodo(FAQUrl.SUBSCRIPTION_GROUP_NOT_EXIST));
+                return false;
+            }
+
+            // 获取最大重试次数
+            int maxReconsumeTimes = subscriptionGroupConfig.getRetryMaxTimes();
+            if (request.getVersion() >= MQVersion.Version.V3_4_9.ordinal)){
+                maxReconsumeTimes = requestHeader.getMaxReconsumeTimes();
+            }
+            int reconsumeTimes = requestHeader.getReconsumeTimes() == null ? 0 : requestHeader.getReconsumeTimes();
+            //超过最大重试次数之后发送到死信队列 
+            if (reconsumeTimes >= maxReconsumeTimes) {
+                // 死信队列是以%DLQ%+consumerGroup 作为维度的 
+                newTopic = MixAll.getDLQTopic(groupName);
+                int queueIdInt = Math.abs(this.random.nextInt() % 99999999) % DLQ_NUMS_PER GROUP;
+                topicConfig = this.brokerController.getTopicConfigManager()
+                        .createTopicInSendMessageBackMethod(newTopic,
+                                DLQ_NUMS_PER_ GROUP,
+                                PermName.PERM_WRITE,
+                                0
+                        );
+                msg.setTopic(newTopic);
+                msg.setQueueId(queueIdInt);
+                if (null == topicConfig) {
+                    response.setCode(ResponseCode.SYSTEM_ERROR);
+                    response.setRemark("topic[" + newTopic + "] not exist");
+                    return false;
+                }
+            }
+        }
+        int sysFlag = requestHeader.getSysFlag();
+        if (TopicFilterType.MULTI_TAG = topicConfig.getTopicFilterType() {
+            sysFlag |= MessageSysFlag.MULTI TAGS FLAG;
+        }
+
+        msg.seSysFlag(sysFlag);
+        return true;
+    }
+```
+
+死信队列的消息最后需要人工处理，可以写一个线程，订阅`%DLQ%`  + ConsumerGroupName，消费消息。
+
+## 6 高可用架构
+
+在RocketMQ的高可用架构中，我们主要关注两块∶主从同步和故障转移。
+
+![rocketmq_architecture_1](images/rocketmq_architecture_1.png)
+
+### 6.1 主从同步的意义
+
+1. 数据备份∶ 保证了两/多台机器上的数据冗余，特别是在主从同步复制的情况下，一定程度上保证了 master 出现不可恢复的故障以后，数据不丢失。
+2. 高可用性∶ 即使 master 掉线， consumer 会自动重连到对应的 slave 机器，不会出现消费停滞的情况。
+3. 提高性能∶主要表现为可分担 master 读的压力，当从 master 拉取消息，拉取消息的最大物理偏移与本地存储的最大物理偏移的差值超过一定值，会转向slave（默认brokerld=1）进行读取，减轻了master 压力。
+4. 消费实时∶ master 节点挂掉之后，依然可以从 slave 节点读取消息，而且会选择一个副本作为新的 master，保证正常消费。
+
+### 6.2 数据同步
+
+#### 6.2.1 主从关联
+
+1. 集群的名字相同，brokerClusterName=XXX-cluster。
+2. 连接到相同的NameServer。
+3. 在配置文件中∶ brokerld=0代表是 master，brokerld =1代表是slave。
+
+#### 6.2.2 主从同步和刷盘类型
+
+在部署节点的时候，配置文件中设置了Broker 角色和刷盘方式∶
+
+|             属性              |      值      |                      | 含义                                                         |
+| :---------------------------: | :----------: | :------------------: | :----------------------------------------------------------- |
+| brokerRole <br />Broker的角色 | ASYNC_MASTER |     主从异步复制     | master 写成功，返回客户端成功。<br />拥有较低的延迟和较高的吞吐量，但是当 master 出现故障后，有可能造成数据丢失。 |
+|                               |  SYNCMASTER  | 主从同步双写（推荐） | master 和slave 均写成功，才返回客户端成功。<br />maste挂了以后可以保证数据不丢失，但是同步复制会增加数据写入延迟，降低吞吐量。 |
+| flushDiskType<br />//刷盘方式 | ASYNC_FLUSH  |  异步刷盘（默 认）   | 生产者发送的每一条消息并不是立即保存到磁盘，而是暂时缓存起来，然后就返回生产者成功。<br />随后再异步的将缓存数据保存到磁盘，有两种情况∶<br />1是定期将缓存中更新的数据进行刷盘，<br />2 是当缓存中更新的数据条数达到某一设定值后进行刷盘。这种方式会存在消息丢失 （在还未来得及同步到磁盘的时候宕机）， 但是性能很好。默认是这种模式。 |
+|                               |  SYNC_FLUSH  |       同步刷盘       | 生产者发送的每一条消息都在保存到磁盘成功后才返回告诉生产者成功。<br />这种方式不会存在消息丢失的问题，但是有很大的磁盘 IO 开销，性能有一定影响。 |
+
+![rocketmq_design_2](images/rocketmq_design_2.png)
+
+通常情况下，会把 Master和 Slave 的 Broker均配置成 ASYNC FLUSH 异步刷盘方式，主从之间配置成 SYNC MASTER 同步复制方式，即∶ 异步刷盘+同步复制。
+
+#### 6.2.3 主从同步流程
+
+1. 从服务器主动建立TCP连接主服务器，然后每隔5s向主服务器发送 commitLog 文件最大偏移量拉取还未同步的消息;
+2. 主服务器开启监听端口，监听从服务器发送过来的信息，主服务器收到从服务器发过来的偏移量进行解析，并返回查找出未同步的消息给从服务器;
+3. 客户端收到主服务器的消息后，将这批消息写入 commitLog 文件中，然后更新 commitLog 拉取偏移量，接着继续向主服务拉取未同步的消息。
+
+### 6.3 HA与故障转移
+
+https://github.com/apache/rocketmq/blob/master/docs/cn/dledger/quick_start.md
+
+在之前的版本中，RocketMQ只有master/slave 一种部署方式，一组Broker中有一个master，有零到多个slave，slave通过同步复制或异步复制方式去同步master的数据。
+
+master/slave部署模式，提供了一定的高可用性，但这样的部署模式有一定缺陷。
+
+比如故障转移方面，如果主节点挂了还需要人为手动的进行重启或者切换，无法自动将一个从节点转换为主节点。
+
+如果要实现自动故障转移，根本上要解决的问题是自动选主的问题。
+
+比如 Kafka 用 Zookeeper选Controller，用类PacificA算法选leader、Redis哨兵用Raft协议选Leader。
+
+用 ZK 的这种方式需要依赖额外的组件，部署和运维的负担都会增加，而且ZK故障的时候会影响 RocketMQ集群。
+
+RocketMQ 2019年3月发布的4.5.0版本中，利用Dledger技术解决了自动选主的问题。
+
+DLedger就是一个基于raft协议的commitlog存储库，也是RocketMQ实现新的高可用多副本架构的关键。
+
+它的优点是不需要引入外部组件，自动选主逻辑集成到各个节点的进程中，节点之间通过通信就可以完成选主。
+
+![image-20210714142909136](images/image-20210714142909136.png)
+
+在这种情况下，commitlog是Dledger管理的，具有选主的功能。
 
 
 
+> 怎么开启 Dledger 的功能?
+>
+> enableDLegerCommitLog是否启用Dledger，即是否启用RocketMQ主从切换，默认值为false。
+>
+> 如果需要开启主从切换，则该值需要设置为true。
 
 
 
+需要添加以下配置∶
+
+```properties
+#是否启用 DLedger 
+enableDLegerCommitLog=true
+# DLedger Raft Group的名字 
+dLegerGroup=broker-a
+#DLedger Group 内各节点的地址和端口，至少需要 3 个节点
+dLegerPeers=n0-192.168.44.163:10911;nl-192.168.44.164:1091l;n2-192.168.44.165:1091
+#本节点ID 
+dLegerSelfid=n0
+```
+
+## 7 RocketMQ 特性
+
+现在市面上有这么多流行的消息中间件，RocketMQ 又有什么不同之处?
+
+一般我们会从使用、功能、性能、可用性和可靠性四个方面来衡量。其中有一些是基础特性，这里重点说一下 RocketMQ 比较突出的∶
+
+1. 单机可以支撑上万个队列的管理——可以满足众多项目创建大量队列的需求;
+2. 上亿级消息堆积能力——在存储海量消息的情况下，不影响收发性能;
+3. 具有多副本容错机制————消息可靠性高，数据安全;
+4. 可以快速扩容缩容，有状态管理服务器——那就意味着具备了横向扩展的能力;
+5. 可严格保证消息的有序性——满足特定业务场景需求;
+6. Consumer 支持 Push和 Pull 两种消费模式——更灵活(主要是 Pull);
+7. 支持集群消费和广播消息——适合不同业务场景;
+8. 低延迟∶客户端消息延迟控制在毫秒级别(从双十—的复盘情况来看延迟在1ms以内的消息比例99.6%; 延迟在 10ms 以内的消息占据99.996%)——效率高。
+
+## 8 MQ选型分析
 
 
 
-
-
-
-
-
+## 9 MQ设计思路
