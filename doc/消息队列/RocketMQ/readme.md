@@ -1468,7 +1468,7 @@ dLegerSelfid=n0
 
 ## 8 MQ选型分析
 
-[參考](https://github.com/hupwy/k8s-cloud-parent/blob/main/doc/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/MQ%E9%80%89%E5%9E%8B%E5%88%86%E6%9E%90.md)
+[參考](https://github.com/hupwy/k8s-cloud-parent/blob/main/doc/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/readme.md)
 
 ## 9 MQ设计思路
 
