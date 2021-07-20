@@ -13,7 +13,7 @@
 > - One or more machines running one of:
 >   - Ubuntu 16.04+
 >   - Debian 9+
->   - CentOS 7【课程中使用】
+>   - CentOS 7
 >   - Red Hat Enterprise Linux (RHEL) 7
 >   - Fedora 25+
 >   - HypriotOS v1.0.1+
