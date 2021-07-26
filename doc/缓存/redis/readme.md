@@ -1,16 +1,10 @@
 # 1. Redis基本数据类型
 
-最基本也是最常用的数据类型就是 String，set和 get 命令就是 String 的操作命令。 
-
-Redis 的字符串被叫做二进制安全的字符串，为什么是 Binary-safe strings 呢?
-
-下面对于所有的数据类型我们都会从4个维度来分析∶存储类型、操作命令、存储结构、应用场景。
-
 ## 1.1 String字符串
 
 ### 存储类型
 
-可以用来存储INT（整数）、float（单精度浮点数）、String （字符串）。
+可以用来存储INT(整数)、float(单精度浮点数)、String(字符串)。
 
 ### 操作命令
 
@@ -131,9 +125,31 @@ typedef struct redisObject {
   - OBJ ZSET
 
 - `String`命令可以出现三种不同的编码
+
   1. `int`: 存储8个字节的长整型(long，2^63-1)。
+  
   2. `embstr`: 代表embstr格式的SDS，存储小于44个字节的字符串。
+  
+     > `embstr`只分配一次内存空间(因为RedisObject和SDS是连续的)
+  
   3. `raw`: 存储大于44个字节的字符串。
+  
+     > `raw`需要分配两次内存空间(分别为 RedisObject 和 SDS 分配空间)
+
+> - `embstr`与`raw`相比，`embstr`的好处在于创建时少分配一次空间，删除时少释放一次空间，以及对象的所有数据连在一起，寻找方便。
+> - `embstr`的缺点是，字符串的长度增加需要重新分配RedisObject和SDS空间，因此`Redis`中的`embstr`实现为只读(这种编码的内容是不能修改的)。
+
+**Int和embstr什么时候转化为raw?** 
+
+1. `int`数据不再是整数 ---> `raw`
+2. `int`大小超过了long的范围(2^63-1) ---> `embstr`
+3. `embstr`长度超过了44个字节 ---> `raw`
+4. `embstr`内容只要修改 ---> `raw`
+
+> 关于Redis内部编码的转换，都符合以下规律∶ 
+>
+> - 编码转换在Redis写入数据时完成，
+> - 转换过程不可逆，只能从小内存编码向大内存编码转换(但是不包括重新set)。
 
 #### SDS
 
@@ -147,9 +163,169 @@ typedef struct redisObject {
 
 用于存储不同的长度的字符串，分别代表`2^5=32byte`，`2^8=256byte`，`2^16=65536byte=64KB`,`2^32byte=4GB`
 
+**特点**∶
+
+1. 不用担心内存溢出问题，如果需要会对SDS进行扩容。
+2. 获取字符串长度时间复杂度为O(1)，因为定义了len属性。
+3. 通过"空间预分配"(sdsMakeRoomFor)和"惰性空间释放"，防止多次重分配内存。
+4. 判断是否结束的标志是len属性，可以包含"\0'(它同样以\0'结尾是因为这样就可以使用 C 语言中函数库操作字符串的函数了)。
+
+**Redis要用SDS实现字符串而使用C语言的字符串数组char[]：**
+
+1. 使用字符数组必须先给目标变量分配足够的空间，否则可能会溢出。
+2. 如果要获取字符长度，必须遍历字符数组，时间复杂度是O(n)。
+3. C字符串长度的变更会对字符数组做内存重分配。
+4. 通过从字符串开始到结尾碰到的第一个\0'来标记字符串的结束，因此不能保存图片、音频、视频、压缩文件等二进制(bytes)保存的内容，二进制不安全。
+
+| C字符数组                                    | SDS                                          |
+| -------------------------------------------- | -------------------------------------------- |
+| 获取字符串长度的复杂度为O(Ｎ)                | 获取字符串长度的复杂度为O(1)                 |
+| API是不安全的，可能会造成缓冲区溢出          | API是安全的，不会造成缓冲区溢出              |
+| 修改字符串长度Ｎ次必然需要执行Ｎ次内存重分配 | 修改字符串长度Ｎ次最多需要执行Ｎ次内存重分配 |
+| 只能保存文本数据                             | 可以保存文本或者二进制数据                   |
+| 可以使用所有<string.h>库中的函数             | 可以使用一部分<string.h>库中的函数           |
+
+### 应用场景
+
+1. 缓存
+
+   String类型 set方法
+
+   缓存热点数据。例如网站首页、报表数据等等，可以显著提升热点数据的访问速度。
+
+2. 分布式数据共享
+
+   String类型 set方法
+
+   Redis是分布式的独立服务，可以在多个应用之间共享。  例如∶ 分布式 Session (spring-session-data-redis)
+
+3. 分布式锁
+
+   String类型，setnx方法
+
+   只有不存在时才能添加成功，返回true。
+
+4. 全局ID
+
+   Int类型，incrby，利用原子性。
+
+   分库分表的场景，一次性取得一段唯一ID
+
+5. 计数器
+
+   Int类型，incr方法
+
+   例如：文章阅读量，点赞，写入Redis在定期同步到数据库。
+
+6. 限流
+
+   Int类型，incr方法
+
+   以访问者的IP和其他信息作为key，访问一次增加一次计数，超过次数则返回 false。
+
+## 2 Hash 哈希
+
+### 2.1 存储类型
+
+Hash用来存储多个无序的键值对，最大存储数量 2^32-1(40 亿左右)。
+
+```mermaid
+graph TD;
+    user:peter-->age;
+    age-->30;
+    user:peter-->addr;
+    addr-->XXXroad;
+    user:peter-->hobby;
+    hobby-->soccer;
+```
+
+> 注意∶ Hash的value只能是字符串，不能嵌套其他类型，比如hash或者list。
+
+#### Hash与String的主要区别
+
+1. 把所有相关的值聚集到一个key中，节省内存空间 
+
+2. 只使用一个key，减少key 冲突
+
+3. 当需要批量获取值的时候，只需要使用一个命令，减少内存/IO/CPU的消耗
 
 
+#### Hash不适合的场景∶
 
+1. Field不能单独设置过期时间
+2. 需要考虑数据量分布的问题(field非常多的时候，无法分布到多个节点)
+
+### 2.2 存储（实现）原理
+
+哈希底层可以使用两种数据结构实现∶
+
+- ziplist∶ OBJENCODING ZIPLIST（压缩列表） 
+- hashtable∶ OBJENCODING HT（哈希表）
+
+#### ziplist 压缩列表
+
+ziplist是一个经过特殊编码的，由**连续内存块组成的双向链表**。
+
+它不存储指向上一个链表节点和指向下一个链表节点的指针，而是存储上一个节点长度和当前节点长度。
+
+这样读写可能会慢一些，因为要去算长度，但是可以节省内存是一种时间换空间的思想。
+
+`ziplist`的内部结构
+
+```xml
+<zlbytes><zltail><zllen><entry><entry>...<entry><zlend>
+```
+
+**zlentry**
+
+```c
+typedef struct zlentry {
+    unsigned int prevrawlensize;     /* 存储上一个链表节点的长度数值所需要的字节数 */ 
+    unsigned int prevrawlen;         /* 上一个链表节点占用的长度 */
+    unsigned int lensize;            /* 存储当前链表节点长度数值所需要的字节数 */ 
+    unsigned int len;                /* 当前链表节点占用的长度 */
+    unsigned int headersize;         /* 当前链表节点的头部大小（prevrawlensize+lensize），即非数据域的大小*/
+    unsigned char encoding;          /* 编码方式 */ 
+    unsigned char *p;                /* 压缩链表以字符串的形式保存，该指针指向当前节点起始位置 */
+} zlentry;
+```
+
+**什么时候使用ziplist存储**
+
+当hash对象同时满足以下两个条件的时候，使用ziplist编码∶
+
+1. 哈希对象保存的键值对数量 < 512个。
+2. 所有的键值对的健和值的字符串长度都 < 64byte(一个英文字母一个字节)。
+
+src/redis.conf 配置
+
+```properties
+hash-max-ziplist-value 64      //ziplist 中最大能存放的值长度
+hash-max-ziplist-entries 512   //ziplist 中最多能存放的entry 节点数量
+```
+
+> 如果超过这两个阈值的任何一个，存储结构就会转换成 hashtable。
+>
+> 总结∶字段个数少，字段值小，用ziplist
+
+#### hashtable(dict)
+
+在Redis中，hashtable被称为字典(dictionary)。
+
+Redis的KV结构是通过一个dictEntry来实现的，在hashtable中，又对dictEntry进行了多层的封装。
+
+**dictEntry**
+
+```c
+typedef struct dictEntry { 
+    void *key;         /*key 关键字定义 */ 
+    union {
+        void *val;    uint64_t u64;  /* value 定义*/
+        int64_t s64;  double d; 
+    } V;
+    struct dictEntry *next;/* 指向下一个键值对节点 */
+} dicEntry;
+```
 
 
 
