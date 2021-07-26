@@ -223,9 +223,9 @@ typedef struct redisObject {
 
    以访问者的IP和其他信息作为key，访问一次增加一次计数，超过次数则返回 false。
 
-## 2 Hash 哈希
+## 1.2 Hash 哈希
 
-### 2.1 存储类型
+### 1.2.1 存储类型
 
 Hash用来存储多个无序的键值对，最大存储数量 2^32-1(40 亿左右)。
 
@@ -255,7 +255,7 @@ graph TD;
 1. Field不能单独设置过期时间
 2. 需要考虑数据量分布的问题(field非常多的时候，无法分布到多个节点)
 
-### 2.2 存储（实现）原理
+### 1.2.2 存储（实现）原理
 
 哈希底层可以使用两种数据结构实现∶
 
@@ -371,7 +371,7 @@ static unsigned int dict_force_resize ratio =5;  //扩容因子
 
 > 总结一下，Redis的Hash类型，可以用ziplist和hashtable来实现。
 
-### 2.3 应用场景
+### 1.2.3 应用场景
 
 - 跟String一样，String能做的事，Hash都可以做
 
@@ -396,13 +396,13 @@ static unsigned int dict_force_resize ratio =5;  //扩容因子
 > - String底层编码有INT和emstr、raw。 
 > - Hash用ziplist和hashtable实现。
 
-## 3 List 列表
+## 1.3 List 列表
 
-### 3.1 存储类型
+### 1.3.1 存储类型
 
 存储有序的字符串（从左到右），元素可以重复。最大存储数量 2^32-1（40 亿左右）。
 
-### 3.2 存储（实现原理）
+### 1.3.2 存储（实现原理）
 
 在早期的版本中，数据量较小时用ziplist存储，达到临界值时转换为linkedlist进行存储，分别对应OBJ_ENCODING_ZIPLIST和OBJ_ ENCODING_LINKEDLIST。
 
@@ -451,7 +451,7 @@ typedef struct quicklistNode {
 
 > 总结一下∶ quicklist 是一个数组+链表的结构。
 
-### 3.3 应用场景
+### 1.3.3 应用场景
 
 List主要用在存储有序内容的场景。
 
@@ -467,13 +467,13 @@ List主要用在存储有序内容的场景。
 
   List提供了两个阻塞的弹出操作∶ BLPOP/BRPOP，可以设置超时时间（单位∶秒）。
 
-## 4 Set集合
+## 1.4 Set集合
 
-### 4.1 存储类型
+### 1.4.1 存储类型
 
 Set存储String类型的无序集合，最大存储数量2^32-1（40 亿左右）。
 
-### 4.2 操作指令
+### 1.4.2 操作指令
 
 ```properties
 # 添加一个或者多个元素 
@@ -492,7 +492,7 @@ srem myset de f
 sismember myset a
 ```
 
-### 4.3 存储（实现）原理
+### 1.4.3 存储（实现）原理
 
 Redis用intset或hashtable存储set。
 
@@ -520,7 +520,7 @@ set-max-intset-entries 5 12
 >
 > value存null就好了
 
-### 4.4 应用场景
+### 1.4.4 应用场景
 
 - 抽奖
 
@@ -591,9 +591,9 @@ set-max-intset-entries 5 12
   2. 我关注的人也关注了他
   3. 可能认识的人
 
-## 5 ZSet有序集合
+## 1.5 ZSet有序集合
 
-### 5.1 存储类型
+### 1.5.1 存储类型
 
 sorted set存储有序的元素。每个元素有个score，按照score从小到大排名，score相同时，按照key的ASCII码排序。
 
@@ -605,7 +605,7 @@ sorted set存储有序的元素。每个元素有个score，按照score从小到
 | 集合set      | 否               | 否       | 无           |
 | 有序集合zset | 否               | 是       | 分值score    |
 
-### 5.2 操作命令
+### 1.5.2 操作命令
 
 ```properties
 # 添加元素
@@ -628,7 +628,7 @@ zscore myzset python
 # 也有倒序的 rev 操作（reverse）
 ```
 
-### 5.3 存储（实现）原理
+### 1.5.3 存储（实现）原理
 
 默认使用ziplist 编码(第三次见到了，hash的小编码，quicklist的Node，都是ziplist)，在ziplist的内部，按照score排序递增来存储。
 
@@ -654,11 +654,120 @@ int zslRandomLevel(void) {
     int level = 1;
     while (random()&0xFFFF)<(ZSKIPLIST_P * 0xFFFF)
         level += 1;
-    return (level<ZSKIPLIST MAXLEVEL) ? level:ZSKIPLIST_MAXLEVEL;
+    return (level<ZSKIPLIST_MAXLEVEL) ? level:ZSKIPLIST_MAXLEVEL;
 }
 ```
 
 现在当我们想查找数据的时候，可以先沿着这个新链表进行查找。当碰到比待查数据大的节点时，再到下一层进行查找。
+
+在这个查找过程中，由于新增加的指针，我们不再需要与链表中每个节点逐个进行比较了。需要比较的节点数大概只有原来的一半。这就是跳跃表。
+
+因为level是随机的，得到的skiplist可能是这样的，有些在第四层，有些在第三层，有些在第二层，有些在第一层。
+
+**源码**
+
+```c
+typedef struct zskiplistNode {
+    sds ele; /* zset 的元素 */ 
+    double score;/* 分值 */
+    struct zskiplistNode *backward; /*后退指针*/
+    struct zskiplistLevel {
+        struct zskiplistNode*forward; /* 前进指针，对应level 的下一个节点 */ 
+        unsigned long span;/* 从当前节点到下一个节点的跨度（跨越的节点数）*/
+    }level[]; /*层*/
+} zskiplistNode; 
+
+typedef struct zskiplist {
+    struct zskiplistNode *header，*tail; /* 指向跳跃表的头结点和尾节点 */ 
+    unsigned long length; /* 跳跃表的节点数 */ 
+    int level;/* 最大的层数 */
+} zskilist; 
+
+typedef struct zset {
+    dict *ict; 
+    zskplist zsl;
+} zset;
+```
+
+### 1.5.4 应用场景
+
+顺序会动态变化的列表。
+
+- 排行榜
+
+  例如百度热榜、微博热搜。
+
+  id为6001的新闻点击数加1∶ zincrby hotNews∶20251111 1 n6001
+
+  获取今天点击最多的15 条∶zrevrange hotNews∶20251111 0 15 withscores
+
+## 1.6 其他数据类型
+
+### BitMaps
+
+Bitmaps是在字符串类型上面定义的位操作。一个字节由8个二进制位组成。
+
+统计二进制位中1的个数
+
+```properties
+bitcount kl
+```
+
+获取第一个 1或者 0的位置
+
+```properties
+bitpos kl 1
+bitpos kl 0
+```
+
+因为 bit 非常节省空间（1 MB=8388608 bit），可以用来做大数据量的统计。
+
+例如∶在线用户统计，留存用户统计
+
+```properties
+setbit onlineusers 0 1 
+setbit onlineusers 1 1 
+setbit onlineusers 2 0
+```
+
+支持按位与、按位或等等操作。
+
+```properties
+BITOP AND destkey key [key …]，对一个或多个key求逻辑并，并将结果保存到destkey。
+BITOP OR destkey key [key…]，对一个或多个key求逻辑或，并将结果保存到destkey。 
+BITOP XOR destkey key [key…]， 对一个或多个key求逻辑异或，并将结果保存到destkey。 
+BITOP NOT destkey key， 对给定key求逻辑非，并将结果保存到destkey 。
+```
+
+计算出7天都在线的用户（假设用户编号有序，依次放在位图）
+
+```properties
+BITOP "AND" "7_days_both_online_users" "day_1_online_users" "day_2_online_users"..."day_7_online_users"
+```
+
+**应用场景∶**
+
+- 用户访问统计
+- 在线用户统计
+
+### Hyperloglogs
+
+Hyperloglogs∶提供了一种不太精确的基数统计方法，用来统计一个集合中不重复的元素个数，比如统计网站的 UV，或者应用的日活、月活，存在一定的误差。
+在Redis中实现的HyperLogLog，只需要12K内存就能统计2^64 个数据。
+
+### Geo
+
+我之前的公百是做消费金副融帕的，给客户使用的客户端有么一种需求，要获取半径1公里内的门店， 那么我们就要抑门店的经纬度保存走来。 
+
+那个时候我们是直接抑经纬度保存在数据库的，一个字段存经度一个字段存维度。
+
+计算距离比较复杂。Redis的GEO直接提供了这个方法。
+
+### Streams
+
+5.0 推出的数据类型。支持多播的可持久化的消息队列，用于实现发布订阅功能，借鉴了kafka的设计。
+
+## 1.7 总结
 
 
 
