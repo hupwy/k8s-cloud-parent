@@ -327,5 +327,342 @@ typedef struct dictEntry {
 } dicEntry;
 ```
 
+dictEntry放到了dictht(hashtable里面)∶
+
+```c
+typedef struct dict {
+    dictType*type;  /* 字典类型*/
+    void*privdata;  /* 私有数据*/
+    dictht ht[2];   /* 一个字典有两个哈希表 */ 
+    long rehashidx; /* rehash 索引 */
+    unsigned long iterators;/* 当前正在使用的迭代器数量 */
+} dict;
+```
+
+从最底层到最高层dictEntry --- dictht --- dict。它是一个数组+链表的结构
+
+**为什么要定义两个哈希表**
+
+redis的hash默认使用的是 ht[0]，ht[1]不会初始化和分配空间。
+
+哈希表dictht是用链地址法来解决碰撞问题的，在这种情况下，哈希表的性能取决于它的大小(size 属性)和它所保存的节点的数量(used 属性)之间的比率∶
+
+- 比率在 1∶1 时(一个哈希表ht只存储一个节点entry)，哈希表的性能最好;
+- 如果节点数量比哈希表的大小要大很多的话(这个比例用ratio[5]表示平均一个ht存储5个entry)，哈希表就会变成多个链表，本身的性能优势就不再存在。
+
+如果单个哈希表的节点数量过多，哈希表的大小需要扩容。Redis里面的这种操作叫做rehash。
+
+rehash 的步骤∶
+
+1. 为字符ht[1]哈希表分配空间，ht[1]的大小为第一个大于等于ht[0].used*2的2的N次方幂。比如已经使用了10000，那就是16384。
+2. 将所有的ht[0]上的节点rehash到ht[1]上，重新计算hash值和索引，然后放入指定的位置。
+3. 当ht[0]全部迁移到了ht[1]之后，释放ht[0]的空间，将ht[1]设置为ht[0]表，并创建新的ht[1]，为下次rehash做准备。
+
+**什么时候触发扩容**
+
+负载因子(源码 dict.c)∶
+
+```c
+static int dict_can_resize = 1;                  // 是否需要扩容
+static unsigned int dict_force_resize ratio =5;  //扩容因子
+```
+
+扩容判断和扩容的操作跟HashMap一样，也有缩容。
+
+> 总结一下，Redis的Hash类型，可以用ziplist和hashtable来实现。
+
+### 2.3 应用场景
+
+- 跟String一样，String能做的事，Hash都可以做
+
+- 存储对象类型的数据
+
+  - 比如对象或者一张表的数据，比String节省了更多key的空间，也更加便于集中管理。
+
+  - 购物车
+
+    `key`∶ 用户id;  `field`∶商品id; `value`∶ 商品数量
+
+    操作
+
+    - +1: hincr
+    - -1: hdecr。
+    - 删除∶ hincrby key field -1。
+    - 全选∶ hgetall
+    - 商品数∶hlen。
+
+> 简单总结一下∶
+>
+> - String底层编码有INT和emstr、raw。 
+> - Hash用ziplist和hashtable实现。
+
+## 3 List 列表
+
+### 3.1 存储类型
+
+存储有序的字符串（从左到右），元素可以重复。最大存储数量 2^32-1（40 亿左右）。
+
+### 3.2 存储（实现原理）
+
+在早期的版本中，数据量较小时用ziplist存储，达到临界值时转换为linkedlist进行存储，分别对应OBJ_ENCODING_ZIPLIST和OBJ_ ENCODING_LINKEDLIST。
+
+3.2 版本之后，统一用quicklist来存储。
+
+quicklist存储了一个双向链表，每个节点都是一个ziplist，所以是ziplist和linkedlist的结合体。
+
+#### quicklist
+
+```c
+typedef struct quicklist {
+    quicklistNode *head; /* 指向双向列表的表头 */ 
+    quicklistNode *tail; /* 指向双向列表的表尾 */
+    unsigned long count; /* 所有的 ziplist中一共存了多少个元素 */
+    unsigned long len; /* 双向链表的长度，node 的数量 */
+    int fill:QL_FILL_BITS; /* ziplist 最大大小，对应 list-max-ziplist-size*/ 
+    unsigned int compress:QL_COMP_BITS;/* 压缩深度，对应 list-compress-depth */ 
+    unsigned int bookmark count:QL_BM_BITS;/*4 位，bookmarks 数组的大小*/
+    quicklistBookmark bookmarks[];/*bookmarks 是一个可选字段，quicklist 重新分配内存空间时使用，不使用时不占用空间*/
+} quicklist;
+```
+
+redis.conf 相关参数∶
+
+| 含义                           | 参数                                                         |
+| ------------------------------ | ------------------------------------------------------------ |
+| list-max-zplist-size( fill)    | 正数表示单个ziplist最多所包含的entry个数。<br />负数代表单个ziplist的大小，默认 8k。 <br/>-1: 4KB;  -2: 8KB;   -3: 16KB;   -4: 32KB;   -5: 64KB |
+| list-compress-depth (compress) | 压缩深度，默认是0。<br />1:首尾的ziplist不压缩;  <br />2:首尾第一第二个ziplist不压缩，以此类推 |
+
+**quicklistNode**
+
+```c
+typedef struct quicklistNode {
+    struct quicklistNode *prev;              /* 指向前一个节点 */ 
+    struct quicklistNode *next;              /* 指向后一个节点 */ 
+    unsigned char *zl;                       /* 指向实际的ziplist */ 
+    unsigned int sz;                         /* 当前 ziplist 占用多少字节 */
+    unsigned int count:16;                   /* 当前 ziplist 中存储了多少个元素，占 16bit（下同），最大 65536 个 */ 
+    unsigned int encoding:2;                 /* 是否采用了LZF 压缩算法压缩节点 *//* RAW==l or LZF==2 */ 
+    unsigned int container:2;                /*2;ziplist，未来可能支持其他结构存储*//*NONE==1 or ZIPLIST==2 */ 
+    unsigned int recompress:1;               /* 当前 ziplist 是不是已经被解压出来作临时使用 */ 
+    unsigned int attempted_ compress:1;      /* 测试用 */ 
+    unsigned int extra:10;                   /* 预留给未来使用 */
+} quicklistNode;
+```
+
+> 总结一下∶ quicklist 是一个数组+链表的结构。
+
+### 3.3 应用场景
+
+List主要用在存储有序内容的场景。
+
+- 列表
+
+  例如: 用户的消息列表、 网站的公告列表、活动列表、博客的文章列表、评论列表等等。
+
+  思路∶存储所有字段，LRANGE取出一页，按顺序显示。
+
+- 队列/栈
+
+  List还可以当做分布式环境的队列/栈使用。
+
+  List提供了两个阻塞的弹出操作∶ BLPOP/BRPOP，可以设置超时时间（单位∶秒）。
+
+## 4 Set集合
+
+### 4.1 存储类型
+
+Set存储String类型的无序集合，最大存储数量2^32-1（40 亿左右）。
+
+### 4.2 操作指令
+
+```properties
+# 添加一个或者多个元素 
+sadd myset abcdefg
+# 获取所有元素 
+smembers myset
+# 统计元素个数 
+scard myset
+# 随机获取一个元素 
+srandmember myset
+# 随机弹出一个元素 
+spop myset
+# 移除一个或者多个元素 
+srem myset de f
+# 查看元素是否存在 
+sismember myset a
+```
+
+### 4.3 存储（实现）原理
+
+Redis用intset或hashtable存储set。
+
+如果元素都是整数类型，就用inset存储。
+
+**inset**
+
+```c
+typedef struct intset {
+    uint32_t encoding; //编码类型 int16_t、int32 t、int64t 
+    uint32_t length;   //长度 最大长度∶2^32 
+    int8_t contents[]; //用来存储成员的动态数组
+} intset;
+```
+
+如果不是整数类型，就用hashtable(数组+链表的存来储结构)。
+
+如果元素个数超过512个，也会用 hashtable存储。跟一个配置有关∶
+
+```properties
+set-max-intset-entries 5 12
+```
+
+> 问题∶set的key没有value，怎么用 hashtable 存储? 
+>
+> value存null就好了
+
+### 4.4 应用场景
+
+- 抽奖
+
+  随机获取元素∶spop myset
+
+- 点赞，签到，打卡
+
+  - 这条微博的ID是t1001，用户ID是u3001。
+
+  - 用 like:t1001来维护t1001这条微博的所有点赞用户。
+
+  - 点赞了这条微博
+
+    `sadd like:t1001 u3001`
+
+  - 取消点赞
+
+    `srem like:t1001 u3001`
+
+  - 是否点赞
+
+    `sismember like:t1001 u3001`
+
+  - 点赞的所有用户  
+
+    `smembers like:1001`
+
+  - 点赞数 
+
+    `scard like:t1001`
+
+- 商品标签
+
+  - 用 tags:i5001来维护商品所有的标签。
+  - sadd tags∶i5001 画面清晰细腻 
+  - sadd tags∶i5001 真彩清晰显示屏 
+  - sadd tagsi5001 流畅至极
+
+- 商品筛选
+
+  ```java
+  // 获取差集 
+  sdiff setl set2
+  // 获取交集(intersection)
+  sinter setl set2
+  // 获取并集 
+  sunion setl set2
+  ```
+
+  P40 上市了，添加商品
+  `sadd brand:huawei p40` 
+
+  `sadd os:android p40` 
+
+  `sadd screensize:6.0-6.24 p40`
+
+  
+
+  筛选商品，华为品牌，android系统，屏幕在6.0-6.24之间的
+
+  ```shell
+  sinter brand:huawei os:android screensize:6.0-6.24
+  ```
+
+- 用户关注、推荐模型
+
+  1. 相互关注
+  2. 我关注的人也关注了他
+  3. 可能认识的人
+
+## 5 ZSet有序集合
+
+### 5.1 存储类型
+
+sorted set存储有序的元素。每个元素有个score，按照score从小到大排名，score相同时，按照key的ASCII码排序。
+
+数据结构对比：
+
+| 数据结构     | 是否允许重复元素 | 是否有序 | 有序实现方式 |
+| ------------ | ---------------- | -------- | ------------ |
+| 列表list     | 是               | 是       | 索引下标     |
+| 集合set      | 否               | 否       | 无           |
+| 有序集合zset | 否               | 是       | 分值score    |
+
+### 5.2 操作命令
+
+```properties
+# 添加元素
+zadd myzset 10java20php 30 ruby 40 cpp 50python
+# 获取全部元素
+zrange myzset 0-l withscores 
+zrevrange myzset 0-l withscores
+# 根据分值区间获取元素 
+zrangebyscore myzset 20 30
+# 移除元素 也可以根据 score rank 删除 
+zrem myzset php cpp
+# 统计元素个数 zcard myzset/ 分值递增
+zincrby myzset 5 python
+# 根据分值统计个数 
+zcount myzset 20 60
+# 获取元素 rank 
+zrank myzset python
+# 获取元素 score 
+zscore myzset python
+# 也有倒序的 rev 操作（reverse）
+```
+
+### 5.3 存储（实现）原理
+
+默认使用ziplist 编码(第三次见到了，hash的小编码，quicklist的Node，都是ziplist)，在ziplist的内部，按照score排序递增来存储。
+
+插入的时候要移动之后的数据。
+
+如果元素数量大于等于128个，或者任一member长度大于等于64字节使用iskiplist+dict 存储。
+
+```properties
+zset-max-ziplist-entries 128 
+zset-max-ziplistvalue 64
+```
+
+#### skiplist
+
+有序链表中每相邻两个节点增加一个指针，让指针指向下下个节点(或者理解为有三个元素进入了第二层)。
+
+这样所有新增加的指针连成了一个新的链表，但它包含的节点个数只有原来的一半，查找数据时可以看做二分查找。
+
+**哪些元素进入到第二层?**
+
+```c
+int zslRandomLevel(void) { 
+    int level = 1;
+    while (random()&0xFFFF)<(ZSKIPLIST_P * 0xFFFF)
+        level += 1;
+    return (level<ZSKIPLIST MAXLEVEL) ? level:ZSKIPLIST_MAXLEVEL;
+}
+```
+
+现在当我们想查找数据的时候，可以先沿着这个新链表进行查找。当碰到比待查数据大的节点时，再到下一层进行查找。
+
+
+
+
+
 
 
