@@ -769,9 +769,407 @@ Hyperloglogs∶提供了一种不太精确的基数统计方法，用来统计�
 
 ## 1.7 总结
 
+### 数据结构
+
+| 对象         | 对象type属性值 | type命令输出 | 底层可能的存储结构                                           | object encoding                 |
+| ------------ | -------------- | ------------ | ------------------------------------------------------------ | ------------------------------- |
+| 字符串对象   | OBJ_STRING     | "string"     | OBJ_ENCODING_INT<br />OBJ_ENCODING_EMBSTR<br />OBJ_ENCODING_RAW | int<br />embstr<br />raw        |
+| 列表对象     | OBJ_LIST       | "list"       | OBJ_ENCODING_QUICKLIST                                       | quicklist                       |
+| 哈希对象     | OBJ_HASH       | "hash"       | OBJ_ENCODING_ZIPLIST<br />OBJ_ENCODING_HT                    | ziplist<br />hashtable          |
+| 集合对象     | OBJ_SET        | "set"        | OBJ_ENCODING_INTSET<br />OBJ_ENCODING_HT                     | intset<br />hashtable           |
+| 有序集合对象 | OBJ_ZSET       | "zset"       | OBJ_ENCODING_ZIPLIST<br />OBJ_ENCODING_SKIPLIST              | ziplist<br />skiplist+hashtable |
+
+### 编码转换
+
+
+
+| 对象         | 原始编码                                                     | 升级编码           |      |
+| ------------ | ------------------------------------------------------------ | ------------------ | ---- |
+| 字符串对象   | INT                                                          | embstr             | raw  |
+|              | 整数并且小于long 2^63-1                                      | 超过44字节，被修改 |      |
+| 哈希对象     | ziplist                                                      | hashtable          |      |
+|              | 键和值的长度小于64byte，键值对个数不超过512个                |                    |      |
+| 列表对象     | quicklist                                                    |                    |      |
+|              |                                                              |                    |      |
+| 集合对象     | intset                                                       | hashtable          |      |
+|              | 元素都是整数类型，元素个数小于512个，同时满足                |                    |      |
+| 有序集合对象 | ziplist                                                      | skiplist           |      |
+|              | 元素数量不超过128个，任何一个member的长度小于64字节，同时满足。 |                    |      |
+
+### 应用场景
+
+- 缓存——提升热点数据的访问速度
+- 共享数据——数据的存储和共享的问题
+- 全局 ID —— 分布式全局 ID 的生成方案（分库分表）
+- 分布式锁——进程间共享数据的原子操作保证
+- 在线用户统计和计数
+- 队列、栈——跨进程的队列/栈
+- 消息队列——异步解耦的消息机制
+- 服务注册与发现 —— RPC通信机制的服务协调中心（Dubbo 支持 Redis）
+- 购物车
+- 新浪/Twitter 用户消息时间线
+- 抽奖逻辑（礼物、转发）
+- 点赞、签到、打卡
+- 商品标签
+- 用户（商品）关注（推荐）模型
+- 电商产品筛选
+- 排行榜
+
+
+
+# 2. 原理
+
+## 2.1 发布订阅模式
+
+除了通过list实现消息队列之外，Redis还提供了发布订阅的功能。
+
+消息的生产者和消费者是不同的客户端，连接到同一个Redis的服务里的channel(频道)模型，订阅者可以订阅一个或者多个channel。
+
+消息的发布者可以给指定的channel发布消息。
+
+只要有消息到达了channel，所有订阅了这个channel的订阅者都会收到这条消。
+
+订阅者订阅频道∶可以一次订阅多个，比如这个客户端订阅了3个频道，频道不用实现创建。
+
+```sh
+subscribe channel-1 channel-2 channel-3
+```
+
+发布者可以向指定频道发布消息（并不支持一次向多个频道发送消息）∶
+
+```sh
+publish channel-1 XXXX
+```
+
+取消订阅（不能在订阅状态下使用）
+
+```shell
+unsubscribe channel-1
+```
+
+### 按规则（Pattern）订阅频道
+
+支持?和\*占位符。? 代表一个字符，\*代表0个或者多个字符。
+
+例如，现在有三个新闻频道，运动新闻（news-sport）、音乐新闻（news-music）天气新闻（news-weather）。
+
+三个消费者，消费端1，关注运动信息∶
+
+```sh
+psubscribe *sport
+```
+
+消费端 2，关注所有新闻∶
+
+```sh
+psubscribe news*
+```
+
+消费端 3，关注天气新闻∶
+
+```sh
+psubscribe news-weather
+```
+
+生产者，向 3个频道发布 3 条信息，对应的订阅者能收到消息∶
+
+```sh
+publish news-sport kobe 
+publish news-music jaychou 
+publish news-weather sunny
+```
+
+
+
+> 一般来说，考虑到性能和持久化的因素，不建议使用Redis的发布订阅功能来实现MQ。
+>
+> Redis的一些内部机制用到了发布订阅功能。
+
+
+
+## 2.2 事务
+
+Redis 的单个命令是原子性的(比如 get set mget mset)，要么成功要么失败，不存在并发干扰的问题。
+
+如果需要把多个命令作为一个不可分割的处理序列，就必须要依赖Redis事务的功能特性来实现了。
+
+Redis 的事务有 3 个特点∶
+
+- 按进入队列的顺序执行。
+- 不会受到其他客户端的请求的影响。 
+- 事务不能嵌套，多个multi命令效果一样。
+
+### 用法
+
+Redis 的事务涉及到四个命令∶ 
+
+- multi（开启事务）
+- exec（执行事务）
+- discard（取消事务）
+- watch（监视）
+
+案例场景∶ tom和mic 各有1000 元，tom向mic转账100 元。
+
+```shell
+set tom 1000 
+set mic 1000 
+multi 
+decrby tom 100 
+incrby mic 100 
+exec 
+get tom 
+get mic
+```
+
+可以调用discard可以清空事务队列，放弃执行。
+
+```sh
+multi 
+decrby tom 100 
+discard 
+get tom
+```
+
+### watch命令
+
+为了防止事务过程中某个key 的值被其他客户端请求修改而带来非预期的结果，在Redis中还提供了一个watch命令。
+
+多个客户端更新变量的时候，会跟原值做比较，只有它没有被其他线程修改的情况下才更新成新值。
+
+它可以为Redis事务提供CAS乐观锁行为（Compare and Swap)。
+
+我们可以用watch监视一个或者多个key，如果开启事务之后，至少有一个被监视key键在exec执行之前被修改了， 那么事务都会被取消(key提前过期除外)。
+
+可以用 unwatch 取消。
+
+| client 1                                                     | client 2           |
+| ------------------------------------------------------------ | ------------------ |
+| set balance 1000 <br />watch balance <br />multi <br />incrby balance 100 |                    |
+|                                                              | decrby balance 100 |
+| exec【返回 nil】<br />get balance                            |                    |
+
+##  2.3 问题点
+
+事务执行遇到的问题分成两种，一种是在执行exec之前发生错误，一种是在执行exec之后发生错误。
+
+### exec之前发生错误
+
+比如∶入队的命令存在语法错误，包括参数数量，参数名等等（编译器错误）。
+
+```shell
+multi 
+set test 111 
+set test1 yes 
+hset test2 666 
+exec
+```
+
+
+比如这里出现了参数个数错误，事务会被拒绝执行，也就是队列中所有的命令都不会得到执行。
+
+### exec之后发生错误
+
+ 比如对 String 使用了Hash 的命令，参数个数正确，但数据类型错误，这是一种运行时错误。
+
+```shell
+flushall 
+multi 
+set kl 1 
+hset kl a b 
+exec 
+
+1)OK
+2)(error) WRONGTYPE Operation against a key holding the wrong kind of value 
+
+get kI
+```
+
+ 最后我们发现`set k1 1`的命令是成功的，也就是在这种发生了运行时异常的情况下，只有错误的命令没有被执行，但是其他命令没有受到影响。
+
+这个显然不符合我们对原子性的定义。也就是我们没办法用Redis的这种事务机制来实现原子性，保证数据的一致。
+
+### 为什么不回滚
+
+官方的解释是这样的∶
+
+- Redis 命令只会因为错误的语法而失败，从实用性的角度来说，失败的命令是由代码错误造成的，应该在开发的过程中被发现(这个是程序员的锅)。
+- 因为不需要对回滚进行支持，所以Redis的内部可以保持简单且快速。需要知道的是∶ 回滚不能解决代码的问题（程序员的锅必须程序员来背）。
+
+
+
+## 3. Lua脚本
+
+Redis 从2.6版本开始引入了Lua 脚本，也就是说Redis可以用 Lua来执行 Redis命令。
+
+Lua是一种轻量级脚本语言，它是用C语言编写的，跟数据的存储过程有点类似。
+
+https://redis.io/commands/eval
+
+使用 Lua 脚本来执行 Redis 命令的好处∶
+
+1. 一次发送多个命令，减少网络开销。
+2. Redis 会将整个脚本作为一个整体执行，不会被其他请求打断，保持**原子性**，
+3. 对于复杂的组合命令，我们可以放在文件中，可以实现命令复用。
+
+### 在Redis中调用Lua脚本
+
+使用 eval /1'væl/ 方法，语法格式∶
+
+```shell
+redis> eval lua-script key-num [keyl key2 key3...][valuel value2 value3...]
+```
+
+- eval 代表执行 Lua语言的命令。
+- lua-script 代表 Lua 语言脚本内容。
+- key-num表示参数中有多少个key，需要注意的是 Redis 中key是从1开始的，如果没有 key的参数，那么写0。
+- [keylkey2 key…]是 key 作为参数传递给 Lua 语言，也可以不填，但是需要和key-num的个数对应起来。
+- [value1 value2 value3 ….]这些参数传递给 Lua 语言，它们是可填可不填的。
+
+**示例，返回一个字符串，0个参数∶**
+
+```shell
+redis> eval "return 'Hello World" 0
+```
+
+实际上，Lua 脚本在Redis里面真正的用途是用来执行Redis命令。
+
+Lua 脚本执行 Redis 命令也是有固定语法的∶
+
+使用 redis.call（command，key [param1，param2...]）进行操作。
+
+
+
+### 语法格式
+
+```shell
+redis.call(command, key [paraml,param2...])
+```
+
+- command 是命令，包括 set、get、del 等。
+- key是被操作的键。
+- param1，param2....代表给key的参数。
+
+来看一个简单的案例，让 Lua 脚本执行 set test 6666（Redis 客户端执行）
+
+```shell
+eval "return redis.call('set',test;,'6666')" 0
+```
+
+这种方式是写死值的，当然也可以用传参的方式∶
+
+```shell
+eval "return redis.call'set', KEYS[1], ARGV[1])" 1 test 6666
+```
+
+如果 KEY和 ARGV有多个，继续往后面加就是了。
+
+在redis-cli中直接写Lua脚本不够方便，也不能实现编辑和复用，通常我们会把Lua脚本放在文件里面，然后执行这个文件。
+
+
+
+### Lua脚本文件
+
+Lua脚本内容，先赋值，再取值
+
+```lua
+redis.call('set,'test','lua666) 
+return redis.call('get,'test')
+```
+
+调用脚本文件∶
+
+```shell
+cd/usr/local/soft/redis-6.0.9/src redis-cli-eval testlua 0
+```
+
+
+
+### 案例∶对IP进行限流 
+
+需求∶每个用户在 X秒内只能访问 Y次。设计思路∶
+
+- 首先是数据类型，用String的key记录IP，用value记录访问次数，几秒钟和几次要用参数动态传进去。
+- 拿到IP以后，对IP次数+1。
+- 如果是第一次访问，对key设置过期时间（参数1）。
+- 否则判断次数，超过限定的次数（参数2），返回 0。
+- 如果没有超过次数则返回1，超过时间，key 过期之后，可以再次访问。
+
+KEY[1]是IP， ARGV[1]是过期时间X，ARGV[2]是限制访问的次数Y。
+
+```lua
+- ip_limit.lua
+-IP 限流，对某个IP 频率进行限制 ，6秒钟访问10次 
+local num=redis.call('incr',KEYS[1]) 
+if tonumber(num) ==1 then
+    redis.call('expire', KEYS[1], ARGV[1]) 
+    return 1
+elseif tonumber(num) > tonumber(ARGV[2]) then 
+    return 0 
+else
+    return l 
+end
+```
+
+6 秒钟内限制访问 10 次，调用测试（连续调用 10 次）∶
+
+```shell
+redis-cli--eval ip_limit.lua appiplimit:192.168.8.1l1,6 10
+```
+
+- appip∶limit∶192.168.8.111 是key值，后面是参数值，中间要加上一个空格和一个逗号，再加上一个 空格。
+
+  即∶redis-cli-eval  [lua 脚本] [key...]空格，空格[args…]
+
+- 多个参数之间用空格分割。
+
+### 缓存Lua脚本
+
+在Lua脚本比较长的情况下，如果每次调用脚本都需要把整个脚本传给Redis服务端，会产生比较大的网络开销。
+
+为了解决这个问题，Redis可以缓存Lua 脚本并生成SHA1摘要码，后面可以直接通过摘要码来执行 Lua 脚本。
+
+
+
+**如何缓存**
+
+这里面涉及到两个命令，首先是在服务端缓存 lua 脚本生成一个摘要码，用script load命令。
+
+```shell
+script load "return "Hello World"
+```
+
+第二个命令是通过摘要码执行缓存的脚本∶
+
+```sh
+evalsha"470877a599ac74fbfda4lcaa908de682c5fc7d4b" 0
+```
+
+**自乘案例**
+
+Redis 有 incrby 这样的自增命令，但是没有自乘，比如乘以3，乘以 5。
+
+```sh
+set num 2
+```
+
+我们可以写一个自乘的运算，让它乘以后面的参数∶
+
+```lua
+local curVal = redis.cll("get", KEYS[1]) 
+if curVal = false then 
+    curVal =0 
+else
+    curVal = tonumber(curVal)
+end
+curVal = curVal * tonumber(ARGV[1])
+redis.call("set", KEYS[1], curVal) 
+return curVal
+```
 
 
 
 
 
+  
 
+  
