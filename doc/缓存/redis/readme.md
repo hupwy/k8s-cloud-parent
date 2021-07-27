@@ -1166,6 +1166,50 @@ redis.call("set", KEYS[1], curVal)
 return curVal
 ```
 
+把这个脚本变成单行，语句之间使用分号隔开∶
+
+script load '命令'（Redis客户端执行）
+
+```lua
+script load 'local curVal = redis.call("get",KEYS[1]); if curVal == false then curVal=0 else curVal= tonumber(curVal) end; curVal = curVal * tonumber(ARGV[1]); redis.call("set", KEYS[1], curVal);return curVal'
+```
+
+```tex
+"be4f93d8a5379e5e5b768a74e77c8a4eb0434441"
+```
+
+调用∶
+
+```tex
+evalsha be4f93d8a5379e5e5b768a74e77c8a4eb04344411 num6
+```
+
+
+
+### 脚本超时
+
+Redis的指令执行本身是单线程的，这个线程还要执行客户端的Lua脚本，如果Lua脚本执行超时或者陷入了死循环，是不是没有办法为客户端提供服务了呢?
+
+```lua
+eval 'while(true) do end' 0
+```
+
+它会导致其他的命令都会进入等待状态，因此脚本执行有一个超时时间，默认为 5 秒钟。
+
+```properties
+lua-time-limit 5000
+```
+
+超过5秒钟，其他客户端的命令不会等待，而是直接会返回"BUSY"错误。
+
+不能一直拒绝其他客户端的命令执行，可以使用下面的命令中止脚本的执行。
+
+```lua
+scrip kll
+```
+
+
+
 
 
 
