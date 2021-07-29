@@ -11,6 +11,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/auth-oauth2/pom.xml" />
         <option value="$PROJECT_DIR$/elephant-modules/content/pom.xml" />
       </set>
     </option>

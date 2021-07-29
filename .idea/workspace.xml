@@ -29,8 +29,17 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b68a67b-9ee6-4c3f-8d75-5952e8d9799a" name="Default Changelist" comment="">
+    <list default="true" id="3b68a67b-9ee6-4c3f-8d75-5952e8d9799a" name="Default Changelist" comment="调整api的包路径">
+      <change afterPath="$PROJECT_DIR$/elephant-auth/auth-oauth2/auth-server/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elephant-auth/auth-oauth2/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-auth/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elephant-auth/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elephant-modules/system/system.iml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,9 +60,17 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$PROJECT_DIR$/../../../appdata/apache-maven-3.6.3" />
+        <option name="userSettingsFile" value="D:\appdata\apache-maven-3.6.3\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="MavenRunner">
     <option name="delegateBuildToMaven" value="true" />
-    <option name="jreName" value="1.8.0_211" />
+    <option name="jreName" value="1.8" />
   </component>
   <component name="ProjectId" id="1hWgT9Hw7221jKHtQhWQlfvSsdG" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -71,7 +88,8 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../geekbang-lessons/projects/stage-0/user-platform/pom.xml" />
+    <property name="jdk.selected.JAVA_MODULE" value="1.8" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/elephant-auth/auth-oauth2/auth-server/src/main/resources" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -82,7 +100,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.29804373" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.runner" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="ReactorSettings">
@@ -90,22 +108,22 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\registory\github\k8s-cloud-parent\elephant-auth\auth-oauth2\auth-server\src\main\resources" />
+      <recent name="D:\registory\github\k8s-cloud-parent\elephant-auth\auth-oauth2\auth-server\src\main\java\com\itartisan\auth\oauth2\config" />
       <recent name="D:\profile\opensource\GitHub\k8s-cloud-parent\elephant-modules\content\src\main\resources" />
       <recent name="D:\profile\opensource\GitHub\k8s-cloud-parent\elephant-modules\content\src\main\resources\mapper\content" />
       <recent name="D:\profile\opensource\GitHub\k8s-cloud-parent\elephant-modules\content\src\main\java\com\itartisan\content" />
-      <recent name="D:\profile\opensource\GitHub\k8s-cloud-parent\elephant-common\common-core\src\main\java\com\itartisan\common\core" />
-      <recent name="D:\profile\opensource\GitHub\k8s-cloud-parent\elephant-modules\system\src\main\java\com\itartisan\system" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\profile\opensource\GitHub\k8s-cloud-parent\elephant-modules\system\src\main\resources\mapper" />
       <recent name="D:\profile\repository\GitHub\k8s-cloud-parent\elephant-api" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.itartisan.auth.oauth2.service.impl" />
+      <recent name="com.itartisan.auth.oauth2" />
       <recent name="com.itartisan.common.core.utils.poi" />
       <recent name="com.itartisan.system" />
       <recent name="com.itartisan.system.util" />
-      <recent name="com.itartisan.gateway.handler" />
-      <recent name="com.itartisan.gateway.filter" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -115,16 +133,14 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.ElephantGatewayApplication">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="Spring Boot.OAuthServerApp">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -274,6 +290,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="OAuthServerApp" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="auth-server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.itartisan.auth.oauth2.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.itartisan.auth.oauth2.OAuthServerApp" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="RuoYiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="elephant-gateway" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.itartisan.gateway.RuoYiGatewayApplication" />
@@ -305,14 +334,16 @@
       <item itemvalue="Spring Boot.ElephantAuthApplication" />
       <item itemvalue="Spring Boot.RuoYiGatewayApplication" />
       <item itemvalue="Spring Boot.ElephantAuthApplication (1)" />
+      <item itemvalue="Spring Boot.SystemApplication" />
+      <item itemvalue="Spring Boot.ContentApplication" />
       <item itemvalue="Spring Boot.DockerMonitorBootMain" />
       <item itemvalue="Spring Boot.LoginBootMain" />
       <item itemvalue="Spring Boot.ElephantGatewayApplication" />
-      <item itemvalue="Spring Boot.SystemApplication" />
-      <item itemvalue="Spring Boot.ContentApplication" />
+      <item itemvalue="Spring Boot.OAuthServerApp" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Spring Boot.OAuthServerApp" />
         <item itemvalue="Spring Boot.ElephantGatewayApplication" />
         <item itemvalue="Spring Boot.LoginBootMain" />
         <item itemvalue="Spring Boot.DockerMonitorBootMain" />
@@ -355,6 +386,7 @@
       <workItem from="1614039915784" duration="3792000" />
       <workItem from="1614126466580" duration="1182000" />
       <workItem from="1614299133364" duration="12140000" />
+      <workItem from="1627471482210" duration="2775000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1601609066235</created>

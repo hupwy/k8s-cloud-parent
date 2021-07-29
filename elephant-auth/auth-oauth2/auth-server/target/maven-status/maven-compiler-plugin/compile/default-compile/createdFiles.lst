@@ -1,0 +1,7 @@
+com\itartisan\auth\oauth2\config\OauthServerConfig.class
+com\itartisan\auth\oauth2\config\WebSecurityConfig.class
+com\itartisan\auth\oauth2\service\PackageInfo.class
+com\itartisan\auth\oauth2\OAuthServerApp.class
+com\itartisan\auth\oauth2\mapper\PackageInfo.class
+com\itartisan\auth\oauth2\domain\PackageInfo.class
+com\itartisan\auth\oauth2\service\impl\PackageInfo.class

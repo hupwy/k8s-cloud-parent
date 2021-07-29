@@ -12,6 +12,7 @@
         <module name="api-lab" />
         <module name="common-mybatis-plus" />
         <module name="redis-auth" />
+        <module name="auth-server" />
         <module name="elephant-gateway" />
         <module name="common-redis" />
         <module name="api-beans" />

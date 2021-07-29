@@ -11,6 +11,7 @@
 
     <modules>
         <module>auth-redis</module>
+        <module>auth-oauth2</module>
     </modules>
 
     <artifactId>elephant-auth</artifactId>
